@@ -8,6 +8,13 @@
       "when": 1790572941662,
       "tag": "0000_cooing_arclight",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1790574335751,
+      "tag": "0001_slimy_naoko",
+      "breakpoints": true
     }
   ]
 }

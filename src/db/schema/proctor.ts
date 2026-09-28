@@ -3,24 +3,28 @@ import { participants } from './users';
 import { quizAttempts } from './quiz';
 
 export const proctorEventTypeEnum = [
+  'TAB_SWITCH_DETECTED',
   'TAB_HIDDEN',
   'TAB_VISIBLE',
-  'FULLSCREEN_EXIT',
-  'FULLSCREEN_ENTER',
   'WINDOW_BLUR',
   'WINDOW_FOCUS',
+  'FULLSCREEN_EXIT',
+  'FULLSCREEN_ENTER',
+  'MULTI_SCREEN_SIGNAL',
   'CAMERA_PERMISSION_DENIED',
   'CAMERA_DISCONNECTED',
+  'CAMERA_STREAM_INTERRUPTED',
   'FACE_NOT_DETECTED',
   'MULTIPLE_FACES',
   'NETWORK_DISCONNECTED',
   'NETWORK_RECONNECTED',
   'DUPLICATE_SESSION',
+  'COPY_PASTE_ATTEMPT',
   'SUSPICIOUS_KEY_COMBO',
 ] as const;
 export type ProctorEventType = (typeof proctorEventTypeEnum)[number];
 
-export const proctorSeverityEnum = ['LOW', 'MEDIUM', 'HIGH', 'CRITICAL'] as const;
+export const proctorSeverityEnum = ['INFO', 'WARNING', 'HIGH', 'CRITICAL'] as const;
 export type ProctorSeverity = (typeof proctorSeverityEnum)[number];
 
 export const proctorEvents = pgTable(
@@ -30,7 +34,7 @@ export const proctorEvents = pgTable(
     participantId: uuid('participant_id').notNull().references(() => participants.id, { onDelete: 'cascade' }),
     attemptId: uuid('attempt_id').references(() => quizAttempts.id, { onDelete: 'set null' }),
     eventType: text('event_type', { enum: proctorEventTypeEnum }).notNull(),
-    severity: text('severity', { enum: proctorSeverityEnum }).notNull().default('LOW'),
+    severity: text('severity', { enum: proctorSeverityEnum }).notNull().default('INFO'),
     metadata: text('metadata'), // JSON stringified details
     ipAddress: text('ip_address'),
     userAgent: text('user_agent'),
@@ -50,7 +54,7 @@ export const securityEvents = pgTable(
     id: uuid('id').defaultRandom().primaryKey(),
     userId: uuid('user_id'),
     action: text('action').notNull(),
-    severity: text('severity', { enum: proctorSeverityEnum }).notNull().default('MEDIUM'),
+    severity: text('severity', { enum: proctorSeverityEnum }).notNull().default('WARNING'),
     details: text('details'),
     ipAddress: text('ip_address'),
     userAgent: text('user_agent'),

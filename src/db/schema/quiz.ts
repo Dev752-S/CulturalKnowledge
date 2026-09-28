@@ -35,6 +35,16 @@ export const quizOptions = pgTable('quiz_options', {
   index('quiz_options_question_id_idx').on(table.questionId),
 ]);
 
+export const quizSecurityStateEnum = [
+  'SECURE',
+  'WARNING',
+  'FLAGGED',
+  'UNDER_REVIEW',
+  'INTERVENTION_REQUIRED',
+  'SUBMITTED',
+] as const;
+export type QuizSecurityState = (typeof quizSecurityStateEnum)[number];
+
 export const quizAttempts = pgTable('quiz_attempts', {
   id: uuid('id').defaultRandom().primaryKey(),
   participantId: uuid('participant_id').notNull().references(() => participants.id, { onDelete: 'cascade' }),
@@ -46,6 +56,10 @@ export const quizAttempts = pgTable('quiz_attempts', {
   isDisqualified: boolean('is_disqualified').notNull().default(false),
   disqualificationReason: text('disqualification_reason'),
   
+  // Strict Server-Authoritative Security State
+  securityState: text('security_state', { enum: quizSecurityStateEnum }).notNull().default('SECURE'),
+  violationCount: integer('violation_count').notNull().default(0),
+
   // Authoritative server-side computed scores
   totalQuestions: integer('total_questions').notNull().default(100),
   answeredCount: integer('answered_count').notNull().default(0),
