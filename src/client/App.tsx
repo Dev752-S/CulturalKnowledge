@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { ShieldCheck, Award, Sparkles, Terminal, CheckCircle2, Server, Database } from 'lucide-react';
+import { ShieldCheck, Award, Sparkles, Terminal, CheckCircle2, Server, Database, LogIn } from 'lucide-react';
+import LoginPage from './pages/LoginPage';
+import DashboardPage from './pages/DashboardPage';
 
 interface HealthResponse {
   success: boolean;
@@ -103,8 +105,15 @@ function HomePage() {
 
           <div className="flex flex-wrap justify-center gap-4">
             <Link
+              to="/login"
+              className="px-6 py-3 rounded-xl bg-gradient-to-r from-amber-600 via-amber-500 to-indigo-600 hover:from-amber-500 hover:to-indigo-500 text-white font-semibold text-sm shadow-lg shadow-amber-500/25 transition-all hover:scale-105 active:scale-95 flex items-center space-x-2"
+            >
+              <LogIn className="w-4 h-4" />
+              <span>Enter Kala Sangamam / Login</span>
+            </Link>
+            <Link
               to="/rules"
-              className="px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm shadow-lg shadow-indigo-600/30 transition-all hover:scale-105 active:scale-95"
+              className="px-6 py-3 rounded-xl bg-indigo-600/80 hover:bg-indigo-500 text-white font-semibold text-sm shadow-lg shadow-indigo-600/20 transition-all hover:scale-105 active:scale-95"
             >
               Competition Rules
             </Link>
@@ -264,6 +273,8 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/rules" element={<RulesPage />} />
         <Route path="/schedule" element={<SchedulePage />} />
       </Routes>
