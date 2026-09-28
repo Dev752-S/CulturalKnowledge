@@ -4,6 +4,18 @@ import '@testing-library/jest-dom/vitest';
 import { BrowserRouter } from 'react-router-dom';
 import LoginPage from './LoginPage';
 
+vi.mock('../lib/firebase', () => ({
+  signInWithGooglePopup: vi.fn().mockResolvedValue({
+    user: {
+      email: 'participant.skp2026@gmail.com',
+      displayName: 'SKP Participant',
+      photoURL: 'https://example.com/photo.jpg',
+    },
+    idToken: 'mock-id-token',
+  }),
+  logoutFirebase: vi.fn().mockResolvedValue(undefined),
+}));
+
 describe('LoginPage Cultural Glassmorphism UI', () => {
   it('Renders Kala Sangamam top title, cultural headers, and Google login button', () => {
     render(

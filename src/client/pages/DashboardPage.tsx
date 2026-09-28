@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { ShieldCheck, Clock, Award, LogOut, CheckCircle2, AlertTriangle, ArrowRight } from 'lucide-react';
+import { logoutFirebase } from '../lib/firebase';
 
 interface UserProfile {
   id: string;
@@ -35,6 +36,11 @@ export default function DashboardPage() {
   }, [navigate]);
 
   const handleLogout = async () => {
+    try {
+      await logoutFirebase();
+    } catch {
+      // ignore
+    }
     await fetch('/api/v1/auth/logout', { method: 'POST' });
     navigate('/login');
   };
