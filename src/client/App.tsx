@@ -1,7 +1,9 @@
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { ShieldCheck, Award, Sparkles, Terminal, CheckCircle2, Server, Database, LogIn } from 'lucide-react';
+import { ShieldCheck, Award, Sparkles, Terminal, CheckCircle2, Server, Database, LogIn, Users } from 'lucide-react';
 import LoginPage from './pages/LoginPage';
+import TeamNamePage from './pages/TeamNamePage';
 import DashboardPage from './pages/DashboardPage';
 
 interface HealthResponse {
@@ -25,6 +27,28 @@ async function fetchHealth(): Promise<HealthResponse> {
 }
 
 function HomePage() {
+  const navigate = useNavigate();
+  const [currentUser, setCurrentUser] = useState<{ fullName: string; teamName?: string | null; role: string } | null>(null);
+
+  useEffect(() => {
+    async function checkUser() {
+      try {
+        const res = await fetch('/api/v1/auth/me');
+        const data = await res.json();
+        if (data.success && data.user) {
+          setCurrentUser(data.user);
+          // Bypass protection (Section 15): If authenticated participant has no team name, redirect to /team-name
+          if (data.user.role === 'participant' && (!data.hasTeamName || !data.user.teamName)) {
+            navigate('/team-name');
+          }
+        }
+      } catch {
+        // guest visitor
+      }
+    }
+    checkUser();
+  }, [navigate]);
+
   const { data: health, isLoading, isError } = useQuery<HealthResponse>({
     queryKey: ['health'],
     queryFn: fetchHealth,
@@ -104,13 +128,20 @@ function HomePage() {
           </p>
 
           <div className="flex flex-wrap justify-center gap-4">
-            <Link
-              to="/login"
-              className="px-6 py-3 rounded-xl bg-gradient-to-r from-amber-600 via-amber-500 to-indigo-600 hover:from-amber-500 hover:to-indigo-500 text-white font-semibold text-sm shadow-lg shadow-amber-500/25 transition-all hover:scale-105 active:scale-95 flex items-center space-x-2"
-            >
-              <LogIn className="w-4 h-4" />
-              <span>Enter Kala Sangamam / Login</span>
-            </Link>
+            {currentUser?.teamName ? (
+              <div className="flex items-center space-x-2 px-5 py-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-sm font-semibold shadow-sm">
+                <Users className="w-4 h-4 text-amber-400" />
+                <span>Team: <strong className="text-white ml-1">{currentUser.teamName}</strong></span>
+              </div>
+            ) : (
+              <Link
+                to="/login"
+                className="px-6 py-3 rounded-xl bg-gradient-to-r from-amber-600 via-amber-500 to-indigo-600 hover:from-amber-500 hover:to-indigo-500 text-white font-semibold text-sm shadow-lg shadow-amber-500/25 transition-all hover:scale-105 active:scale-95 flex items-center space-x-2"
+              >
+                <LogIn className="w-4 h-4" />
+                <span>Enter Kala Sangamam / Login</span>
+              </Link>
+            )}
             <Link
               to="/rules"
               className="px-6 py-3 rounded-xl bg-indigo-600/80 hover:bg-indigo-500 text-white font-semibold text-sm shadow-lg shadow-indigo-600/20 transition-all hover:scale-105 active:scale-95"
@@ -274,6 +305,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/team-name" element={<TeamNamePage />} />
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/rules" element={<RulesPage />} />
         <Route path="/schedule" element={<SchedulePage />} />

@@ -45,6 +45,7 @@ const v1 = new Hono();
 v1.route('/health', healthRouter);
 v1.route('/auth', authRouter);
 v1.route('/participants', participantsRouter);
+v1.route('/participant', participantsRouter);
 v1.route('/quiz', quizRouter);
 v1.route('/leaderboard', leaderboardRouter);
 v1.route('/proctor', proctoringRouter);

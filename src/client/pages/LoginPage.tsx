@@ -32,8 +32,12 @@ export default function LoginPage() {
 
       const data = await res.json();
       if (data.success) {
-        // 3. Navigate to participant competition dashboard
-        navigate('/dashboard');
+        // Navigate to / if team name exists, else to /team-name
+        if (data.hasTeamName) {
+          navigate('/');
+        } else {
+          navigate('/team-name');
+        }
       } else {
         setErrorMessage(data.error?.message || 'Authentication failed. Please try again.');
       }
@@ -57,7 +61,11 @@ export default function LoginPage() {
           });
           const data = await res.json();
           if (data.success) {
-            navigate('/dashboard');
+            if (data.hasTeamName) {
+              navigate('/');
+            } else {
+              navigate('/team-name');
+            }
             return;
           }
         } catch {

@@ -33,6 +33,7 @@ export const participants = pgTable(
     phone: text('phone').notNull(),
     department: text('department').notNull(),
     yearOfStudy: text('year_of_study').notNull(),
+    teamName: text('team_name'),
     isQualifiedForRound2: boolean('is_qualified_for_round2').notNull().default(false),
     preflightCompleted: boolean('preflight_completed').notNull().default(false),
     preflightData: text('preflight_data'), // JSON string of client checks
