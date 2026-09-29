@@ -4,11 +4,13 @@ import CulturalBackground from '../components/auth/CulturalBackground';
 import TopBrand from '../components/auth/TopBrand';
 import LoginCard from '../components/auth/LoginCard';
 import { signInWithGooglePopup } from '../lib/firebase';
+import { useAuth } from '../context/AuthContext';
 
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const navigate = useNavigate();
+  const { checkAuth } = useAuth();
 
   const handleGoogleLogin = async () => {
     setIsLoading(true);
@@ -32,6 +34,9 @@ export default function LoginPage() {
 
       const data = await res.json();
       if (data.success) {
+        if (checkAuth) {
+          await checkAuth();
+        }
         // Navigate to / if team name exists, else to /team-name
         if (data.hasTeamName) {
           navigate('/');
@@ -61,6 +66,9 @@ export default function LoginPage() {
           });
           const data = await res.json();
           if (data.success) {
+            if (checkAuth) {
+              await checkAuth();
+            }
             if (data.hasTeamName) {
               navigate('/');
             } else {

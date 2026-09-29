@@ -22,6 +22,20 @@
       "when": 1790579403623,
       "tag": "0002_good_baron_strucker",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1790649753849,
+      "tag": "0003_easy_shiver_man",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1790650014840,
+      "tag": "0004_furry_dexter_bennett",
+      "breakpoints": true
     }
   ]
 }

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useAuth } from '../context/AuthContext';
+import DecorativeDivider from '../components/auth/DecorativeDivider';
 
 export default function TeamNamePage() {
   const [teamName, setTeamName] = useState('');
@@ -8,6 +10,7 @@ export default function TeamNamePage() {
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
+  const { checkAuth: syncAuth } = useAuth();
 
   // Authentication check and bypass protection (Section 14 & 15)
   useEffect(() => {
@@ -17,19 +20,19 @@ export default function TeamNamePage() {
         const data = await res.json();
 
         if (!data.success || !data.user) {
-          // Unauthenticated user -> redirect to login
-          navigate('/login');
+          // Unauthenticated user -> redirect to login (root /)
+          navigate('/');
           return;
         }
 
-        // If user already has a team name, redirect to Landing Page
+        // If user already has a team name, redirect to Landing Page (root /)
         if (data.hasTeamName || (data.user.teamName && data.user.teamName.trim().length > 0)) {
           navigate('/');
           return;
         }
       } catch (err) {
         console.error('Auth verification failed:', err);
-        navigate('/login');
+        navigate('/');
       } finally {
         setIsCheckingAuth(false);
       }
@@ -70,7 +73,10 @@ export default function TeamNamePage() {
       const data = await res.json();
 
       if (data.success) {
-        // Navigate to Landing Page on success (Section 16)
+        if (syncAuth) {
+          await syncAuth();
+        }
+        // Navigate to Landing Page on success
         navigate('/');
       } else {
         setError(data.error?.message || 'Failed to register team name. Please try again.');
@@ -95,7 +101,7 @@ export default function TeamNamePage() {
   }
 
   return (
-    <div className="relative min-h-screen w-full overflow-hidden bg-[#F5EFE4] flex flex-col justify-between p-4 sm:p-6 md:p-10 select-none">
+    <div className="relative min-h-screen w-full overflow-hidden bg-[#F5EFE4] flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 select-none">
       {/* High-Resolution Watercolor Cultural Background */}
       <div
         className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-95 transition-opacity duration-1000"
@@ -110,38 +116,54 @@ export default function TeamNamePage() {
       <div
         className="absolute inset-0 z-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at center, rgba(245, 239, 228, 0.45) 0%, rgba(245, 239, 228, 0.1) 70%, transparent 100%)',
+          background: 'radial-gradient(ellipse at center, rgba(245, 239, 228, 0.55) 0%, rgba(245, 239, 228, 0.2) 65%, transparent 100%)',
         }}
       />
 
-      {/* Top Header: NEXT PAGE */}
-      <header className="relative z-10 w-full pt-4 sm:pt-8 text-center">
-        <h1 className="font-cormorant text-4xl sm:text-5xl md:text-6xl font-normal tracking-[4px] sm:tracking-[6px] text-[#4A1F1A] uppercase select-none">
-          NEXT PAGE
+      {/* Centered Composition: Title -> Ornament -> Centered Form Card */}
+      <motion.div
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        className="relative z-10 w-full max-w-[620px] flex flex-col items-center text-center my-auto"
+      >
+        {/* Main Page Title: Cultural Knowledge */}
+        <h1 className="font-cormorant text-4xl sm:text-5xl md:text-[56px] lg:text-[64px] font-medium tracking-[2px] sm:tracking-[3px] text-[#4A211C] select-none leading-tight">
+          Cultural Knowledge
         </h1>
-      </header>
 
-      {/* Center Section: Team Name Card + Continue Button to the right */}
-      <main className="relative z-10 w-full flex-1 flex flex-col items-center justify-center py-6 px-4">
-        {error && (
-          <div className="mb-4 px-5 py-2.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-800 text-xs sm:text-sm font-medium max-w-md text-center shadow-sm">
-            {error}
-          </div>
-        )}
+        {/* Subtle Cultural Decorative Ornament */}
+        <div className="my-2.5 sm:my-3.5 w-full">
+          <DecorativeDivider />
+        </div>
 
-        <form onSubmit={handleSubmit} className="w-full flex flex-col md:flex-row items-center justify-center gap-4 sm:gap-6">
-          {/* Centered White / Light Team Name Card */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full max-w-[420px] bg-white/95 rounded-[16px] p-8 sm:p-10 shadow-[0_20px_50px_rgba(80,50,30,0.12),0_2px_8px_rgba(0,0,0,0.04)] border border-white/90 flex flex-col items-center text-center backdrop-blur-sm"
+        {/* Central Form Container */}
+        <div
+          className="w-[calc(100%-16px)] sm:w-full max-w-[580px] rounded-[24px] p-8 sm:p-10 md:p-12 backdrop-blur-md flex flex-col items-center text-center transition-all duration-300"
+          style={{
+            background: 'rgba(255, 255, 255, 0.78)',
+            border: '1px solid rgba(255, 255, 255, 0.85)',
+            boxShadow: '0 18px 50px rgba(70, 40, 25, 0.16)',
+          }}
+        >
+          {/* Team Name Heading */}
+          <h2
+            className="font-cormorant text-3xl sm:text-4xl md:text-[46px] font-medium tracking-tight mb-6 sm:mb-8 select-none leading-none"
+            style={{ color: '#4A211C' }}
           >
-            <h2 className="font-cormorant text-3xl sm:text-4xl font-medium text-[#4A1F1A] mb-6 tracking-tight select-none">
-              Team Name
-            </h2>
+            Team Name
+          </h2>
 
-            <div className="w-full">
+          {error && (
+            <div className="w-full max-w-[400px] mb-5 px-4 py-2.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-800 text-xs sm:text-sm font-medium text-center shadow-sm">
+              {error}
+            </div>
+          )}
+
+          {/* Form */}
+          <form onSubmit={handleSubmit} className="w-full flex flex-col items-center">
+            {/* Input Box */}
+            <div className="w-full max-w-[400px]">
               <input
                 type="text"
                 value={teamName}
@@ -149,31 +171,32 @@ export default function TeamNamePage() {
                 placeholder="Enter your team name..."
                 disabled={isLoading}
                 autoFocus
-                className="w-full h-[50px] sm:h-[54px] px-4 rounded-xl border border-slate-300 bg-white text-[#251D18] placeholder-slate-400 text-sm sm:text-base font-inter focus:outline-none focus:ring-2 focus:ring-[#B87932]/40 focus:border-[#B87932] transition-all"
+                className="w-full h-[58px] px-5 rounded-[12px] text-center sm:text-left text-[#251D18] placeholder-slate-400 text-base sm:text-lg font-inter focus:outline-none focus:ring-2 focus:ring-[#B87932]/50 focus:border-[#B87932] transition-all shadow-inner"
+                style={{
+                  background: 'rgba(255, 255, 255, 0.9)',
+                  border: '1px solid rgba(90, 70, 60, 0.3)',
+                }}
                 maxLength={50}
               />
             </div>
-          </motion.div>
 
-          {/* Continue Button to the Right of the Card on Desktop */}
-          <motion.button
-            type="submit"
-            disabled={isLoading || !teamName.trim()}
-            whileHover={!isLoading && teamName.trim() ? { scale: 1.02 } : {}}
-            whileTap={!isLoading && teamName.trim() ? { scale: 0.98 } : {}}
-            className={`h-[50px] sm:h-[54px] px-8 rounded-xl border border-[#2E1810] bg-white text-[#2E1810] font-inter text-xs sm:text-sm font-semibold tracking-[2px] uppercase select-none transition-all duration-200 shadow-sm ${
-              isLoading || !teamName.trim()
-                ? 'opacity-50 cursor-not-allowed'
-                : 'hover:bg-slate-50 hover:shadow-md cursor-pointer'
-            }`}
-          >
-            {isLoading ? 'SAVING...' : 'CONTINUE'}
-          </motion.button>
-        </form>
-      </main>
-
-      {/* Bottom Spacer */}
-      <footer className="relative z-10 w-full h-8" />
+            {/* Continue Button Inside Container */}
+            <motion.button
+              type="submit"
+              disabled={isLoading || !teamName.trim()}
+              whileHover={!isLoading && teamName.trim() ? { y: -2, scale: 1.01 } : {}}
+              whileTap={!isLoading && teamName.trim() ? { scale: 0.98 } : {}}
+              className={`mt-6 sm:mt-8 w-full max-w-[280px] h-[52px] sm:h-[54px] rounded-xl font-inter text-xs sm:text-sm font-semibold tracking-[2px] uppercase select-none transition-all duration-200 shadow-[0_4px_16px_rgba(74,33,28,0.22)] ${
+                isLoading || !teamName.trim()
+                  ? 'opacity-50 cursor-not-allowed bg-[#4A211C] text-white/70'
+                  : 'bg-gradient-to-r from-[#4A211C] via-[#5C2720] to-[#4A211C] hover:from-[#5C2720] hover:via-[#6E3027] hover:to-[#5C2720] hover:shadow-[0_8px_24px_rgba(74,33,28,0.3)] text-white cursor-pointer'
+              }`}
+            >
+              {isLoading ? 'SAVING...' : 'CONTINUE'}
+            </motion.button>
+          </form>
+        </div>
+      </motion.div>
     </div>
   );
 }

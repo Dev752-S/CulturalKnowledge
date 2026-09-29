@@ -4,12 +4,12 @@ import '@testing-library/jest-dom/vitest';
 import { BrowserRouter } from 'react-router-dom';
 import TeamNamePage from './TeamNamePage';
 
-describe('TeamNamePage Flow and UI', () => {
+describe('TeamNamePage Centered Cultural UI & Flow', () => {
   beforeEach(() => {
     vi.resetAllMocks();
   });
 
-  it('Renders NEXT PAGE header, Team Name input and CONTINUE button', async () => {
+  it('Renders Cultural Knowledge header, removes NEXT PAGE, and displays centered Team Name card', async () => {
     global.fetch = vi.fn().mockImplementation((url: string) => {
       if (url === '/api/v1/auth/me') {
         return Promise.resolve({
@@ -31,9 +31,13 @@ describe('TeamNamePage Flow and UI', () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByRole('heading', { level: 1, name: /next page/i })).toBeInTheDocument();
+      expect(screen.getByRole('heading', { level: 1, name: /cultural knowledge/i })).toBeInTheDocument();
     });
 
+    // Verify NEXT PAGE is completely removed
+    expect(screen.queryByText(/next page/i)).not.toBeInTheDocument();
+
+    // Verify Team Name heading, input, and centered Continue button
     expect(screen.getByRole('heading', { level: 2, name: /team name/i })).toBeInTheDocument();
     expect(screen.getByPlaceholderText('Enter your team name...')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /continue/i })).toBeInTheDocument();

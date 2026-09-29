@@ -6,7 +6,7 @@ export const events = pgTable('events', {
   name: text('name').notNull().default('SKP Cultural Fest 2026 - Skill Arena'),
   round1StartedAt: timestamp('round1_started_at', { withTimezone: true }),
   round1EndedAt: timestamp('round1_ended_at', { withTimezone: true }),
-  round1DurationMinutes: integer('round1_duration_minutes').notNull().default(80),
+  round1DurationMinutes: integer('round1_duration_minutes').notNull().default(60),
   round1TotalQuestions: integer('round1_total_questions').notNull().default(100),
   round1IsActive: boolean('round1_is_active').notNull().default(false),
   round2IsActive: boolean('round2_is_active').notNull().default(false),
@@ -117,3 +117,16 @@ export const leaderboardSnapshots = pgTable('leaderboard_snapshots', {
   version: integer('version').notNull().default(1),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
 });
+
+export const notifications = pgTable('notifications', {
+  id: text('id').primaryKey(),
+  participantId: uuid('participant_id').notNull().references(() => participants.id, { onDelete: 'cascade' }),
+  title: text('title').notNull(),
+  message: text('message').notNull(),
+  type: text('type').notNull().default('INFO'),
+  isRead: boolean('is_read').notNull().default(false),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+}, (table) => [
+  index('notifications_participant_idx').on(table.participantId),
+]);
+

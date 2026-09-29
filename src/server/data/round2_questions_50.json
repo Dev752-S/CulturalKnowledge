@@ -1,0 +1,2702 @@
+[
+  {
+    "questionId": "R2Q001",
+    "questionNumber": 1,
+    "questionText": "Which logo belongs to the company behind the iPhone?",
+    "correctLogoId": "L001",
+    "correctTileNumber": 1,
+    "correctBrandName": "Apple",
+    "options": [
+      {
+        "optionId": "opt_1_A",
+        "logoId": "L001",
+        "tileNumber": 1,
+        "brandName": "Apple",
+        "category": "Technology",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/001.svg",
+        "pngUrl": "/logos/001.png"
+      },
+      {
+        "optionId": "opt_1_B",
+        "logoId": "L003",
+        "tileNumber": 3,
+        "brandName": "Microsoft",
+        "category": "Technology",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/003.svg",
+        "pngUrl": "/logos/003.png"
+      },
+      {
+        "optionId": "opt_1_C",
+        "logoId": "L002",
+        "tileNumber": 2,
+        "brandName": "Google",
+        "category": "Technology",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/002.svg",
+        "pngUrl": "/logos/002.png"
+      },
+      {
+        "optionId": "opt_1_D",
+        "logoId": "L051",
+        "tileNumber": 51,
+        "brandName": "Cloudflare",
+        "category": "Cloud & Security",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/051.svg",
+        "pngUrl": "/logos/051.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q002",
+    "questionNumber": 2,
+    "questionText": "Which logo represents the search engine known for its colorful G?",
+    "correctLogoId": "L002",
+    "correctTileNumber": 2,
+    "correctBrandName": "Google",
+    "options": [
+      {
+        "optionId": "opt_2_A",
+        "logoId": "L003",
+        "tileNumber": 3,
+        "brandName": "Microsoft",
+        "category": "Technology",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/003.svg",
+        "pngUrl": "/logos/003.png"
+      },
+      {
+        "optionId": "opt_2_B",
+        "logoId": "L019",
+        "tileNumber": 19,
+        "brandName": "Google Chrome",
+        "category": "Browser & Technology",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/019.svg",
+        "pngUrl": "/logos/019.png"
+      },
+      {
+        "optionId": "opt_2_C",
+        "logoId": "L002",
+        "tileNumber": 2,
+        "brandName": "Google",
+        "category": "Technology",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/002.svg",
+        "pngUrl": "/logos/002.png"
+      },
+      {
+        "optionId": "opt_2_D",
+        "logoId": "L052",
+        "tileNumber": 52,
+        "brandName": "React",
+        "category": "Developer & Technology",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/052.svg",
+        "pngUrl": "/logos/052.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q003",
+    "questionNumber": 3,
+    "questionText": "Which logo belongs to the company that makes Windows?",
+    "correctLogoId": "L003",
+    "correctTileNumber": 3,
+    "correctBrandName": "Microsoft",
+    "options": [
+      {
+        "optionId": "opt_3_A",
+        "logoId": "L003",
+        "tileNumber": 3,
+        "brandName": "Microsoft",
+        "category": "Technology",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/003.svg",
+        "pngUrl": "/logos/003.png"
+      },
+      {
+        "optionId": "opt_3_B",
+        "logoId": "L053",
+        "tileNumber": 53,
+        "brandName": "Angular",
+        "category": "Developer & Technology",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/053.svg",
+        "pngUrl": "/logos/053.png"
+      },
+      {
+        "optionId": "opt_3_C",
+        "logoId": "L042",
+        "tileNumber": 42,
+        "brandName": "Microsoft Edge",
+        "category": "Browser & Technology",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/042.svg",
+        "pngUrl": "/logos/042.png"
+      },
+      {
+        "optionId": "opt_3_D",
+        "logoId": "L021",
+        "tileNumber": 21,
+        "brandName": "Windows",
+        "category": "Operating Systems",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/021.svg",
+        "pngUrl": "/logos/021.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q004",
+    "questionNumber": 4,
+    "questionText": "Which logo is associated with the online shopping company known for its smile-shaped arrow?",
+    "correctLogoId": "L004",
+    "correctTileNumber": 4,
+    "correctBrandName": "Amazon",
+    "options": [
+      {
+        "optionId": "opt_4_A",
+        "logoId": "L031",
+        "tileNumber": 31,
+        "brandName": "eBay",
+        "category": "E-commerce",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/031.svg",
+        "pngUrl": "/logos/031.png"
+      },
+      {
+        "optionId": "opt_4_B",
+        "logoId": "L033",
+        "tileNumber": 33,
+        "brandName": "Shopify",
+        "category": "E-commerce",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/033.svg",
+        "pngUrl": "/logos/033.png"
+      },
+      {
+        "optionId": "opt_4_C",
+        "logoId": "L004",
+        "tileNumber": 4,
+        "brandName": "Amazon",
+        "category": "Technology & Commerce",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/004.svg",
+        "pngUrl": "/logos/004.png"
+      },
+      {
+        "optionId": "opt_4_D",
+        "logoId": "L054",
+        "tileNumber": 54,
+        "brandName": "Vue.js",
+        "category": "Developer & Technology",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/054.svg",
+        "pngUrl": "/logos/054.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q005",
+    "questionNumber": 5,
+    "questionText": "Which logo belongs to the company that owns Instagram and WhatsApp?",
+    "correctLogoId": "L005",
+    "correctTileNumber": 5,
+    "correctBrandName": "Meta",
+    "options": [
+      {
+        "optionId": "opt_5_A",
+        "logoId": "L005",
+        "tileNumber": 5,
+        "brandName": "Meta",
+        "category": "Technology",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/005.svg",
+        "pngUrl": "/logos/005.png"
+      },
+      {
+        "optionId": "opt_5_B",
+        "logoId": "L006",
+        "tileNumber": 6,
+        "brandName": "Facebook",
+        "category": "Social Media",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/006.svg",
+        "pngUrl": "/logos/006.png"
+      },
+      {
+        "optionId": "opt_5_C",
+        "logoId": "L055",
+        "tileNumber": 55,
+        "brandName": "Node.js",
+        "category": "Developer & Technology",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/055.svg",
+        "pngUrl": "/logos/055.png"
+      },
+      {
+        "optionId": "opt_5_D",
+        "logoId": "L007",
+        "tileNumber": 7,
+        "brandName": "Instagram",
+        "category": "Social Media",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/007.svg",
+        "pngUrl": "/logos/007.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q006",
+    "questionNumber": 6,
+    "questionText": "Which logo represents the social network that uses a blue \"f\"?",
+    "correctLogoId": "L006",
+    "correctTileNumber": 6,
+    "correctBrandName": "Facebook",
+    "options": [
+      {
+        "optionId": "opt_6_A",
+        "logoId": "L006",
+        "tileNumber": 6,
+        "brandName": "Facebook",
+        "category": "Social Media",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/006.svg",
+        "pngUrl": "/logos/006.png"
+      },
+      {
+        "optionId": "opt_6_B",
+        "logoId": "L015",
+        "tileNumber": 15,
+        "brandName": "Reddit",
+        "category": "Social Media",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/015.svg",
+        "pngUrl": "/logos/015.png"
+      },
+      {
+        "optionId": "opt_6_C",
+        "logoId": "L007",
+        "tileNumber": 7,
+        "brandName": "Instagram",
+        "category": "Social Media",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/007.svg",
+        "pngUrl": "/logos/007.png"
+      },
+      {
+        "optionId": "opt_6_D",
+        "logoId": "L056",
+        "tileNumber": 56,
+        "brandName": "Python",
+        "category": "Programming",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/056.svg",
+        "pngUrl": "/logos/056.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q007",
+    "questionNumber": 7,
+    "questionText": "Which logo represents the photo-sharing platform Instagram?",
+    "correctLogoId": "L007",
+    "correctTileNumber": 7,
+    "correctBrandName": "Instagram",
+    "options": [
+      {
+        "optionId": "opt_7_A",
+        "logoId": "L057",
+        "tileNumber": 57,
+        "brandName": "Java",
+        "category": "Programming",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/057.svg",
+        "pngUrl": "/logos/057.png"
+      },
+      {
+        "optionId": "opt_7_B",
+        "logoId": "L007",
+        "tileNumber": 7,
+        "brandName": "Instagram",
+        "category": "Social Media",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/007.svg",
+        "pngUrl": "/logos/007.png"
+      },
+      {
+        "optionId": "opt_7_C",
+        "logoId": "L012",
+        "tileNumber": 12,
+        "brandName": "Snapchat",
+        "category": "Social Media",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/012.svg",
+        "pngUrl": "/logos/012.png"
+      },
+      {
+        "optionId": "opt_7_D",
+        "logoId": "L006",
+        "tileNumber": 6,
+        "brandName": "Facebook",
+        "category": "Social Media",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/006.svg",
+        "pngUrl": "/logos/006.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q008",
+    "questionNumber": 8,
+    "questionText": "Which logo represents the video platform YouTube?",
+    "correctLogoId": "L008",
+    "correctTileNumber": 8,
+    "correctBrandName": "YouTube",
+    "options": [
+      {
+        "optionId": "opt_8_A",
+        "logoId": "L008",
+        "tileNumber": 8,
+        "brandName": "YouTube",
+        "category": "Media & Entertainment",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/008.svg",
+        "pngUrl": "/logos/008.png"
+      },
+      {
+        "optionId": "opt_8_B",
+        "logoId": "L039",
+        "tileNumber": 39,
+        "brandName": "SoundCloud",
+        "category": "Music & Audio",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/039.svg",
+        "pngUrl": "/logos/039.png"
+      },
+      {
+        "optionId": "opt_8_C",
+        "logoId": "L058",
+        "tileNumber": 58,
+        "brandName": "Raspberry Pi",
+        "category": "Hardware & Education",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/058.svg",
+        "pngUrl": "/logos/058.png"
+      },
+      {
+        "optionId": "opt_8_D",
+        "logoId": "L030",
+        "tileNumber": 30,
+        "brandName": "Twitch",
+        "category": "Gaming & Streaming",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/030.svg",
+        "pngUrl": "/logos/030.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q009",
+    "questionNumber": 9,
+    "questionText": "Which logo is used by the messaging app WhatsApp?",
+    "correctLogoId": "L009",
+    "correctTileNumber": 9,
+    "correctBrandName": "WhatsApp",
+    "options": [
+      {
+        "optionId": "opt_9_A",
+        "logoId": "L014",
+        "tileNumber": 14,
+        "brandName": "Discord",
+        "category": "Communication & Gaming",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/014.svg",
+        "pngUrl": "/logos/014.png"
+      },
+      {
+        "optionId": "opt_9_B",
+        "logoId": "L059",
+        "tileNumber": 59,
+        "brandName": "Bluetooth",
+        "category": "Technology Standard",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/059.svg",
+        "pngUrl": "/logos/059.png"
+      },
+      {
+        "optionId": "opt_9_C",
+        "logoId": "L009",
+        "tileNumber": 9,
+        "brandName": "WhatsApp",
+        "category": "Communication",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/009.svg",
+        "pngUrl": "/logos/009.png"
+      },
+      {
+        "optionId": "opt_9_D",
+        "logoId": "L013",
+        "tileNumber": 13,
+        "brandName": "Telegram",
+        "category": "Communication",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/013.svg",
+        "pngUrl": "/logos/013.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q010",
+    "questionNumber": 10,
+    "questionText": "Which logo represents the music streaming service Spotify?",
+    "correctLogoId": "L010",
+    "correctTileNumber": 10,
+    "correctBrandName": "Spotify",
+    "options": [
+      {
+        "optionId": "opt_10_A",
+        "logoId": "L060",
+        "tileNumber": 60,
+        "brandName": "USB",
+        "category": "Technology Standard",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/060.svg",
+        "pngUrl": "/logos/060.png"
+      },
+      {
+        "optionId": "opt_10_B",
+        "logoId": "L010",
+        "tileNumber": 10,
+        "brandName": "Spotify",
+        "category": "Media & Entertainment",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/010.svg",
+        "pngUrl": "/logos/010.png"
+      },
+      {
+        "optionId": "opt_10_C",
+        "logoId": "L039",
+        "tileNumber": 39,
+        "brandName": "SoundCloud",
+        "category": "Music & Audio",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/039.svg",
+        "pngUrl": "/logos/039.png"
+      },
+      {
+        "optionId": "opt_10_D",
+        "logoId": "L008",
+        "tileNumber": 8,
+        "brandName": "YouTube",
+        "category": "Media & Entertainment",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/008.svg",
+        "pngUrl": "/logos/008.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q011",
+    "questionNumber": 11,
+    "questionText": "Which logo represents the short-video platform TikTok?",
+    "correctLogoId": "L011",
+    "correctTileNumber": 11,
+    "correctBrandName": "TikTok",
+    "options": [
+      {
+        "optionId": "opt_11_A",
+        "logoId": "L007",
+        "tileNumber": 7,
+        "brandName": "Instagram",
+        "category": "Social Media",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/007.svg",
+        "pngUrl": "/logos/007.png"
+      },
+      {
+        "optionId": "opt_11_B",
+        "logoId": "L012",
+        "tileNumber": 12,
+        "brandName": "Snapchat",
+        "category": "Social Media",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/012.svg",
+        "pngUrl": "/logos/012.png"
+      },
+      {
+        "optionId": "opt_11_C",
+        "logoId": "L061",
+        "tileNumber": 61,
+        "brandName": "Figma",
+        "category": "Design & Creative",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/061.svg",
+        "pngUrl": "/logos/061.png"
+      },
+      {
+        "optionId": "opt_11_D",
+        "logoId": "L011",
+        "tileNumber": 11,
+        "brandName": "TikTok",
+        "category": "Social Media",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/011.svg",
+        "pngUrl": "/logos/011.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q012",
+    "questionNumber": 12,
+    "questionText": "Which logo represents the messaging app Snapchat?",
+    "correctLogoId": "L012",
+    "correctTileNumber": 12,
+    "correctBrandName": "Snapchat",
+    "options": [
+      {
+        "optionId": "opt_12_A",
+        "logoId": "L012",
+        "tileNumber": 12,
+        "brandName": "Snapchat",
+        "category": "Social Media",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/012.svg",
+        "pngUrl": "/logos/012.png"
+      },
+      {
+        "optionId": "opt_12_B",
+        "logoId": "L011",
+        "tileNumber": 11,
+        "brandName": "TikTok",
+        "category": "Social Media",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/011.svg",
+        "pngUrl": "/logos/011.png"
+      },
+      {
+        "optionId": "opt_12_C",
+        "logoId": "L007",
+        "tileNumber": 7,
+        "brandName": "Instagram",
+        "category": "Social Media",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/007.svg",
+        "pngUrl": "/logos/007.png"
+      },
+      {
+        "optionId": "opt_12_D",
+        "logoId": "L062",
+        "tileNumber": 62,
+        "brandName": "Behance",
+        "category": "Design & Creative",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/062.svg",
+        "pngUrl": "/logos/062.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q013",
+    "questionNumber": 13,
+    "questionText": "Which logo represents the messaging app Telegram?",
+    "correctLogoId": "L013",
+    "correctTileNumber": 13,
+    "correctBrandName": "Telegram",
+    "options": [
+      {
+        "optionId": "opt_13_A",
+        "logoId": "L063",
+        "tileNumber": 63,
+        "brandName": "Dribbble",
+        "category": "Design & Creative",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/063.svg",
+        "pngUrl": "/logos/063.png"
+      },
+      {
+        "optionId": "opt_13_B",
+        "logoId": "L009",
+        "tileNumber": 9,
+        "brandName": "WhatsApp",
+        "category": "Communication",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/009.svg",
+        "pngUrl": "/logos/009.png"
+      },
+      {
+        "optionId": "opt_13_C",
+        "logoId": "L013",
+        "tileNumber": 13,
+        "brandName": "Telegram",
+        "category": "Communication",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/013.svg",
+        "pngUrl": "/logos/013.png"
+      },
+      {
+        "optionId": "opt_13_D",
+        "logoId": "L014",
+        "tileNumber": 14,
+        "brandName": "Discord",
+        "category": "Communication & Gaming",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/014.svg",
+        "pngUrl": "/logos/014.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q014",
+    "questionNumber": 14,
+    "questionText": "Which logo is associated with Discord, a communication platform popular with gaming communities?",
+    "correctLogoId": "L014",
+    "correctTileNumber": 14,
+    "correctBrandName": "Discord",
+    "options": [
+      {
+        "optionId": "opt_14_A",
+        "logoId": "L030",
+        "tileNumber": 30,
+        "brandName": "Twitch",
+        "category": "Gaming & Streaming",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/030.svg",
+        "pngUrl": "/logos/030.png"
+      },
+      {
+        "optionId": "opt_14_B",
+        "logoId": "L028",
+        "tileNumber": 28,
+        "brandName": "Xbox",
+        "category": "Gaming",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/028.svg",
+        "pngUrl": "/logos/028.png"
+      },
+      {
+        "optionId": "opt_14_C",
+        "logoId": "L014",
+        "tileNumber": 14,
+        "brandName": "Discord",
+        "category": "Communication & Gaming",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/014.svg",
+        "pngUrl": "/logos/014.png"
+      },
+      {
+        "optionId": "opt_14_D",
+        "logoId": "L064",
+        "tileNumber": 64,
+        "brandName": "Vimeo",
+        "category": "Media & Entertainment",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/064.svg",
+        "pngUrl": "/logos/064.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q015",
+    "questionNumber": 15,
+    "questionText": "Which logo represents the social discussion platform Reddit?",
+    "correctLogoId": "L015",
+    "correctTileNumber": 15,
+    "correctBrandName": "Reddit",
+    "options": [
+      {
+        "optionId": "opt_15_A",
+        "logoId": "L065",
+        "tileNumber": 65,
+        "brandName": "Deezer",
+        "category": "Music & Audio",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/065.svg",
+        "pngUrl": "/logos/065.png"
+      },
+      {
+        "optionId": "opt_15_B",
+        "logoId": "L018",
+        "tileNumber": 18,
+        "brandName": "X / Twitter",
+        "category": "Social Media",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/018.svg",
+        "pngUrl": "/logos/018.png"
+      },
+      {
+        "optionId": "opt_15_C",
+        "logoId": "L015",
+        "tileNumber": 15,
+        "brandName": "Reddit",
+        "category": "Social Media",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/015.svg",
+        "pngUrl": "/logos/015.png"
+      },
+      {
+        "optionId": "opt_15_D",
+        "logoId": "L003",
+        "tileNumber": 3,
+        "brandName": "Microsoft",
+        "category": "Technology",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/003.svg",
+        "pngUrl": "/logos/003.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q016",
+    "questionNumber": 16,
+    "questionText": "Which logo represents the professional networking platform LinkedIn?",
+    "correctLogoId": "L016",
+    "correctTileNumber": 16,
+    "correctBrandName": "LinkedIn",
+    "options": [
+      {
+        "optionId": "opt_16_A",
+        "logoId": "L017",
+        "tileNumber": 17,
+        "brandName": "GitHub",
+        "category": "Developer & Technology",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/017.svg",
+        "pngUrl": "/logos/017.png"
+      },
+      {
+        "optionId": "opt_16_B",
+        "logoId": "L016",
+        "tileNumber": 16,
+        "brandName": "LinkedIn",
+        "category": "Professional & Social",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/016.svg",
+        "pngUrl": "/logos/016.png"
+      },
+      {
+        "optionId": "opt_16_C",
+        "logoId": "L066",
+        "tileNumber": 66,
+        "brandName": "Audible",
+        "category": "Media & Books",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/066.svg",
+        "pngUrl": "/logos/066.png"
+      },
+      {
+        "optionId": "opt_16_D",
+        "logoId": "L006",
+        "tileNumber": 6,
+        "brandName": "Facebook",
+        "category": "Social Media",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/006.svg",
+        "pngUrl": "/logos/006.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q017",
+    "questionNumber": 17,
+    "questionText": "Which logo represents the developer platform where many programmers store code repositories?",
+    "correctLogoId": "L017",
+    "correctTileNumber": 17,
+    "correctBrandName": "GitHub",
+    "options": [
+      {
+        "optionId": "opt_17_A",
+        "logoId": "L017",
+        "tileNumber": 17,
+        "brandName": "GitHub",
+        "category": "Developer & Technology",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/017.svg",
+        "pngUrl": "/logos/017.png"
+      },
+      {
+        "optionId": "opt_17_B",
+        "logoId": "L067",
+        "tileNumber": 67,
+        "brandName": "Goodreads",
+        "category": "Books & Knowledge",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/067.svg",
+        "pngUrl": "/logos/067.png"
+      },
+      {
+        "optionId": "opt_17_C",
+        "logoId": "L047",
+        "tileNumber": 47,
+        "brandName": "GitLab",
+        "category": "Developer & Technology",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/047.svg",
+        "pngUrl": "/logos/047.png"
+      },
+      {
+        "optionId": "opt_17_D",
+        "logoId": "L048",
+        "tileNumber": 48,
+        "brandName": "Stack Overflow",
+        "category": "Developer & Technology",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/048.svg",
+        "pngUrl": "/logos/048.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q018",
+    "questionNumber": 18,
+    "questionText": "Which logo represents the social platform formerly known as Twitter?",
+    "correctLogoId": "L018",
+    "correctTileNumber": 18,
+    "correctBrandName": "X / Twitter",
+    "options": [
+      {
+        "optionId": "opt_18_A",
+        "logoId": "L015",
+        "tileNumber": 15,
+        "brandName": "Reddit",
+        "category": "Social Media",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/015.svg",
+        "pngUrl": "/logos/015.png"
+      },
+      {
+        "optionId": "opt_18_B",
+        "logoId": "L006",
+        "tileNumber": 6,
+        "brandName": "Facebook",
+        "category": "Social Media",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/006.svg",
+        "pngUrl": "/logos/006.png"
+      },
+      {
+        "optionId": "opt_18_C",
+        "logoId": "L018",
+        "tileNumber": 18,
+        "brandName": "X / Twitter",
+        "category": "Social Media",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/018.svg",
+        "pngUrl": "/logos/018.png"
+      },
+      {
+        "optionId": "opt_18_D",
+        "logoId": "L068",
+        "tileNumber": 68,
+        "brandName": "Patreon",
+        "category": "Creator Economy",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/068.svg",
+        "pngUrl": "/logos/068.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q019",
+    "questionNumber": 19,
+    "questionText": "Which logo represents the web browser from Google?",
+    "correctLogoId": "L019",
+    "correctTileNumber": 19,
+    "correctBrandName": "Google Chrome",
+    "options": [
+      {
+        "optionId": "opt_19_A",
+        "logoId": "L069",
+        "tileNumber": 69,
+        "brandName": "Kickstarter",
+        "category": "Crowdfunding",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/069.svg",
+        "pngUrl": "/logos/069.png"
+      },
+      {
+        "optionId": "opt_19_B",
+        "logoId": "L042",
+        "tileNumber": 42,
+        "brandName": "Microsoft Edge",
+        "category": "Browser & Technology",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/042.svg",
+        "pngUrl": "/logos/042.png"
+      },
+      {
+        "optionId": "opt_19_C",
+        "logoId": "L019",
+        "tileNumber": 19,
+        "brandName": "Google Chrome",
+        "category": "Browser & Technology",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/019.svg",
+        "pngUrl": "/logos/019.png"
+      },
+      {
+        "optionId": "opt_19_D",
+        "logoId": "L041",
+        "tileNumber": 41,
+        "brandName": "Mozilla Firefox",
+        "category": "Browser & Technology",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/041.svg",
+        "pngUrl": "/logos/041.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q020",
+    "questionNumber": 20,
+    "questionText": "Which logo represents Google's mobile operating system?",
+    "correctLogoId": "L020",
+    "correctTileNumber": 20,
+    "correctBrandName": "Android",
+    "options": [
+      {
+        "optionId": "opt_20_A",
+        "logoId": "L070",
+        "tileNumber": 70,
+        "brandName": "Quora",
+        "category": "Knowledge & Social",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/070.svg",
+        "pngUrl": "/logos/070.png"
+      },
+      {
+        "optionId": "opt_20_B",
+        "logoId": "L044",
+        "tileNumber": 44,
+        "brandName": "Linux",
+        "category": "Operating Systems",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/044.svg",
+        "pngUrl": "/logos/044.png"
+      },
+      {
+        "optionId": "opt_20_C",
+        "logoId": "L020",
+        "tileNumber": 20,
+        "brandName": "Android",
+        "category": "Operating Systems",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/020.svg",
+        "pngUrl": "/logos/020.png"
+      },
+      {
+        "optionId": "opt_20_D",
+        "logoId": "L021",
+        "tileNumber": 21,
+        "brandName": "Windows",
+        "category": "Operating Systems",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/021.svg",
+        "pngUrl": "/logos/021.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q021",
+    "questionNumber": 21,
+    "questionText": "Which logo represents the Windows operating system?",
+    "correctLogoId": "L021",
+    "correctTileNumber": 21,
+    "correctBrandName": "Windows",
+    "options": [
+      {
+        "optionId": "opt_21_A",
+        "logoId": "L020",
+        "tileNumber": 20,
+        "brandName": "Android",
+        "category": "Operating Systems",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/020.svg",
+        "pngUrl": "/logos/020.png"
+      },
+      {
+        "optionId": "opt_21_B",
+        "logoId": "L042",
+        "tileNumber": 42,
+        "brandName": "Microsoft Edge",
+        "category": "Browser & Technology",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/042.svg",
+        "pngUrl": "/logos/042.png"
+      },
+      {
+        "optionId": "opt_21_C",
+        "logoId": "L021",
+        "tileNumber": 21,
+        "brandName": "Windows",
+        "category": "Operating Systems",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/021.svg",
+        "pngUrl": "/logos/021.png"
+      },
+      {
+        "optionId": "opt_21_D",
+        "logoId": "L071",
+        "tileNumber": 71,
+        "brandName": "Medium",
+        "category": "Publishing",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/071.svg",
+        "pngUrl": "/logos/071.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q022",
+    "questionNumber": 22,
+    "questionText": "Which logo represents the payment service PayPal?",
+    "correctLogoId": "L022",
+    "correctTileNumber": 22,
+    "correctBrandName": "PayPal",
+    "options": [
+      {
+        "optionId": "opt_22_A",
+        "logoId": "L022",
+        "tileNumber": 22,
+        "brandName": "PayPal",
+        "category": "Finance & Payments",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/022.svg",
+        "pngUrl": "/logos/022.png"
+      },
+      {
+        "optionId": "opt_22_B",
+        "logoId": "L024",
+        "tileNumber": 24,
+        "brandName": "Mastercard",
+        "category": "Finance & Payments",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/024.svg",
+        "pngUrl": "/logos/024.png"
+      },
+      {
+        "optionId": "opt_22_C",
+        "logoId": "L072",
+        "tileNumber": 72,
+        "brandName": "Stripe",
+        "category": "Finance & Payments",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/072.svg",
+        "pngUrl": "/logos/072.png"
+      },
+      {
+        "optionId": "opt_22_D",
+        "logoId": "L023",
+        "tileNumber": 23,
+        "brandName": "Visa",
+        "category": "Finance & Payments",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/023.svg",
+        "pngUrl": "/logos/023.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q023",
+    "questionNumber": 23,
+    "questionText": "Which logo is a card-network brand used for electronic payments?",
+    "correctLogoId": "L023",
+    "correctTileNumber": 23,
+    "correctBrandName": "Visa",
+    "options": [
+      {
+        "optionId": "opt_23_A",
+        "logoId": "L073",
+        "tileNumber": 73,
+        "brandName": "Apple Pay",
+        "category": "Finance & Payments",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/073.svg",
+        "pngUrl": "/logos/073.png"
+      },
+      {
+        "optionId": "opt_23_B",
+        "logoId": "L023",
+        "tileNumber": 23,
+        "brandName": "Visa",
+        "category": "Finance & Payments",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/023.svg",
+        "pngUrl": "/logos/023.png"
+      },
+      {
+        "optionId": "opt_23_C",
+        "logoId": "L022",
+        "tileNumber": 22,
+        "brandName": "PayPal",
+        "category": "Finance & Payments",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/022.svg",
+        "pngUrl": "/logos/022.png"
+      },
+      {
+        "optionId": "opt_23_D",
+        "logoId": "L024",
+        "tileNumber": 24,
+        "brandName": "Mastercard",
+        "category": "Finance & Payments",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/024.svg",
+        "pngUrl": "/logos/024.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q024",
+    "questionNumber": 24,
+    "questionText": "Which logo is another major card-network brand used for payments?",
+    "correctLogoId": "L024",
+    "correctTileNumber": 24,
+    "correctBrandName": "Mastercard",
+    "options": [
+      {
+        "optionId": "opt_24_A",
+        "logoId": "L022",
+        "tileNumber": 22,
+        "brandName": "PayPal",
+        "category": "Finance & Payments",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/022.svg",
+        "pngUrl": "/logos/022.png"
+      },
+      {
+        "optionId": "opt_24_B",
+        "logoId": "L074",
+        "tileNumber": 74,
+        "brandName": "Google Pay",
+        "category": "Finance & Payments",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/074.svg",
+        "pngUrl": "/logos/074.png"
+      },
+      {
+        "optionId": "opt_24_C",
+        "logoId": "L024",
+        "tileNumber": 24,
+        "brandName": "Mastercard",
+        "category": "Finance & Payments",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/024.svg",
+        "pngUrl": "/logos/024.png"
+      },
+      {
+        "optionId": "opt_24_D",
+        "logoId": "L023",
+        "tileNumber": 23,
+        "brandName": "Visa",
+        "category": "Finance & Payments",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/023.svg",
+        "pngUrl": "/logos/023.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q025",
+    "questionNumber": 25,
+    "questionText": "Which logo represents the ride-hailing service Uber?",
+    "correctLogoId": "L025",
+    "correctTileNumber": 25,
+    "correctBrandName": "Uber",
+    "options": [
+      {
+        "optionId": "opt_25_A",
+        "logoId": "L025",
+        "tileNumber": 25,
+        "brandName": "Uber",
+        "category": "Travel & Mobility",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/025.svg",
+        "pngUrl": "/logos/025.png"
+      },
+      {
+        "optionId": "opt_25_B",
+        "logoId": "L026",
+        "tileNumber": 26,
+        "brandName": "Airbnb",
+        "category": "Travel & Hospitality",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/026.svg",
+        "pngUrl": "/logos/026.png"
+      },
+      {
+        "optionId": "opt_25_C",
+        "logoId": "L003",
+        "tileNumber": 3,
+        "brandName": "Microsoft",
+        "category": "Technology",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/003.svg",
+        "pngUrl": "/logos/003.png"
+      },
+      {
+        "optionId": "opt_25_D",
+        "logoId": "L075",
+        "tileNumber": 75,
+        "brandName": "Bitcoin",
+        "category": "Finance & Crypto",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/075.svg",
+        "pngUrl": "/logos/075.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q026",
+    "questionNumber": 26,
+    "questionText": "Which logo represents the accommodation platform Airbnb?",
+    "correctLogoId": "L026",
+    "correctTileNumber": 26,
+    "correctBrandName": "Airbnb",
+    "options": [
+      {
+        "optionId": "opt_26_A",
+        "logoId": "L076",
+        "tileNumber": 76,
+        "brandName": "Ethereum",
+        "category": "Finance & Crypto",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/076.svg",
+        "pngUrl": "/logos/076.png"
+      },
+      {
+        "optionId": "opt_26_B",
+        "logoId": "L026",
+        "tileNumber": 26,
+        "brandName": "Airbnb",
+        "category": "Travel & Hospitality",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/026.svg",
+        "pngUrl": "/logos/026.png"
+      },
+      {
+        "optionId": "opt_26_C",
+        "logoId": "L003",
+        "tileNumber": 3,
+        "brandName": "Microsoft",
+        "category": "Technology",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/003.svg",
+        "pngUrl": "/logos/003.png"
+      },
+      {
+        "optionId": "opt_26_D",
+        "logoId": "L025",
+        "tileNumber": 25,
+        "brandName": "Uber",
+        "category": "Travel & Mobility",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/025.svg",
+        "pngUrl": "/logos/025.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q027",
+    "questionNumber": 27,
+    "questionText": "Which logo represents Sony's PlayStation gaming brand?",
+    "correctLogoId": "L027",
+    "correctTileNumber": 27,
+    "correctBrandName": "PlayStation",
+    "options": [
+      {
+        "optionId": "opt_27_A",
+        "logoId": "L077",
+        "tileNumber": 77,
+        "brandName": "Lyft",
+        "category": "Travel & Mobility",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/077.svg",
+        "pngUrl": "/logos/077.png"
+      },
+      {
+        "optionId": "opt_27_B",
+        "logoId": "L028",
+        "tileNumber": 28,
+        "brandName": "Xbox",
+        "category": "Gaming",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/028.svg",
+        "pngUrl": "/logos/028.png"
+      },
+      {
+        "optionId": "opt_27_C",
+        "logoId": "L029",
+        "tileNumber": 29,
+        "brandName": "Steam",
+        "category": "Gaming",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/029.svg",
+        "pngUrl": "/logos/029.png"
+      },
+      {
+        "optionId": "opt_27_D",
+        "logoId": "L027",
+        "tileNumber": 27,
+        "brandName": "PlayStation",
+        "category": "Gaming",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/027.svg",
+        "pngUrl": "/logos/027.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q028",
+    "questionNumber": 28,
+    "questionText": "Which logo represents Microsoft's Xbox gaming brand?",
+    "correctLogoId": "L028",
+    "correctTileNumber": 28,
+    "correctBrandName": "Xbox",
+    "options": [
+      {
+        "optionId": "opt_28_A",
+        "logoId": "L028",
+        "tileNumber": 28,
+        "brandName": "Xbox",
+        "category": "Gaming",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/028.svg",
+        "pngUrl": "/logos/028.png"
+      },
+      {
+        "optionId": "opt_28_B",
+        "logoId": "L078",
+        "tileNumber": 78,
+        "brandName": "Waze",
+        "category": "Travel & Mobility",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/078.svg",
+        "pngUrl": "/logos/078.png"
+      },
+      {
+        "optionId": "opt_28_C",
+        "logoId": "L029",
+        "tileNumber": 29,
+        "brandName": "Steam",
+        "category": "Gaming",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/029.svg",
+        "pngUrl": "/logos/029.png"
+      },
+      {
+        "optionId": "opt_28_D",
+        "logoId": "L027",
+        "tileNumber": 27,
+        "brandName": "PlayStation",
+        "category": "Gaming",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/027.svg",
+        "pngUrl": "/logos/027.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q029",
+    "questionNumber": 29,
+    "questionText": "Which logo represents the PC gaming platform Steam?",
+    "correctLogoId": "L029",
+    "correctTileNumber": 29,
+    "correctBrandName": "Steam",
+    "options": [
+      {
+        "optionId": "opt_29_A",
+        "logoId": "L027",
+        "tileNumber": 27,
+        "brandName": "PlayStation",
+        "category": "Gaming",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/027.svg",
+        "pngUrl": "/logos/027.png"
+      },
+      {
+        "optionId": "opt_29_B",
+        "logoId": "L029",
+        "tileNumber": 29,
+        "brandName": "Steam",
+        "category": "Gaming",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/029.svg",
+        "pngUrl": "/logos/029.png"
+      },
+      {
+        "optionId": "opt_29_C",
+        "logoId": "L028",
+        "tileNumber": 28,
+        "brandName": "Xbox",
+        "category": "Gaming",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/028.svg",
+        "pngUrl": "/logos/028.png"
+      },
+      {
+        "optionId": "opt_29_D",
+        "logoId": "L079",
+        "tileNumber": 79,
+        "brandName": "DHL",
+        "category": "Logistics",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/079.svg",
+        "pngUrl": "/logos/079.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q030",
+    "questionNumber": 30,
+    "questionText": "Which logo represents the live-streaming platform Twitch?",
+    "correctLogoId": "L030",
+    "correctTileNumber": 30,
+    "correctBrandName": "Twitch",
+    "options": [
+      {
+        "optionId": "opt_30_A",
+        "logoId": "L029",
+        "tileNumber": 29,
+        "brandName": "Steam",
+        "category": "Gaming",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/029.svg",
+        "pngUrl": "/logos/029.png"
+      },
+      {
+        "optionId": "opt_30_B",
+        "logoId": "L008",
+        "tileNumber": 8,
+        "brandName": "YouTube",
+        "category": "Media & Entertainment",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/008.svg",
+        "pngUrl": "/logos/008.png"
+      },
+      {
+        "optionId": "opt_30_C",
+        "logoId": "L080",
+        "tileNumber": 80,
+        "brandName": "FedEx",
+        "category": "Logistics",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/080.svg",
+        "pngUrl": "/logos/080.png"
+      },
+      {
+        "optionId": "opt_30_D",
+        "logoId": "L030",
+        "tileNumber": 30,
+        "brandName": "Twitch",
+        "category": "Gaming & Streaming",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/030.svg",
+        "pngUrl": "/logos/030.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q031",
+    "questionNumber": 31,
+    "questionText": "Which logo represents the online marketplace eBay?",
+    "correctLogoId": "L031",
+    "correctTileNumber": 31,
+    "correctBrandName": "eBay",
+    "options": [
+      {
+        "optionId": "opt_31_A",
+        "logoId": "L032",
+        "tileNumber": 32,
+        "brandName": "Etsy",
+        "category": "E-commerce",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/032.svg",
+        "pngUrl": "/logos/032.png"
+      },
+      {
+        "optionId": "opt_31_B",
+        "logoId": "L031",
+        "tileNumber": 31,
+        "brandName": "eBay",
+        "category": "E-commerce",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/031.svg",
+        "pngUrl": "/logos/031.png"
+      },
+      {
+        "optionId": "opt_31_C",
+        "logoId": "L081",
+        "tileNumber": 81,
+        "brandName": "UPS",
+        "category": "Logistics",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/081.svg",
+        "pngUrl": "/logos/081.png"
+      },
+      {
+        "optionId": "opt_31_D",
+        "logoId": "L033",
+        "tileNumber": 33,
+        "brandName": "Shopify",
+        "category": "E-commerce",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/033.svg",
+        "pngUrl": "/logos/033.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q032",
+    "questionNumber": 32,
+    "questionText": "Which logo represents the handmade and creative marketplace Etsy?",
+    "correctLogoId": "L032",
+    "correctTileNumber": 32,
+    "correctBrandName": "Etsy",
+    "options": [
+      {
+        "optionId": "opt_32_A",
+        "logoId": "L082",
+        "tileNumber": 82,
+        "brandName": "Yelp",
+        "category": "Food & Local Discovery",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/082.svg",
+        "pngUrl": "/logos/082.png"
+      },
+      {
+        "optionId": "opt_32_B",
+        "logoId": "L031",
+        "tileNumber": 31,
+        "brandName": "eBay",
+        "category": "E-commerce",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/031.svg",
+        "pngUrl": "/logos/031.png"
+      },
+      {
+        "optionId": "opt_32_C",
+        "logoId": "L033",
+        "tileNumber": 33,
+        "brandName": "Shopify",
+        "category": "E-commerce",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/033.svg",
+        "pngUrl": "/logos/033.png"
+      },
+      {
+        "optionId": "opt_32_D",
+        "logoId": "L032",
+        "tileNumber": 32,
+        "brandName": "Etsy",
+        "category": "E-commerce",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/032.svg",
+        "pngUrl": "/logos/032.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q033",
+    "questionNumber": 33,
+    "questionText": "Which logo represents the e-commerce platform Shopify?",
+    "correctLogoId": "L033",
+    "correctTileNumber": 33,
+    "correctBrandName": "Shopify",
+    "options": [
+      {
+        "optionId": "opt_33_A",
+        "logoId": "L033",
+        "tileNumber": 33,
+        "brandName": "Shopify",
+        "category": "E-commerce",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/033.svg",
+        "pngUrl": "/logos/033.png"
+      },
+      {
+        "optionId": "opt_33_B",
+        "logoId": "L083",
+        "tileNumber": 83,
+        "brandName": "Untappd",
+        "category": "Food & Beverage",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/083.svg",
+        "pngUrl": "/logos/083.png"
+      },
+      {
+        "optionId": "opt_33_C",
+        "logoId": "L031",
+        "tileNumber": 31,
+        "brandName": "eBay",
+        "category": "E-commerce",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/031.svg",
+        "pngUrl": "/logos/031.png"
+      },
+      {
+        "optionId": "opt_33_D",
+        "logoId": "L032",
+        "tileNumber": 32,
+        "brandName": "Etsy",
+        "category": "E-commerce",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/032.svg",
+        "pngUrl": "/logos/032.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q034",
+    "questionNumber": 34,
+    "questionText": "Which logo represents the cloud storage service Dropbox?",
+    "correctLogoId": "L034",
+    "correctTileNumber": 34,
+    "correctBrandName": "Dropbox",
+    "options": [
+      {
+        "optionId": "opt_34_A",
+        "logoId": "L084",
+        "tileNumber": 84,
+        "brandName": "Strava",
+        "category": "Sports & Fitness",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/084.svg",
+        "pngUrl": "/logos/084.png"
+      },
+      {
+        "optionId": "opt_34_B",
+        "logoId": "L035",
+        "tileNumber": 35,
+        "brandName": "Slack",
+        "category": "Productivity & Communication",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/035.svg",
+        "pngUrl": "/logos/035.png"
+      },
+      {
+        "optionId": "opt_34_C",
+        "logoId": "L034",
+        "tileNumber": 34,
+        "brandName": "Dropbox",
+        "category": "Cloud & Productivity",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/034.svg",
+        "pngUrl": "/logos/034.png"
+      },
+      {
+        "optionId": "opt_34_D",
+        "logoId": "L050",
+        "tileNumber": 50,
+        "brandName": "Amazon Web Services",
+        "category": "Cloud Computing",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/050.svg",
+        "pngUrl": "/logos/050.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q035",
+    "questionNumber": 35,
+    "questionText": "Which logo represents the team communication platform Slack?",
+    "correctLogoId": "L035",
+    "correctTileNumber": 35,
+    "correctBrandName": "Slack",
+    "options": [
+      {
+        "optionId": "opt_35_A",
+        "logoId": "L014",
+        "tileNumber": 14,
+        "brandName": "Discord",
+        "category": "Communication & Gaming",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/014.svg",
+        "pngUrl": "/logos/014.png"
+      },
+      {
+        "optionId": "opt_35_B",
+        "logoId": "L035",
+        "tileNumber": 35,
+        "brandName": "Slack",
+        "category": "Productivity & Communication",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/035.svg",
+        "pngUrl": "/logos/035.png"
+      },
+      {
+        "optionId": "opt_35_C",
+        "logoId": "L085",
+        "tileNumber": 85,
+        "brandName": "Salesforce",
+        "category": "Business Software",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/085.svg",
+        "pngUrl": "/logos/085.png"
+      },
+      {
+        "optionId": "opt_35_D",
+        "logoId": "L034",
+        "tileNumber": 34,
+        "brandName": "Dropbox",
+        "category": "Cloud & Productivity",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/034.svg",
+        "pngUrl": "/logos/034.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q036",
+    "questionNumber": 36,
+    "questionText": "Which logo represents the visual discovery and pinboard platform Pinterest?",
+    "correctLogoId": "L036",
+    "correctTileNumber": 36,
+    "correctBrandName": "Pinterest",
+    "options": [
+      {
+        "optionId": "opt_36_A",
+        "logoId": "L007",
+        "tileNumber": 7,
+        "brandName": "Instagram",
+        "category": "Social Media",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/007.svg",
+        "pngUrl": "/logos/007.png"
+      },
+      {
+        "optionId": "opt_36_B",
+        "logoId": "L015",
+        "tileNumber": 15,
+        "brandName": "Reddit",
+        "category": "Social Media",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/015.svg",
+        "pngUrl": "/logos/015.png"
+      },
+      {
+        "optionId": "opt_36_C",
+        "logoId": "L036",
+        "tileNumber": 36,
+        "brandName": "Pinterest",
+        "category": "Social Media",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/036.svg",
+        "pngUrl": "/logos/036.png"
+      },
+      {
+        "optionId": "opt_36_D",
+        "logoId": "L086",
+        "tileNumber": 86,
+        "brandName": "Atlassian",
+        "category": "Business Software",
+        "difficulty": "Hard",
+        "recommendedPoints": 20,
+        "svgUrl": "/logos/086.svg",
+        "pngUrl": "/logos/086.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q037",
+    "questionNumber": 37,
+    "questionText": "Which logo represents the online encyclopedia Wikipedia?",
+    "correctLogoId": "L037",
+    "correctTileNumber": 37,
+    "correctBrandName": "Wikipedia",
+    "options": [
+      {
+        "optionId": "opt_37_A",
+        "logoId": "L003",
+        "tileNumber": 3,
+        "brandName": "Microsoft",
+        "category": "Technology",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/003.svg",
+        "pngUrl": "/logos/003.png"
+      },
+      {
+        "optionId": "opt_37_B",
+        "logoId": "L007",
+        "tileNumber": 7,
+        "brandName": "Instagram",
+        "category": "Social Media",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/007.svg",
+        "pngUrl": "/logos/007.png"
+      },
+      {
+        "optionId": "opt_37_C",
+        "logoId": "L087",
+        "tileNumber": 87,
+        "brandName": "Jira",
+        "category": "Business Software",
+        "difficulty": "Hard",
+        "recommendedPoints": 20,
+        "svgUrl": "/logos/087.svg",
+        "pngUrl": "/logos/087.png"
+      },
+      {
+        "optionId": "opt_37_D",
+        "logoId": "L037",
+        "tileNumber": 37,
+        "brandName": "Wikipedia",
+        "category": "Knowledge & Education",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/037.svg",
+        "pngUrl": "/logos/037.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q038",
+    "questionNumber": 38,
+    "questionText": "Which logo represents the movie and TV information website IMDb?",
+    "correctLogoId": "L038",
+    "correctTileNumber": 38,
+    "correctBrandName": "IMDb",
+    "options": [
+      {
+        "optionId": "opt_38_A",
+        "logoId": "L088",
+        "tileNumber": 88,
+        "brandName": "Confluence",
+        "category": "Business Software",
+        "difficulty": "Hard",
+        "recommendedPoints": 20,
+        "svgUrl": "/logos/088.svg",
+        "pngUrl": "/logos/088.png"
+      },
+      {
+        "optionId": "opt_38_B",
+        "logoId": "L008",
+        "tileNumber": 8,
+        "brandName": "YouTube",
+        "category": "Media & Entertainment",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/008.svg",
+        "pngUrl": "/logos/008.png"
+      },
+      {
+        "optionId": "opt_38_C",
+        "logoId": "L038",
+        "tileNumber": 38,
+        "brandName": "IMDb",
+        "category": "Media & Entertainment",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/038.svg",
+        "pngUrl": "/logos/038.png"
+      },
+      {
+        "optionId": "opt_38_D",
+        "logoId": "L003",
+        "tileNumber": 3,
+        "brandName": "Microsoft",
+        "category": "Technology",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/003.svg",
+        "pngUrl": "/logos/003.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q039",
+    "questionNumber": 39,
+    "questionText": "Which logo represents the music and audio platform SoundCloud?",
+    "correctLogoId": "L039",
+    "correctTileNumber": 39,
+    "correctBrandName": "SoundCloud",
+    "options": [
+      {
+        "optionId": "opt_39_A",
+        "logoId": "L089",
+        "tileNumber": 89,
+        "brandName": "Trello",
+        "category": "Productivity",
+        "difficulty": "Hard",
+        "recommendedPoints": 20,
+        "svgUrl": "/logos/089.svg",
+        "pngUrl": "/logos/089.png"
+      },
+      {
+        "optionId": "opt_39_B",
+        "logoId": "L010",
+        "tileNumber": 10,
+        "brandName": "Spotify",
+        "category": "Media & Entertainment",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/010.svg",
+        "pngUrl": "/logos/010.png"
+      },
+      {
+        "optionId": "opt_39_C",
+        "logoId": "L003",
+        "tileNumber": 3,
+        "brandName": "Microsoft",
+        "category": "Technology",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/003.svg",
+        "pngUrl": "/logos/003.png"
+      },
+      {
+        "optionId": "opt_39_D",
+        "logoId": "L039",
+        "tileNumber": 39,
+        "brandName": "SoundCloud",
+        "category": "Music & Audio",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/039.svg",
+        "pngUrl": "/logos/039.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q040",
+    "questionNumber": 40,
+    "questionText": "Which logo represents the website publishing platform WordPress?",
+    "correctLogoId": "L040",
+    "correctTileNumber": 40,
+    "correctBrandName": "WordPress",
+    "options": [
+      {
+        "optionId": "opt_40_A",
+        "logoId": "L090",
+        "tileNumber": 90,
+        "brandName": "HubSpot",
+        "category": "Business & Marketing",
+        "difficulty": "Hard",
+        "recommendedPoints": 20,
+        "svgUrl": "/logos/090.svg",
+        "pngUrl": "/logos/090.png"
+      },
+      {
+        "optionId": "opt_40_B",
+        "logoId": "L040",
+        "tileNumber": 40,
+        "brandName": "WordPress",
+        "category": "Web & Publishing",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/040.svg",
+        "pngUrl": "/logos/040.png"
+      },
+      {
+        "optionId": "opt_40_C",
+        "logoId": "L003",
+        "tileNumber": 3,
+        "brandName": "Microsoft",
+        "category": "Technology",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/003.svg",
+        "pngUrl": "/logos/003.png"
+      },
+      {
+        "optionId": "opt_40_D",
+        "logoId": "L007",
+        "tileNumber": 7,
+        "brandName": "Instagram",
+        "category": "Social Media",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/007.svg",
+        "pngUrl": "/logos/007.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q041",
+    "questionNumber": 41,
+    "questionText": "Which logo represents the Firefox web browser?",
+    "correctLogoId": "L041",
+    "correctTileNumber": 41,
+    "correctBrandName": "Mozilla Firefox",
+    "options": [
+      {
+        "optionId": "opt_41_A",
+        "logoId": "L041",
+        "tileNumber": 41,
+        "brandName": "Mozilla Firefox",
+        "category": "Browser & Technology",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/041.svg",
+        "pngUrl": "/logos/041.png"
+      },
+      {
+        "optionId": "opt_41_B",
+        "logoId": "L043",
+        "tileNumber": 43,
+        "brandName": "Safari",
+        "category": "Browser & Technology",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/043.svg",
+        "pngUrl": "/logos/043.png"
+      },
+      {
+        "optionId": "opt_41_C",
+        "logoId": "L042",
+        "tileNumber": 42,
+        "brandName": "Microsoft Edge",
+        "category": "Browser & Technology",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/042.svg",
+        "pngUrl": "/logos/042.png"
+      },
+      {
+        "optionId": "opt_41_D",
+        "logoId": "L091",
+        "tileNumber": 91,
+        "brandName": "Mailchimp",
+        "category": "Marketing",
+        "difficulty": "Hard",
+        "recommendedPoints": 20,
+        "svgUrl": "/logos/091.svg",
+        "pngUrl": "/logos/091.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q042",
+    "questionNumber": 42,
+    "questionText": "Which logo represents the Microsoft web browser Edge?",
+    "correctLogoId": "L042",
+    "correctTileNumber": 42,
+    "correctBrandName": "Microsoft Edge",
+    "options": [
+      {
+        "optionId": "opt_42_A",
+        "logoId": "L043",
+        "tileNumber": 43,
+        "brandName": "Safari",
+        "category": "Browser & Technology",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/043.svg",
+        "pngUrl": "/logos/043.png"
+      },
+      {
+        "optionId": "opt_42_B",
+        "logoId": "L092",
+        "tileNumber": 92,
+        "brandName": "Product Hunt",
+        "category": "Technology Community",
+        "difficulty": "Hard",
+        "recommendedPoints": 20,
+        "svgUrl": "/logos/092.svg",
+        "pngUrl": "/logos/092.png"
+      },
+      {
+        "optionId": "opt_42_C",
+        "logoId": "L042",
+        "tileNumber": 42,
+        "brandName": "Microsoft Edge",
+        "category": "Browser & Technology",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/042.svg",
+        "pngUrl": "/logos/042.png"
+      },
+      {
+        "optionId": "opt_42_D",
+        "logoId": "L041",
+        "tileNumber": 41,
+        "brandName": "Mozilla Firefox",
+        "category": "Browser & Technology",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/041.svg",
+        "pngUrl": "/logos/041.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q043",
+    "questionNumber": 43,
+    "questionText": "Which logo represents Apple's web browser Safari?",
+    "correctLogoId": "L043",
+    "correctTileNumber": 43,
+    "correctBrandName": "Safari",
+    "options": [
+      {
+        "optionId": "opt_43_A",
+        "logoId": "L042",
+        "tileNumber": 42,
+        "brandName": "Microsoft Edge",
+        "category": "Browser & Technology",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/042.svg",
+        "pngUrl": "/logos/042.png"
+      },
+      {
+        "optionId": "opt_43_B",
+        "logoId": "L043",
+        "tileNumber": 43,
+        "brandName": "Safari",
+        "category": "Browser & Technology",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/043.svg",
+        "pngUrl": "/logos/043.png"
+      },
+      {
+        "optionId": "opt_43_C",
+        "logoId": "L093",
+        "tileNumber": 93,
+        "brandName": "Hacker News",
+        "category": "Technology Community",
+        "difficulty": "Hard",
+        "recommendedPoints": 20,
+        "svgUrl": "/logos/093.svg",
+        "pngUrl": "/logos/093.png"
+      },
+      {
+        "optionId": "opt_43_D",
+        "logoId": "L041",
+        "tileNumber": 41,
+        "brandName": "Mozilla Firefox",
+        "category": "Browser & Technology",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/041.svg",
+        "pngUrl": "/logos/041.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q044",
+    "questionNumber": 44,
+    "questionText": "Which logo represents the Linux operating system?",
+    "correctLogoId": "L044",
+    "correctTileNumber": 44,
+    "correctBrandName": "Linux",
+    "options": [
+      {
+        "optionId": "opt_44_A",
+        "logoId": "L046",
+        "tileNumber": 46,
+        "brandName": "Fedora",
+        "category": "Operating Systems",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/046.svg",
+        "pngUrl": "/logos/046.png"
+      },
+      {
+        "optionId": "opt_44_B",
+        "logoId": "L045",
+        "tileNumber": 45,
+        "brandName": "Ubuntu",
+        "category": "Operating Systems",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/045.svg",
+        "pngUrl": "/logos/045.png"
+      },
+      {
+        "optionId": "opt_44_C",
+        "logoId": "L094",
+        "tileNumber": 94,
+        "brandName": "Red Hat",
+        "category": "Enterprise Technology",
+        "difficulty": "Hard",
+        "recommendedPoints": 20,
+        "svgUrl": "/logos/094.svg",
+        "pngUrl": "/logos/094.png"
+      },
+      {
+        "optionId": "opt_44_D",
+        "logoId": "L044",
+        "tileNumber": 44,
+        "brandName": "Linux",
+        "category": "Operating Systems",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/044.svg",
+        "pngUrl": "/logos/044.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q045",
+    "questionNumber": 45,
+    "questionText": "Which logo represents the Ubuntu Linux distribution?",
+    "correctLogoId": "L045",
+    "correctTileNumber": 45,
+    "correctBrandName": "Ubuntu",
+    "options": [
+      {
+        "optionId": "opt_45_A",
+        "logoId": "L044",
+        "tileNumber": 44,
+        "brandName": "Linux",
+        "category": "Operating Systems",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/044.svg",
+        "pngUrl": "/logos/044.png"
+      },
+      {
+        "optionId": "opt_45_B",
+        "logoId": "L095",
+        "tileNumber": 95,
+        "brandName": "DigitalOcean",
+        "category": "Cloud Computing",
+        "difficulty": "Hard",
+        "recommendedPoints": 20,
+        "svgUrl": "/logos/095.svg",
+        "pngUrl": "/logos/095.png"
+      },
+      {
+        "optionId": "opt_45_C",
+        "logoId": "L045",
+        "tileNumber": 45,
+        "brandName": "Ubuntu",
+        "category": "Operating Systems",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/045.svg",
+        "pngUrl": "/logos/045.png"
+      },
+      {
+        "optionId": "opt_45_D",
+        "logoId": "L046",
+        "tileNumber": 46,
+        "brandName": "Fedora",
+        "category": "Operating Systems",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/046.svg",
+        "pngUrl": "/logos/046.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q046",
+    "questionNumber": 46,
+    "questionText": "Which logo represents the Fedora Linux distribution?",
+    "correctLogoId": "L046",
+    "correctTileNumber": 46,
+    "correctBrandName": "Fedora",
+    "options": [
+      {
+        "optionId": "opt_46_A",
+        "logoId": "L045",
+        "tileNumber": 45,
+        "brandName": "Ubuntu",
+        "category": "Operating Systems",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/045.svg",
+        "pngUrl": "/logos/045.png"
+      },
+      {
+        "optionId": "opt_46_B",
+        "logoId": "L046",
+        "tileNumber": 46,
+        "brandName": "Fedora",
+        "category": "Operating Systems",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/046.svg",
+        "pngUrl": "/logos/046.png"
+      },
+      {
+        "optionId": "opt_46_C",
+        "logoId": "L096",
+        "tileNumber": 96,
+        "brandName": "Laravel",
+        "category": "Developer & Technology",
+        "difficulty": "Hard",
+        "recommendedPoints": 20,
+        "svgUrl": "/logos/096.svg",
+        "pngUrl": "/logos/096.png"
+      },
+      {
+        "optionId": "opt_46_D",
+        "logoId": "L044",
+        "tileNumber": 44,
+        "brandName": "Linux",
+        "category": "Operating Systems",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/044.svg",
+        "pngUrl": "/logos/044.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q047",
+    "questionNumber": 47,
+    "questionText": "Which logo represents the GitLab developer platform?",
+    "correctLogoId": "L047",
+    "correctTileNumber": 47,
+    "correctBrandName": "GitLab",
+    "options": [
+      {
+        "optionId": "opt_47_A",
+        "logoId": "L047",
+        "tileNumber": 47,
+        "brandName": "GitLab",
+        "category": "Developer & Technology",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/047.svg",
+        "pngUrl": "/logos/047.png"
+      },
+      {
+        "optionId": "opt_47_B",
+        "logoId": "L048",
+        "tileNumber": 48,
+        "brandName": "Stack Overflow",
+        "category": "Developer & Technology",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/048.svg",
+        "pngUrl": "/logos/048.png"
+      },
+      {
+        "optionId": "opt_47_C",
+        "logoId": "L097",
+        "tileNumber": 97,
+        "brandName": "Symfony",
+        "category": "Developer & Technology",
+        "difficulty": "Hard",
+        "recommendedPoints": 20,
+        "svgUrl": "/logos/097.svg",
+        "pngUrl": "/logos/097.png"
+      },
+      {
+        "optionId": "opt_47_D",
+        "logoId": "L017",
+        "tileNumber": 17,
+        "brandName": "GitHub",
+        "category": "Developer & Technology",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/017.svg",
+        "pngUrl": "/logos/017.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q048",
+    "questionNumber": 48,
+    "questionText": "Which logo represents the Stack Overflow developer Q&A platform?",
+    "correctLogoId": "L048",
+    "correctTileNumber": 48,
+    "correctBrandName": "Stack Overflow",
+    "options": [
+      {
+        "optionId": "opt_48_A",
+        "logoId": "L098",
+        "tileNumber": 98,
+        "brandName": "Bootstrap",
+        "category": "Developer & Technology",
+        "difficulty": "Hard",
+        "recommendedPoints": 20,
+        "svgUrl": "/logos/098.svg",
+        "pngUrl": "/logos/098.png"
+      },
+      {
+        "optionId": "opt_48_B",
+        "logoId": "L048",
+        "tileNumber": 48,
+        "brandName": "Stack Overflow",
+        "category": "Developer & Technology",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/048.svg",
+        "pngUrl": "/logos/048.png"
+      },
+      {
+        "optionId": "opt_48_C",
+        "logoId": "L017",
+        "tileNumber": 17,
+        "brandName": "GitHub",
+        "category": "Developer & Technology",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/017.svg",
+        "pngUrl": "/logos/017.png"
+      },
+      {
+        "optionId": "opt_48_D",
+        "logoId": "L047",
+        "tileNumber": 47,
+        "brandName": "GitLab",
+        "category": "Developer & Technology",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/047.svg",
+        "pngUrl": "/logos/047.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q049",
+    "questionNumber": 49,
+    "questionText": "Which logo represents Docker, widely used for containers?",
+    "correctLogoId": "L049",
+    "correctTileNumber": 49,
+    "correctBrandName": "Docker",
+    "options": [
+      {
+        "optionId": "opt_49_A",
+        "logoId": "L003",
+        "tileNumber": 3,
+        "brandName": "Microsoft",
+        "category": "Technology",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/003.svg",
+        "pngUrl": "/logos/003.png"
+      },
+      {
+        "optionId": "opt_49_B",
+        "logoId": "L099",
+        "tileNumber": 99,
+        "brandName": "Sass",
+        "category": "Developer & Technology",
+        "difficulty": "Hard",
+        "recommendedPoints": 20,
+        "svgUrl": "/logos/099.svg",
+        "pngUrl": "/logos/099.png"
+      },
+      {
+        "optionId": "opt_49_C",
+        "logoId": "L049",
+        "tileNumber": 49,
+        "brandName": "Docker",
+        "category": "Developer & Cloud",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/049.svg",
+        "pngUrl": "/logos/049.png"
+      },
+      {
+        "optionId": "opt_49_D",
+        "logoId": "L050",
+        "tileNumber": 50,
+        "brandName": "Amazon Web Services",
+        "category": "Cloud Computing",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/050.svg",
+        "pngUrl": "/logos/050.png"
+      }
+    ]
+  },
+  {
+    "questionId": "R2Q050",
+    "questionNumber": 50,
+    "questionText": "Which logo represents Amazon Web Services, a cloud platform?",
+    "correctLogoId": "L050",
+    "correctTileNumber": 50,
+    "correctBrandName": "Amazon Web Services",
+    "options": [
+      {
+        "optionId": "opt_50_A",
+        "logoId": "L100",
+        "tileNumber": 100,
+        "brandName": "Less",
+        "category": "Developer & Technology",
+        "difficulty": "Hard",
+        "recommendedPoints": 20,
+        "svgUrl": "/logos/100.svg",
+        "pngUrl": "/logos/100.png"
+      },
+      {
+        "optionId": "opt_50_B",
+        "logoId": "L003",
+        "tileNumber": 3,
+        "brandName": "Microsoft",
+        "category": "Technology",
+        "difficulty": "Easy",
+        "recommendedPoints": 10,
+        "svgUrl": "/logos/003.svg",
+        "pngUrl": "/logos/003.png"
+      },
+      {
+        "optionId": "opt_50_C",
+        "logoId": "L050",
+        "tileNumber": 50,
+        "brandName": "Amazon Web Services",
+        "category": "Cloud Computing",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/050.svg",
+        "pngUrl": "/logos/050.png"
+      },
+      {
+        "optionId": "opt_50_D",
+        "logoId": "L049",
+        "tileNumber": 49,
+        "brandName": "Docker",
+        "category": "Developer & Cloud",
+        "difficulty": "Medium",
+        "recommendedPoints": 15,
+        "svgUrl": "/logos/049.svg",
+        "pngUrl": "/logos/049.png"
+      }
+    ]
+  }
+]
