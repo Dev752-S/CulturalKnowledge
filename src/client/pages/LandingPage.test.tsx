@@ -40,10 +40,13 @@ describe('Cultural Knowledge Landing Page Reference UI Tests', () => {
       </AuthProvider>
     );
 
-    // 1. Top Navigation Bar (Section 7–15)
+    // 1. Top Navigation Bar
     await waitFor(() => {
-      expect(screen.getByText('college cultural event')).toBeInTheDocument();
+      expect(screen.getByText('Team Vibes')).toBeInTheDocument();
     });
+
+    // "college cultural event" must NOT be in the document
+    expect(screen.queryByText(/college cultural event/i)).not.toBeInTheDocument();
 
     // Brand titles
     const brandTitles = screen.getAllByText('Cultural Knowledge');
@@ -53,10 +56,10 @@ describe('Cultural Knowledge Landing Page Reference UI Tests', () => {
     expect(screen.getByRole('link', { name: 'Events' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Leaderboard' })).toBeInTheDocument();
 
-    // Dynamic Team Area (Section 12)
+    // Dynamic Team Area: Shows ONLY Team Name, NOT participant name or DEV
     expect(screen.getByText('Team Vibes')).toBeInTheDocument();
-    expect(screen.getByText('Dinesh K')).toBeInTheDocument();
-    expect(screen.getByRole('img', { name: 'Dinesh K' })).toBeInTheDocument();
+    expect(screen.queryByText('Dinesh K')).not.toBeInTheDocument();
+    expect(screen.getByRole('img', { name: 'Team Vibes' })).toBeInTheDocument();
 
     // Notification bell & Logout (Section 14 & 61)
     expect(screen.getByRole('button', { name: /notifications/i })).toBeInTheDocument();
@@ -71,16 +74,18 @@ describe('Cultural Knowledge Landing Page Reference UI Tests', () => {
       )
     ).toBeInTheDocument();
 
-    // 3. Event Rules & Instructions (Section 31–37)
+    // 3. Event Rules & Instructions
     expect(
       screen.getByRole('heading', { level: 3, name: /Event Rules & Instructions/i })
     ).toBeInTheDocument();
-    expect(
-      screen.getByText(/Mobile phones used by team members only\./i)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(/Maximum of four members per team\./i)
-    ).toBeInTheDocument();
+    expect(screen.getByText(/No Other Tabs/i)).toBeInTheDocument();
+    expect(screen.getByText(/No AI Assistance/i)).toBeInTheDocument();
+    expect(screen.getByText(/No Communication With Others/i)).toBeInTheDocument();
+    expect(screen.getByText(/No Multi-Screen \/ Additional Device/i)).toBeInTheDocument();
+    expect(screen.getByText(/Violation Consequence/i)).toBeInTheDocument();
+    expect(screen.getByText(/Each team can have a maximum of/i)).toBeInTheDocument();
+    expect(screen.getByText(/The two members of a team must use only/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/ONE device\/resource/i).length).toBeGreaterThanOrEqual(1);
 
     // 4. Subtle Quiz Transition (Section 42 & 70)
     expect(screen.getByRole('link', { name: /proceed to quiz/i })).toBeInTheDocument();

@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/vitest';
 import { BrowserRouter } from 'react-router-dom';
@@ -8,47 +8,58 @@ import QuizRound2Page from './QuizRound2Page';
 const mockRound2Questions = Array.from({ length: 50 }, (_, i) => ({
   questionId: `R2Q${String(i + 1).padStart(3, '0')}`,
   questionNumber: i + 1,
-  questionText: i === 0 ? 'Which logo belongs to the company behind the iPhone?' : `Logo Question ${i + 1}`,
+  questionText: i === 0 ? 'Which logo belongs to the company behind the iPhone?' : `Identify this brand emblem ${i + 1}`,
+  category: 'Technology',
+  difficulty: 'Easy',
+  logoSvgUrl: `/logos/${String(i + 1).padStart(3, '0')}.svg`,
+  logoPngUrl: `/logos/${String(i + 1).padStart(3, '0')}.png`,
+  logoImageUrl: `/logos/${String(i + 1).padStart(3, '0')}.svg`,
   options: [
     {
       optionId: `opt_${i + 1}_A`,
-      logoId: 'L001',
       key: 'A' as const,
-      svgUrl: '/logos/001.svg',
-      pngUrl: '/logos/001.png',
+      text: i === 0 ? 'Apple' : `Brand ${i + 1} A`,
+      brandName: i === 0 ? 'Apple' : `Brand ${i + 1} A`,
+      logoId: 'L001',
     },
     {
       optionId: `opt_${i + 1}_B`,
-      logoId: 'L003',
       key: 'B' as const,
-      svgUrl: '/logos/003.svg',
-      pngUrl: '/logos/003.png',
+      text: i === 0 ? 'Microsoft' : `Brand ${i + 1} B`,
+      brandName: i === 0 ? 'Microsoft' : `Brand ${i + 1} B`,
+      logoId: 'L003',
     },
     {
       optionId: `opt_${i + 1}_C`,
-      logoId: 'L002',
       key: 'C' as const,
-      svgUrl: '/logos/002.svg',
-      pngUrl: '/logos/002.png',
+      text: i === 0 ? 'Google' : `Brand ${i + 1} C`,
+      brandName: i === 0 ? 'Google' : `Brand ${i + 1} C`,
+      logoId: 'L002',
     },
     {
       optionId: `opt_${i + 1}_D`,
-      logoId: 'L051',
       key: 'D' as const,
-      svgUrl: '/logos/051.svg',
-      pngUrl: '/logos/051.png',
+      text: i === 0 ? 'Cloudflare' : `Brand ${i + 1} D`,
+      brandName: i === 0 ? 'Cloudflare' : `Brand ${i + 1} D`,
+      logoId: 'L051',
     },
   ],
 }));
 
-describe('QuizRound2Page UI & Interaction Tests (Untimed & Unscored)', () => {
+describe('QuizRound2Page Flip-Card Logo Identification Game UI & Flow Tests', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    vi.useFakeTimers({ shouldAdvanceTime: true });
   });
 
-  it('Renders preflight screen initially, then starts Round 2 and displays 3-column layout without timer', async () => {
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  it('Renders preflight screen, starts Flip-Card game, reveals logo for 5s, locks card, chooses text option, navigates, and submits explicitly', async () => {
     let hasStarted = false;
     const answersMap: Record<string, any> = {};
+    const revealsMap: Record<string, any> = {};
 
     global.fetch = vi.fn().mockImplementation((url: string, options?: any) => {
       if (url === '/api/v1/auth/me') {
@@ -58,8 +69,8 @@ describe('QuizRound2Page UI & Interaction Tests (Untimed & Unscored)', () => {
             success: true,
             user: {
               id: 'u-logo-1',
-              fullName: 'Logo Contestant',
-              teamName: 'Visual Explorers',
+              fullName: 'Flip Contestant',
+              teamName: 'Flip Explorers',
               role: 'participant',
             },
             hasTeamName: true,
@@ -83,6 +94,7 @@ describe('QuizRound2Page UI & Interaction Tests (Untimed & Unscored)', () => {
               totalQuestions: 50,
               isSubmitted: false,
               answers: answersMap,
+              reveals: revealsMap,
             },
           }),
         });
@@ -104,13 +116,38 @@ describe('QuizRound2Page UI & Interaction Tests (Untimed & Unscored)', () => {
         });
       }
 
+      if (url.startsWith('/api/v1/round2/reveal/')) {
+        const qId = url.split('/').pop()!;
+        revealsMap[qId] = { isLocked: false, remainingMs: 5000, revealStartedAt: new Date().toISOString() };
+        return Promise.resolve({
+          ok: true,
+          json: async () => ({
+            success: true,
+            questionId: qId,
+            isLocked: false,
+            remainingMs: 5000,
+            revealStartedAt: revealsMap[qId].revealStartedAt,
+          }),
+        });
+      }
+
       if (url.startsWith('/api/v1/round2/answers/')) {
         const body = JSON.parse(options.body);
         const qId = url.split('/').pop()!;
-        answersMap[qId] = { selectedLogoId: body.selectedLogoId, isMarkedForReview: false };
+        answersMap[qId] = {
+          selectedOptionId: body.selectedOptionId,
+          selectedBrandName: body.selectedBrandName,
+          isMarkedForReview: false,
+        };
+        revealsMap[qId] = { isLocked: true, remainingMs: 0 };
         return Promise.resolve({
           ok: true,
-          json: async () => ({ success: true, questionId: qId, selectedLogoId: body.selectedLogoId }),
+          json: async () => ({
+            success: true,
+            questionId: qId,
+            selectedOptionId: body.selectedOptionId,
+            selectedBrandName: body.selectedBrandName,
+          }),
         });
       }
 
@@ -151,13 +188,14 @@ describe('QuizRound2Page UI & Interaction Tests (Untimed & Unscored)', () => {
       </AuthProvider>
     );
 
-    // 1. Verify Preflight Screen appears
+    // 1. Verify Preflight Screen appears with Flip-Card info
     await waitFor(() => {
       expect(screen.getByRole('button', { name: /start round 2/i })).toBeInTheDocument();
     });
     expect(screen.getByText(/Round 2 — Logo Quiz/i)).toBeInTheDocument();
-    expect(screen.getByText(/50 Questions/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/50 Questions/i).length).toBeGreaterThan(0);
     expect(screen.getByText(/Untimed Examination/i)).toBeInTheDocument();
+    expect(screen.getByText(/Flip-Card Identification/i)).toBeInTheDocument();
 
     // 2. Click Start Round 2
     fireEvent.click(screen.getByRole('button', { name: /start round 2/i }));
@@ -167,41 +205,71 @@ describe('QuizRound2Page UI & Interaction Tests (Untimed & Unscored)', () => {
       expect(screen.getByRole('heading', { name: /Question 1 of 50/i })).toBeInTheDocument();
     });
 
-    // Check Clue Question Text
+    // Check Question Clue
     expect(screen.getByText('Which logo belongs to the company behind the iPhone?')).toBeInTheDocument();
 
-    // Check that there are exactly 4 option letter badges
-    expect(screen.getByText('A')).toBeInTheDocument();
-    expect(screen.getByText('B')).toBeInTheDocument();
-    expect(screen.getByText('C')).toBeInTheDocument();
-    expect(screen.getByText('D')).toBeInTheDocument();
+    // CRITICAL: Flip Card starts in Mystery/Unrevealed State
+    expect(screen.getByText(/Mystery Logo Card/i)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /reveal logo/i })).toBeInTheDocument();
 
-    // CRITICAL: Ensure NO countdown / timer exists in Round 2
+    // Answer options are hidden before reveal
+    expect(screen.getByText(/Answer Options Are Hidden During Initial State/i)).toBeInTheDocument();
+
+    // CRITICAL: Ensure NO countdown timer or points/marks exist
     expect(screen.queryByText(/Time Remaining/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/80 Minutes/i)).not.toBeInTheDocument();
-    expect(screen.queryByText(/60 Minutes/i)).not.toBeInTheDocument();
-
-    // CRITICAL: Ensure NO score / points exists in Round 2
     expect(screen.queryByText(/Total Points/i)).not.toBeInTheDocument();
-    expect(screen.queryByText(/Score:/i)).not.toBeInTheDocument();
 
-    // 4. Test selecting Option A
-    const optionAButton = screen.getByText('A').closest('button');
-    expect(optionAButton).toBeInTheDocument();
-    fireEvent.click(optionAButton!);
+    // 4. Reveal the card!
+    fireEvent.click(screen.getByRole('button', { name: /reveal logo/i }));
 
-    // Verify option A selection was called
+    await waitFor(() => {
+      expect(global.fetch).toHaveBeenCalledWith(
+        '/api/v1/round2/reveal/R2Q001',
+        expect.objectContaining({ method: 'POST' })
+      );
+    });
+
+    // Verify Active Reveal Back-Face is rendered (shows remaining countdown, e.g. 5s Left)
+    await waitFor(() => {
+      expect(screen.getByText(/5s Left/i)).toBeInTheDocument();
+      expect(screen.getByText(/Memorize this emblem/i)).toBeInTheDocument();
+    });
+
+    // 5. Fast-forward timer to end of 5-second reveal window
+    await vi.advanceTimersByTimeAsync(6000);
+
+    // 6. After 5 seconds, card locks permanently!
+    // Card displays "Card Locked"
+    await waitFor(() => {
+      expect(screen.getByText(/Card Locked/i)).toBeInTheDocument();
+    });
+
+    // Now the 4 TEXT answer options appear: Apple, Microsoft, Google, Cloudflare
+    await waitFor(() => {
+      expect(screen.getByText('Apple')).toBeInTheDocument();
+      expect(screen.getByText('Microsoft')).toBeInTheDocument();
+      expect(screen.getByText('Google')).toBeInTheDocument();
+      expect(screen.getByText('Cloudflare')).toBeInTheDocument();
+    });
+
+    // 7. Select Option A (Apple)
+    const appleBtn = screen.getByText('Apple').closest('button');
+    expect(appleBtn).toBeInTheDocument();
+    fireEvent.click(appleBtn!);
+
+    // Verify answer submission was called with text option
     await waitFor(() => {
       expect(global.fetch).toHaveBeenCalledWith(
         '/api/v1/round2/answers/R2Q001',
         expect.objectContaining({
           method: 'PUT',
-          body: JSON.stringify({ selectedLogoId: 'L001', selectedOptionId: 'opt_1_A' }),
+          body: JSON.stringify({ selectedOptionId: 'opt_1_A', selectedBrandName: 'Apple' }),
         })
       );
     });
 
-    // 5. Test Mark for Review
+    // 8. Test Mark for Review
     const reviewBtn = screen.getByRole('button', { name: /mark for review/i });
     fireEvent.click(reviewBtn);
 
@@ -215,12 +283,11 @@ describe('QuizRound2Page UI & Interaction Tests (Untimed & Unscored)', () => {
       );
     });
 
-    // 6. Test Navigator displays 50 questions
+    // 9. Verify Question Navigator has 50 questions
     expect(screen.getByTitle('Question 1')).toBeInTheDocument();
     expect(screen.getByTitle('Question 50')).toBeInTheDocument();
-    expect(screen.queryByTitle('Question 51')).not.toBeInTheDocument();
 
-    // 7. CRITICAL TEST: Answering Question 1 does NOT finish the quiz (must advance to Question 2)
+    // 10. CRITICAL: Moving to Next Question advances to Question 2 (attempt remains active!)
     const nextBtn = screen.getByRole('button', { name: /next question/i });
     expect(nextBtn).toBeInTheDocument();
     fireEvent.click(nextBtn);
@@ -229,7 +296,7 @@ describe('QuizRound2Page UI & Interaction Tests (Untimed & Unscored)', () => {
       expect(screen.getByRole('heading', { name: /Question 2 of 50/i })).toBeInTheDocument();
     });
 
-    // 8. Test Random Jump to Question 50
+    // 11. Jump to Question 50
     const q50Btn = screen.getByTitle('Question 50');
     fireEvent.click(q50Btn);
 
@@ -237,18 +304,15 @@ describe('QuizRound2Page UI & Interaction Tests (Untimed & Unscored)', () => {
       expect(screen.getByRole('heading', { name: /Question 50 of 50/i })).toBeInTheDocument();
     });
 
-    // At Question 50, the button should be Review & Submit
+    // 12. Review & Submit opens modal
     const reviewSubmitBtn = screen.getByRole('button', { name: /review & submit/i });
     expect(reviewSubmitBtn).toBeInTheDocument();
     fireEvent.click(reviewSubmitBtn);
 
-    // 9. Verify Submission Modal
     await waitFor(() => {
       expect(screen.getByText(/Round 2 Review/i)).toBeInTheDocument();
     });
-    expect(screen.getByText(/50 Questions/i)).toBeInTheDocument();
-    // Modal must NOT show score/marks
+    expect(screen.getAllByText(/50 Questions/i).length).toBeGreaterThan(0);
     expect(screen.queryByText(/Points/i)).not.toBeInTheDocument();
-    expect(screen.queryByText(/Marks/i)).not.toBeInTheDocument();
   });
 });

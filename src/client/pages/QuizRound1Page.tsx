@@ -18,8 +18,8 @@ export default function QuizRound1Page() {
   const { user, hasTeamName, isLoading } = useAuth();
   const navigate = useNavigate();
 
-  // Quiz Lifecycle State: 'loading' | 'preflight' | 'active' | 'submitting'
-  const [quizState, setQuizState] = useState<'loading' | 'preflight' | 'active' | 'submitting'>('loading');
+  // Quiz Lifecycle State: 'loading' | 'preflight' | 'active' | 'submitting' | 'disqualified'
+  const [quizState, setQuizState] = useState<'loading' | 'preflight' | 'active' | 'submitting' | 'disqualified'>('loading');
   const [questions, setQuestions] = useState<QuizQuestionData[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, QuizAnswerState>>({});
@@ -29,7 +29,7 @@ export default function QuizRound1Page() {
   // Security & Modal States
   const [securityModalType, setSecurityModalType] = useState<'TAB_SWITCH' | 'WINDOW_BLUR' | 'FULLSCREEN_EXIT' | null>(null);
   const [showSubmitModal, setShowSubmitModal] = useState(false);
-  const [cameraStream, setCameraStream] = useState<MediaStream | null>(null);
+  const [isRoundLocked, setIsRoundLocked] = useState(false);
 
   // Participant Route Guard
   useEffect(() => {
@@ -81,7 +81,18 @@ export default function QuizRound1Page() {
 
           setQuizState('active');
         } else {
-          // No active attempt, show preflight start gate
+          // No active attempt, check if round is enabled by admin
+          try {
+            const statusRes = await fetch('/api/v1/quiz/rounds-status');
+            if (statusRes.ok) {
+              const statusData = await statusRes.json();
+              if (statusData?.success && statusData.round1 && statusData.round1.isActive === false && user.role !== 'admin') {
+                setIsRoundLocked(true);
+              }
+            }
+          } catch {
+            // Non-blocking in offline/test environment
+          }
           setQuizState('preflight');
         }
       } catch (err) {
@@ -95,8 +106,8 @@ export default function QuizRound1Page() {
     }
   }, [user, isLoading, navigate]);
 
-  // Handle Start Quiz (Section 7, 8, 9)
-  const handleStartQuiz = async (enableCamera: boolean) => {
+  // Handle Start Quiz (Section 7, 8, 9) - Camera removed
+  const handleStartQuiz = async () => {
     // 1. Fullscreen request
     try {
       if (document.documentElement.requestFullscreen) {
@@ -106,19 +117,7 @@ export default function QuizRound1Page() {
       console.log('Fullscreen request was declined or unsupported:', err);
     }
 
-    // 2. Camera request if enabled (Section 16)
-    if (enableCamera && navigator.mediaDevices?.getUserMedia) {
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia({
-          video: { width: 320, height: 240, facingMode: 'user' },
-        });
-        setCameraStream(stream);
-      } catch (err) {
-        console.log('Camera permission was declined or unsupported:', err);
-      }
-    }
-
-    // 3. Initiate attempt on server
+    // 2. Initiate attempt on server
     const res = await fetch('/api/v1/quiz/round-1/start', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -200,10 +199,6 @@ export default function QuizRound1Page() {
       const data = await res.json();
 
       if (data.success) {
-        // Stop camera tracks if active
-        if (cameraStream) {
-          cameraStream.getTracks().forEach((track) => track.stop());
-        }
         navigate('/quiz/round-1/result');
       } else {
         alert(data.error?.message || 'Submission failed. Please try again.');
@@ -253,25 +248,28 @@ export default function QuizRound1Page() {
   useEffect(() => {
     if (quizState !== 'active') return;
 
+    const triggerElimination = (anomalyType: 'TAB_SWITCH' | 'WINDOW_BLUR' | 'FULLSCREEN_EXIT') => {
+      reportSecurityEvent(anomalyType, { timestamp: new Date().toISOString(), eliminated: true });
+      setQuizState('disqualified');
+      setSecurityModalType(anomalyType);
+    };
+
     // 1. Tab Switch / Visibility Change
     const handleVisibilityChange = () => {
       if (document.hidden) {
-        reportSecurityEvent('TAB_SWITCH', { timestamp: new Date().toISOString() });
-        setSecurityModalType('TAB_SWITCH');
+        triggerElimination('TAB_SWITCH');
       }
     };
 
     // 2. Window Blur (lost focus)
     const handleWindowBlur = () => {
-      reportSecurityEvent('WINDOW_BLUR', { timestamp: new Date().toISOString() });
-      setSecurityModalType('WINDOW_BLUR');
+      triggerElimination('WINDOW_BLUR');
     };
 
     // 3. Fullscreen Exit
     const handleFullscreenChange = () => {
       if (!document.fullscreenElement) {
-        reportSecurityEvent('FULLSCREEN_EXIT', { timestamp: new Date().toISOString() });
-        setSecurityModalType('FULLSCREEN_EXIT');
+        triggerElimination('FULLSCREEN_EXIT');
       }
     };
 
@@ -286,17 +284,6 @@ export default function QuizRound1Page() {
     };
   }, [quizState, reportSecurityEvent]);
 
-  // Request fullscreen return
-  const handleReturnFullscreen = async () => {
-    setSecurityModalType(null);
-    try {
-      if (document.documentElement.requestFullscreen) {
-        await document.documentElement.requestFullscreen();
-      }
-    } catch (err) {
-      console.log('Failed to return to fullscreen:', err);
-    }
-  };
 
   // Calculations for submit modal
   const answeredCount = Object.values(answers).filter((a) => a.selectedOption !== null).length;
@@ -338,6 +325,7 @@ export default function QuizRound1Page() {
             onStartQuiz={handleStartQuiz}
             teamName={user.teamName || 'Team Vibes'}
             participantName={user.fullName || 'Participant'}
+            isRoundLocked={isRoundLocked}
           />
         </div>
       </div>
@@ -383,8 +371,8 @@ export default function QuizRound1Page() {
 
       {/* 2. Main 3-Column Examination Arena (Section 22 & 97) */}
       <main className="relative z-10 flex-1 max-w-[1440px] mx-auto px-4 sm:px-6 py-4 sm:py-6 flex flex-col md:flex-row gap-4 sm:gap-6 w-full items-stretch">
-        {/* Left Column: Sidebar with Question Paper active state + Proctor Cam */}
-        <QuizLeftSidebar cameraStream={cameraStream} />
+        {/* Left Column: Sidebar with Question Paper active state + Security Badge */}
+        <QuizLeftSidebar />
 
         {/* Center Column: Question Card */}
         <div className="flex-1 flex flex-col min-w-0">
@@ -414,11 +402,10 @@ export default function QuizRound1Page() {
         />
       </main>
 
-      {/* Security Incident Notice Modal (Section 73) */}
+      {/* Zero Tolerance Immediate Elimination Modal */}
       <QuizSecurityModal
         type={securityModalType}
-        onDismiss={() => setSecurityModalType(null)}
-        onRequestFullscreen={handleReturnFullscreen}
+        onExit={() => navigate('/')}
       />
 
       {/* Submit Confirmation Modal (Section 80) */}

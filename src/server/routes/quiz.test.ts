@@ -130,24 +130,6 @@ describe('Round 1 Cultural Quiz Backend APIs', () => {
     expect(attData.attempt.answers['Q001'].isMarkedForReview).toBe(true);
   });
 
-  it('POST /api/v1/quiz/round-1/security-events logs proctor signals (TAB_SWITCH, FULLSCREEN_EXIT)', async () => {
-    const secRes = await app.request('/api/v1/quiz/round-1/security-events', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Cookie: sessionCookie,
-      },
-      body: JSON.stringify({
-        eventType: 'TAB_SWITCH',
-        metadata: { durationMs: 2500 },
-      }),
-    });
-
-    expect(secRes.status).toBe(200);
-    const secData = (await secRes.json()) as any;
-    expect(secData.success).toBe(true);
-    expect(secData.eventRecorded).toBe(true);
-  });
 
   it('POST /api/v1/quiz/round-1/submit evaluates server-authoritative score and prevents duplicate submissions', async () => {
     await app.request('/api/v1/quiz/round-1/start', {
@@ -225,5 +207,25 @@ describe('Round 1 Cultural Quiz Backend APIs', () => {
     );
     expect(round1Notifs.length).toBe(1);
     expect(round1Notifs[0].message).toContain('marks are now available on the leaderboard');
+  });
+
+  it('POST /api/v1/quiz/round-1/security-events logs proctor signals and eliminates participant on anomaly', async () => {
+    const secRes = await app.request('/api/v1/quiz/round-1/security-events', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Cookie: sessionCookie,
+      },
+      body: JSON.stringify({
+        eventType: 'TAB_SWITCH',
+        metadata: { durationMs: 2500 },
+      }),
+    });
+
+    expect(secRes.status).toBe(200);
+    const secData = (await secRes.json()) as any;
+    expect(secData.success).toBe(true);
+    expect(secData.eventRecorded).toBe(true);
+    expect(secData.eliminated).toBe(true);
   });
 });

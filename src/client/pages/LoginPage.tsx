@@ -102,7 +102,7 @@ export default function LoginPage() {
       </div>
 
       {/* Subtle Bottom Balance Spacer to preserve visual symmetry */}
-      <div className="h-6 sm:h-8" />
+      <div className="h-4 sm:h-6" />
     </CulturalBackground>
   );
 }

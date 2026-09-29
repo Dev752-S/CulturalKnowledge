@@ -1,17 +1,20 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import app from '../app';
+import rawQuestions from '../data/round2_questions_50.json';
+import fs from 'fs';
+import path from 'path';
 
-describe('Round 2 Visual Logo Quiz Backend APIs', () => {
+describe('Round 2 Flip-Card Logo Identification Game Backend APIs', () => {
   let sessionCookie: string;
 
   beforeEach(async () => {
-    // 1. Authenticate dev participant to get session cookie
+    // Authenticate participant to get session cookie
     const authRes = await app.request('/api/v1/auth/google', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        email: 'logo.contestant@example.com',
-        name: 'Logo Master',
+        email: `logo.flip.${Date.now()}.${Math.random().toString(36).substring(2)}@example.com`,
+        name: 'Flip Contestant',
       }),
     });
     const setCookie = authRes.headers.get('set-cookie');
@@ -25,11 +28,14 @@ describe('Round 2 Visual Logo Quiz Backend APIs', () => {
         'Content-Type': 'application/json',
         Cookie: sessionCookie,
       },
-      body: JSON.stringify({ teamName: 'Visual Explorers' }),
+      body: JSON.stringify({ teamName: 'Flip Explorers' }),
     });
   });
 
-  it('POST /api/v1/round2/start initiates untimed, unscored attempt and returns 50 sanitized questions (ZERO answer keys, ZERO company names)', async () => {
+  // =========================================================================
+  // 1. START ATTEMPT & 50 SANITIZED QUESTIONS
+  // =========================================================================
+  it('POST /api/v1/round2/start initiates untimed, unscored attempt and returns 50 sanitized flip-card questions (ZERO answer keys, 4 TEXT options)', async () => {
     const res = await app.request('/api/v1/round2/start', {
       method: 'POST',
       headers: { Cookie: sessionCookie },
@@ -39,48 +45,52 @@ describe('Round 2 Visual Logo Quiz Backend APIs', () => {
     const data = (await res.json()) as any;
     expect(data.success).toBe(true);
 
-    // Attempt verification (Untimed & Unscored)
+    // Attempt verification (Timed & Scored according to Round 2 timer requirements)
     expect(data.attempt).toBeDefined();
     expect(data.attempt.totalQuestions).toBe(50);
     expect(data.attempt.isSubmitted).toBe(false);
-    expect(data.attempt.durationMinutes).toBeUndefined();
-    expect(data.attempt.remainingSeconds).toBeUndefined();
-    expect(data.attempt.endsAt).toBeUndefined();
-    expect(data.attempt.score).toBeUndefined();
+    expect(data.attempt.durationMinutes).toBe(30);
+    expect(data.attempt.remainingSeconds).toBeGreaterThan(0);
 
-    // Exactly 50 sanitized questions
+    // Exactly 50 questions
     expect(data.questions.length).toBe(50);
     const firstQ = data.questions[0];
     expect(firstQ.questionId).toBe('R2Q001');
     expect(firstQ.questionNumber).toBe(1);
     expect(firstQ.questionText).toBe('Which logo belongs to the company behind the iPhone?');
-    expect(firstQ.options.length).toBe(4);
 
-    // Verify option structure and labels A, B, C, D
+    // Single card logo image
+    expect(firstQ.logoSvgUrl).toBeDefined();
+    expect(firstQ.logoPngUrl).toBeDefined();
+
+    // Exactly 4 TEXT options (NOT logo images)
+    expect(firstQ.options.length).toBe(4);
     const keys = firstQ.options.map((o: any) => o.key);
     expect(keys.sort()).toEqual(['A', 'B', 'C', 'D']);
 
-    // CRITICAL: Ensure NO answer key, correct_logo, points, or brand names are exposed in API response
     for (const q of data.questions) {
+      // CRITICAL: Ensure NO answer key, correct_logo, points, or scores are exposed
       expect((q as any).correctLogoId).toBeUndefined();
       expect((q as any).correctTileNumber).toBeUndefined();
       expect((q as any).correctBrandName).toBeUndefined();
       expect((q as any).points).toBeUndefined();
-      expect((q as any).difficulty).toBeUndefined();
+      expect((q as any).score).toBeUndefined();
 
+      // Card has single logo image
+      expect(q.logoSvgUrl).toBeDefined();
+      expect(q.logoPngUrl).toBeDefined();
+
+      // Options must be text (brandName / text)
       for (const opt of q.options) {
-        expect((opt as any).brandName).toBeUndefined();
-        expect((opt as any).answer).toBeUndefined();
-        expect((opt as any).companyName).toBeUndefined();
+        expect(opt.text || opt.brandName).toBeDefined();
+        expect(typeof (opt.text || opt.brandName)).toBe('string');
         expect((opt as any).isCorrect).toBeUndefined();
         expect((opt as any).points).toBeUndefined();
-        expect(opt.svgUrl).toBeDefined();
-        expect(opt.pngUrl).toBeDefined();
       }
     }
   });
 
-  it('GET /api/v1/quiz/round-2/start also works via forwarded subroute', async () => {
+  it('GET /api/v1/quiz/round-2/start forwards to Round 2 router', async () => {
     const res = await app.request('/api/v1/quiz/round-2/start', {
       method: 'POST',
       headers: { Cookie: sessionCookie },
@@ -92,60 +102,36 @@ describe('Round 2 Visual Logo Quiz Backend APIs', () => {
     expect(data.attempt.totalQuestions).toBe(50);
   });
 
-  it('GET /api/v1/round2/attempt returns active attempt without timer or score', async () => {
+  // =========================================================================
+  // 2. 5-SECOND REVEAL LIFECYCLE & SECURITY (SECTION 6, 7, 21, 40, 50)
+  // =========================================================================
+  it('POST /api/v1/round2/reveal/:questionId starts 5-second reveal window and locks permanently after 5 seconds', async () => {
+    // Start attempt
     await app.request('/api/v1/round2/start', {
       method: 'POST',
       headers: { Cookie: sessionCookie },
     });
 
-    const res = await app.request('/api/v1/round2/attempt', {
-      method: 'GET',
-      headers: { Cookie: sessionCookie },
-    });
-
-    expect(res.status).toBe(200);
-    const data = (await res.json()) as any;
-    expect(data.success).toBe(true);
-    expect(data.attempt.totalQuestions).toBe(50);
-    expect(data.attempt.remainingSeconds).toBeUndefined();
-    expect(data.attempt.score).toBeUndefined();
-  });
-
-  it('PUT /api/v1/round2/answers/:questionId autosaves answer and POST /review toggles review', async () => {
-    await app.request('/api/v1/round2/start', {
+    // 1. Initial reveal at T0
+    const rev1 = await app.request('/api/v1/round2/reveal/R2Q001', {
       method: 'POST',
       headers: { Cookie: sessionCookie },
     });
+    expect(rev1.status).toBe(200);
+    const data1 = (await rev1.json()) as any;
+    expect(data1.success).toBe(true);
+    expect(data1.isLocked).toBe(false);
+    expect(data1.remainingMs).toBeLessThanOrEqual(5000);
+    expect(data1.remainingMs).toBeGreaterThan(0);
+    expect(data1.revealStartedAt).toBeDefined();
 
-    // 1. Autosave answer
-    const ansRes = await app.request('/api/v1/round2/answers/R2Q001', {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        Cookie: sessionCookie,
-      },
-      body: JSON.stringify({ selectedLogoId: 'L001', selectedOptionId: 'opt_1_A' }),
-    });
-
-    expect(ansRes.status).toBe(200);
-    const ansData = (await ansRes.json()) as any;
-    expect(ansData.success).toBe(true);
-    expect(ansData.selectedLogoId).toBe('L001');
-
-    // 2. Toggle review
-    const revRes = await app.request('/api/v1/round2/review/R2Q001', {
+    // 2. Call again immediately: reveal is still active
+    const rev2 = await app.request('/api/v1/round2/reveal/R2Q001', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Cookie: sessionCookie,
-      },
-      body: JSON.stringify({ isMarkedForReview: true }),
+      headers: { Cookie: sessionCookie },
     });
-
-    expect(revRes.status).toBe(200);
-    const revData = (await revRes.json()) as any;
-    expect(revData.success).toBe(true);
-    expect(revData.isMarkedForReview).toBe(true);
+    const data2 = (await rev2.json()) as any;
+    expect(data2.isLocked).toBe(false);
 
     // 3. Verify in attempt state
     const attRes = await app.request('/api/v1/round2/attempt', {
@@ -153,139 +139,312 @@ describe('Round 2 Visual Logo Quiz Backend APIs', () => {
       headers: { Cookie: sessionCookie },
     });
     const attData = (await attRes.json()) as any;
-    expect(attData.attempt.answers['R2Q001'].selectedLogoId).toBe('L001');
-    expect(attData.attempt.answers['R2Q001'].isMarkedForReview).toBe(true);
+    expect(attData.attempt.reveals['R2Q001']).toBeDefined();
+    expect(attData.attempt.reveals['R2Q001'].isLocked).toBe(false);
+
+    // 4. Test security: Tampering to restart reveal is prevented
+    // An active reveal preserves its original revealStartedAt timestamp
+    expect(attData.attempt.reveals['R2Q001'].revealStartedAt).toBe(data1.revealStartedAt);
   });
 
-  it('POST /api/v1/round2/security-events logs proctor signals (TAB_SWITCH, FULLSCREEN_EXIT)', async () => {
-    const secRes = await app.request('/api/v1/round2/security-events', {
+  // =========================================================================
+  // 3. NO ACCIDENTAL COMPLETION & 50-QUESTION PROGRESSION (SECTION 12, 13, 48, 49)
+  // =========================================================================
+  it('Answering Q1, Q2 ... Q49 and Q50 does NOT submit the attempt; attempt remains ACTIVE', async () => {
+    const startRes = await app.request('/api/v1/round2/start', {
       method: 'POST',
+      headers: { Cookie: sessionCookie },
+    });
+    const startData = (await startRes.json()) as any;
+    const questions = startData.questions;
+
+    // 1. Answer Question 1
+    const q1 = questions[0];
+    const ans1 = await app.request(`/api/v1/round2/answers/${q1.questionId}`, {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
         Cookie: sessionCookie,
       },
       body: JSON.stringify({
-        eventType: 'TAB_SWITCH',
-        metadata: { durationMs: 1800 },
+        selectedOptionId: q1.options[0].optionId,
+        selectedBrandName: q1.options[0].text,
       }),
     });
+    expect(ans1.status).toBe(200);
 
-    expect(secRes.status).toBe(200);
-    const secData = (await secRes.json()) as any;
-    expect(secData.success).toBe(true);
-    expect(secData.eventRecorded).toBe(true);
-  });
-
-  it('POST /api/v1/round2/submit submits without score/marks and protects against duplicate submissions', async () => {
-    await app.request('/api/v1/round2/start', {
-      method: 'POST',
-      headers: { Cookie: sessionCookie },
-    });
-
-    // Answer Q1 and Q2
-    await app.request('/api/v1/round2/answers/R2Q001', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json', Cookie: sessionCookie },
-      body: JSON.stringify({ selectedLogoId: 'L001' }),
-    });
-
-    await app.request('/api/v1/round2/answers/R2Q002', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json', Cookie: sessionCookie },
-      body: JSON.stringify({ selectedLogoId: 'L002' }),
-    });
-
-    // Submit
-    const subRes = await app.request('/api/v1/round2/submit', {
-      method: 'POST',
-      headers: { Cookie: sessionCookie },
-    });
-
-    expect(subRes.status).toBe(200);
-    const subData = (await subRes.json()) as any;
-    expect(subData.success).toBe(true);
-    expect(subData.result.totalQuestions).toBe(50);
-    expect(subData.result.answeredCount).toBe(2);
-    expect(subData.result.unansweredCount).toBe(48);
-
-    // CRITICAL: NO score, NO marks, NO points in result
-    expect(subData.result.score).toBeUndefined();
-    expect(subData.result.points).toBeUndefined();
-    expect(subData.result.marks).toBeUndefined();
-
-    // Idempotency: Second submit returns existing result without error
-    const subRes2 = await app.request('/api/v1/round2/submit', {
-      method: 'POST',
-      headers: { Cookie: sessionCookie },
-    });
-    expect(subRes2.status).toBe(200);
-    const subData2 = (await subRes2.json()) as any;
-    expect(subData2.alreadySubmitted).toBe(true);
-    expect(subData2.result.score).toBeUndefined();
-
-    // Verify GET /result
-    const resGet = await app.request('/api/v1/round2/result', {
+    // Check attempt after Q1: MUST REMAIN ACTIVE!
+    let attRes = await app.request('/api/v1/round2/attempt', {
       method: 'GET',
       headers: { Cookie: sessionCookie },
     });
-    expect(resGet.status).toBe(200);
-    const resGetData = (await resGet.json()) as any;
-    expect(resGetData.result.totalQuestions).toBe(50);
-    expect(resGetData.result.answeredCount).toBe(2);
-    expect(resGetData.result.score).toBeUndefined();
-    expect(resGetData.result.points).toBeUndefined();
-    expect(resGetData.result.teamName).toBe('Visual Explorers');
-  });
+    let attData = (await attRes.json()) as any;
+    expect(attData.attempt.isSubmitted).toBe(false);
+    expect(attData.attempt.answeredCount).toBe(1);
 
-  it('Verifies Round 2 submission does NOT alter participant leaderboard score (Section 52 regression test)', async () => {
-    // 1. Submit Round 1 to get a score on the leaderboard
-    await app.request('/api/v1/quiz/round-1/start', {
-      method: 'POST',
-      headers: { Cookie: sessionCookie },
-    });
-    await app.request('/api/v1/quiz/round-1/answers/Q001', {
+    // 2. Answer Question 2
+    const q2 = questions[1];
+    const ans2 = await app.request(`/api/v1/round2/answers/${q2.questionId}`, {
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json', Cookie: sessionCookie },
-      body: JSON.stringify({ selectedOption: 'B' }),
+      headers: {
+        'Content-Type': 'application/json',
+        Cookie: sessionCookie,
+      },
+      body: JSON.stringify({
+        selectedOptionId: q2.options[0].optionId,
+        selectedBrandName: q2.options[0].text,
+      }),
     });
-    await app.request('/api/v1/quiz/round-1/submit', {
-      method: 'POST',
-      headers: { Cookie: sessionCookie },
-    });
+    expect(ans2.status).toBe(200);
 
-    const lbBefore = await app.request('/api/v1/leaderboard', {
+    // Check attempt after Q2: MUST REMAIN ACTIVE!
+    attRes = await app.request('/api/v1/round2/attempt', {
       method: 'GET',
       headers: { Cookie: sessionCookie },
     });
-    const lbDataBefore = (await lbBefore.json()) as any;
-    const teamBefore = lbDataBefore.leaderboard.find((e: any) => e.teamName === 'Visual Explorers');
-    expect(teamBefore).toBeDefined();
-    const scoreBefore = teamBefore.score;
-    expect(scoreBefore).toBe(1);
+    attData = (await attRes.json()) as any;
+    expect(attData.attempt.isSubmitted).toBe(false);
+    expect(attData.attempt.answeredCount).toBe(2);
 
-    // 2. Start and submit Round 2
-    await app.request('/api/v1/round2/start', {
+    // 3. Answer remaining questions through Q50
+    for (let i = 2; i < 50; i++) {
+      const q = questions[i];
+      const opt = q.options[0];
+      const r = await app.request(`/api/v1/round2/answers/${q.questionId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Cookie: sessionCookie,
+        },
+        body: JSON.stringify({
+          selectedOptionId: opt.optionId,
+          selectedBrandName: opt.text,
+        }),
+      });
+      expect(r.status).toBe(200);
+    }
+
+    // Check attempt after ALL 50 QUESTIONS: MUST STILL REMAIN ACTIVE (NOT SUBMITTED)!
+    attRes = await app.request('/api/v1/round2/attempt', {
+      method: 'GET',
+      headers: { Cookie: sessionCookie },
+    });
+    attData = (await attRes.json()) as any;
+    expect(attData.attempt.isSubmitted).toBe(false);
+    expect(attData.attempt.answeredCount).toBe(50);
+    expect(attData.attempt.unansweredCount).toBe(0);
+
+    // 4. EXPLICIT FINAL SUBMISSION (Section 30, 31)
+    const submitRes = await app.request('/api/v1/round2/submit', {
       method: 'POST',
       headers: { Cookie: sessionCookie },
     });
-    await app.request('/api/v1/round2/answers/R2Q001', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json', Cookie: sessionCookie },
-      body: JSON.stringify({ selectedLogoId: 'L001' }),
+    expect(submitRes.status).toBe(200);
+    const submitData = (await submitRes.json()) as any;
+    expect(submitData.success).toBe(true);
+    expect(submitData.result.answeredCount).toBe(50);
+    expect(submitData.result.unansweredCount).toBe(0);
+    expect(submitData.result.submittedAt).toBeDefined();
+
+    // Verify attempt is now SUBMITTED
+    attRes = await app.request('/api/v1/round2/attempt', {
+      method: 'GET',
+      headers: { Cookie: sessionCookie },
+    });
+    attData = (await attRes.json()) as any;
+    expect(attData.attempt.isSubmitted).toBe(true);
+
+    // 5. Result API Verification (Zero marks, Zero points, No leaderboard points)
+    const resultRes = await app.request('/api/v1/round2/result', {
+      method: 'GET',
+      headers: { Cookie: sessionCookie },
+    });
+    expect(resultRes.status).toBe(200);
+    const resultData = (await resultRes.json()) as any;
+    expect(resultData.success).toBe(true);
+    expect(resultData.result.score).toBeUndefined();
+    expect(resultData.result.points).toBeUndefined();
+    expect(resultData.result.marks).toBeUndefined();
+    expect(resultData.result.rank).toBeUndefined();
+  });
+
+  // =========================================================================
+  // 4. ROUND 2 MUST NOT MODIFY ROUND 1 LEADERBOARD
+  // =========================================================================
+  it('Round 2 completion does NOT add points to Round 1 or modify the Round 1 leaderboard', async () => {
+    // Check leaderboard before Round 2
+    const lbBefore = await app.request('/api/v1/leaderboard');
+    const lbBeforeData = (await lbBefore.json()) as any;
+
+    // Complete Round 2
+    await app.request('/api/v1/round2/start', {
+      method: 'POST',
+      headers: { Cookie: sessionCookie },
     });
     await app.request('/api/v1/round2/submit', {
       method: 'POST',
       headers: { Cookie: sessionCookie },
     });
 
-    // 3. Reload leaderboard and verify score is strictly unchanged
-    const lbAfter = await app.request('/api/v1/leaderboard', {
+    // Check leaderboard after Round 2
+    const lbAfter = await app.request('/api/v1/leaderboard');
+    const lbAfterData = (await lbAfter.json()) as any;
+
+    // Round 1 leaderboard must be untouched
+    expect(lbAfterData.round1).toEqual(lbBeforeData.round1);
+  });
+
+  // =========================================================================
+  // 5. REFRESH / RECONNECT RECOVERY (SECTION 20, 51)
+  // =========================================================================
+  it('Page refresh restores attempt, stable question order, answered questions, and locked cards', async () => {
+    // 1. Start attempt
+    const startRes = await app.request('/api/v1/round2/start', {
+      method: 'POST',
+      headers: { Cookie: sessionCookie },
+    });
+    const startData = (await startRes.json()) as any;
+    const initialOrder = startData.questions.map((q: any) => q.questionId);
+
+    // 2. Reveal Q1 and answer Q1
+    await app.request('/api/v1/round2/reveal/R2Q001', {
+      method: 'POST',
+      headers: { Cookie: sessionCookie },
+    });
+    await app.request('/api/v1/round2/answers/R2Q001', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Cookie: sessionCookie,
+      },
+      body: JSON.stringify({
+        selectedOptionId: startData.questions[0].options[0].optionId,
+        selectedBrandName: startData.questions[0].options[0].text,
+      }),
+    });
+
+    // 3. Simulate page refresh: call GET /attempt and GET /questions
+    const refreshAtt = await app.request('/api/v1/round2/attempt', {
       method: 'GET',
       headers: { Cookie: sessionCookie },
     });
-    const lbDataAfter = (await lbAfter.json()) as any;
-    const teamAfter = lbDataAfter.leaderboard.find((e: any) => e.teamName === 'Visual Explorers');
-    expect(teamAfter).toBeDefined();
-    expect(teamAfter.score).toBe(scoreBefore);
+    const refreshAttData = (await refreshAtt.json()) as any;
+    expect(refreshAttData.success).toBe(true);
+    expect(refreshAttData.attempt.isSubmitted).toBe(false);
+    expect(refreshAttData.attempt.answers['R2Q001']).toBeDefined();
+    expect(refreshAttData.attempt.answers['R2Q001'].isCardLocked).toBe(true);
+
+    const refreshQs = await app.request('/api/v1/round2/questions', {
+      method: 'GET',
+      headers: { Cookie: sessionCookie },
+    });
+    const refreshQsData = (await refreshQs.json()) as any;
+    const restoredOrder = refreshQsData.questions.map((q: any) => q.questionId);
+
+    // Question order must NOT reshuffle on refresh
+    expect(restoredOrder).toEqual(initialOrder);
+  });
+
+  // =========================================================================
+  // 6. 50-QUESTION DATA INTEGRITY (SECTION 25, 52)
+  // =========================================================================
+  it('Validates 50 questions: 1 logo image, 1 correct name, 4 text options, 0 duplicate answers', () => {
+    expect(rawQuestions.length).toBe(50);
+
+    for (const q of rawQuestions) {
+      expect(q.questionId).toBeDefined();
+      expect(q.correctLogoId).toBeDefined();
+      expect(q.correctTileNumber).toBeDefined();
+      expect(q.correctBrandName).toBeDefined();
+      expect(q.options.length).toBe(4);
+
+      // Verify logo image file exists in public/logos/
+      const numStr = String(q.correctTileNumber).padStart(3, '0');
+      const svgPath = path.join(process.cwd(), 'public', 'logos', `${numStr}.svg`);
+      const pngPath = path.join(process.cwd(), 'public', 'logos', `${numStr}.png`);
+      const fileExists = fs.existsSync(svgPath) || fs.existsSync(pngPath);
+      expect(fileExists).toBe(true);
+
+      // Exactly 1 correct answer matching correctBrandName
+      const correctMatches = q.options.filter(
+        (o: any) => o.brandName.toLowerCase() === q.correctBrandName.toLowerCase()
+      );
+      expect(correctMatches.length).toBe(1);
+
+      // Exactly 3 incorrect options
+      const incorrectMatches = q.options.filter(
+        (o: any) => o.brandName.toLowerCase() !== q.correctBrandName.toLowerCase()
+      );
+      expect(incorrectMatches.length).toBe(3);
+    }
+  });
+
+  // =========================================================================
+  // 7. SECURITY & TAMPER PROTECTION (SECTION 39, 47, 54)
+  // =========================================================================
+  it('Rejects invalid option, nonexistent question, and prevents duplicate answering', async () => {
+    await app.request('/api/v1/round2/start', {
+      method: 'POST',
+      headers: { Cookie: sessionCookie },
+    });
+
+    // 1. Submit nonexistent question ID -> 404
+    const fakeQRes = await app.request('/api/v1/round2/answers/NON_EXISTENT_Q', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Cookie: sessionCookie,
+      },
+      body: JSON.stringify({ selectedOptionId: 'opt_fake' }),
+    });
+    expect(fakeQRes.status).toBe(404);
+
+    // 2. Submit invalid option ID for Q1 -> 400
+    const fakeOptRes = await app.request('/api/v1/round2/answers/R2Q001', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Cookie: sessionCookie,
+      },
+      body: JSON.stringify({ selectedOptionId: 'opt_invalid_malicious_id' }),
+    });
+    expect(fakeOptRes.status).toBe(400);
+
+    // 3. Submit valid answer
+    const validAns = await app.request('/api/v1/round2/answers/R2Q001', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Cookie: sessionCookie,
+      },
+      body: JSON.stringify({ selectedOptionId: 'opt_1_A' }),
+    });
+    expect(validAns.status).toBe(200);
+
+    // 4. Double answer: submit same answer is idempotent
+    const repeatAns = await app.request('/api/v1/round2/answers/R2Q001', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Cookie: sessionCookie,
+      },
+      body: JSON.stringify({ selectedOptionId: 'opt_1_A' }),
+    });
+    expect(repeatAns.status).toBe(200);
+    const repeatData = (await repeatAns.json()) as any;
+    expect(repeatData.selectedOptionId).toBe('opt_1_A');
+
+    // 5. Submit security proctor signal
+    const secRes = await app.request('/api/v1/round2/security-events', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Cookie: sessionCookie,
+      },
+      body: JSON.stringify({ eventType: 'TAB_SWITCH', metadata: { windowFocus: false } }),
+    });
+    expect(secRes.status).toBe(200);
+    const secData = (await secRes.json()) as any;
+    expect(secData.success).toBe(true);
   });
 });

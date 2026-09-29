@@ -326,7 +326,7 @@
   {
     "questionId": "R2Q007",
     "questionNumber": 7,
-    "questionText": "Which logo represents the photo-sharing platform Instagram?",
+    "questionText": "Identify the brand or platform represented by this logo.",
     "correctLogoId": "L007",
     "correctTileNumber": 7,
     "correctBrandName": "Instagram",
@@ -380,7 +380,7 @@
   {
     "questionId": "R2Q008",
     "questionNumber": 8,
-    "questionText": "Which logo represents the video platform YouTube?",
+    "questionText": "Identify the brand or platform represented by this logo.",
     "correctLogoId": "L008",
     "correctTileNumber": 8,
     "correctBrandName": "YouTube",
@@ -434,7 +434,7 @@
   {
     "questionId": "R2Q009",
     "questionNumber": 9,
-    "questionText": "Which logo is used by the messaging app WhatsApp?",
+    "questionText": "Identify the brand or platform represented by this logo.",
     "correctLogoId": "L009",
     "correctTileNumber": 9,
     "correctBrandName": "WhatsApp",
@@ -488,7 +488,7 @@
   {
     "questionId": "R2Q010",
     "questionNumber": 10,
-    "questionText": "Which logo represents the music streaming service Spotify?",
+    "questionText": "Identify the brand or platform represented by this logo.",
     "correctLogoId": "L010",
     "correctTileNumber": 10,
     "correctBrandName": "Spotify",
@@ -542,7 +542,7 @@
   {
     "questionId": "R2Q011",
     "questionNumber": 11,
-    "questionText": "Which logo represents the short-video platform TikTok?",
+    "questionText": "Identify the brand or platform represented by this logo.",
     "correctLogoId": "L011",
     "correctTileNumber": 11,
     "correctBrandName": "TikTok",
@@ -596,7 +596,7 @@
   {
     "questionId": "R2Q012",
     "questionNumber": 12,
-    "questionText": "Which logo represents the messaging app Snapchat?",
+    "questionText": "Identify the brand or platform represented by this logo.",
     "correctLogoId": "L012",
     "correctTileNumber": 12,
     "correctBrandName": "Snapchat",
@@ -650,7 +650,7 @@
   {
     "questionId": "R2Q013",
     "questionNumber": 13,
-    "questionText": "Which logo represents the messaging app Telegram?",
+    "questionText": "Identify the brand or platform represented by this logo.",
     "correctLogoId": "L013",
     "correctTileNumber": 13,
     "correctBrandName": "Telegram",
@@ -704,7 +704,7 @@
   {
     "questionId": "R2Q014",
     "questionNumber": 14,
-    "questionText": "Which logo is associated with Discord, a communication platform popular with gaming communities?",
+    "questionText": "Identify the brand or platform represented by this logo.",
     "correctLogoId": "L014",
     "correctTileNumber": 14,
     "correctBrandName": "Discord",
@@ -758,7 +758,7 @@
   {
     "questionId": "R2Q015",
     "questionNumber": 15,
-    "questionText": "Which logo represents the social discussion platform Reddit?",
+    "questionText": "Identify the brand or platform represented by this logo.",
     "correctLogoId": "L015",
     "correctTileNumber": 15,
     "correctBrandName": "Reddit",
@@ -812,7 +812,7 @@
   {
     "questionId": "R2Q016",
     "questionNumber": 16,
-    "questionText": "Which logo represents the professional networking platform LinkedIn?",
+    "questionText": "Identify the brand or platform represented by this logo.",
     "correctLogoId": "L016",
     "correctTileNumber": 16,
     "correctBrandName": "LinkedIn",
@@ -1082,7 +1082,7 @@
   {
     "questionId": "R2Q021",
     "questionNumber": 21,
-    "questionText": "Which logo represents the Windows operating system?",
+    "questionText": "Identify the brand or platform represented by this logo.",
     "correctLogoId": "L021",
     "correctTileNumber": 21,
     "correctBrandName": "Windows",
@@ -1136,7 +1136,7 @@
   {
     "questionId": "R2Q022",
     "questionNumber": 22,
-    "questionText": "Which logo represents the payment service PayPal?",
+    "questionText": "Identify the brand or platform represented by this logo.",
     "correctLogoId": "L022",
     "correctTileNumber": 22,
     "correctBrandName": "PayPal",
@@ -1298,7 +1298,7 @@
   {
     "questionId": "R2Q025",
     "questionNumber": 25,
-    "questionText": "Which logo represents the ride-hailing service Uber?",
+    "questionText": "Identify the brand or platform represented by this logo.",
     "correctLogoId": "L025",
     "correctTileNumber": 25,
     "correctBrandName": "Uber",
@@ -1352,7 +1352,7 @@
   {
     "questionId": "R2Q026",
     "questionNumber": 26,
-    "questionText": "Which logo represents the accommodation platform Airbnb?",
+    "questionText": "Identify the brand or platform represented by this logo.",
     "correctLogoId": "L026",
     "correctTileNumber": 26,
     "correctBrandName": "Airbnb",
@@ -1406,7 +1406,7 @@
   {
     "questionId": "R2Q027",
     "questionNumber": 27,
-    "questionText": "Which logo represents Sony's PlayStation gaming brand?",
+    "questionText": "Identify the brand or platform represented by this logo.",
     "correctLogoId": "L027",
     "correctTileNumber": 27,
     "correctBrandName": "PlayStation",
@@ -1460,7 +1460,7 @@
   {
     "questionId": "R2Q028",
     "questionNumber": 28,
-    "questionText": "Which logo represents Microsoft's Xbox gaming brand?",
+    "questionText": "Identify the brand or platform represented by this logo.",
     "correctLogoId": "L028",
     "correctTileNumber": 28,
     "correctBrandName": "Xbox",
@@ -1514,7 +1514,7 @@
   {
     "questionId": "R2Q029",
     "questionNumber": 29,
-    "questionText": "Which logo represents the PC gaming platform Steam?",
+    "questionText": "Identify the brand or platform represented by this logo.",
     "correctLogoId": "L029",
     "correctTileNumber": 29,
     "correctBrandName": "Steam",
@@ -1568,7 +1568,7 @@
   {
     "questionId": "R2Q030",
     "questionNumber": 30,
-    "questionText": "Which logo represents the live-streaming platform Twitch?",
+    "questionText": "Identify the brand or platform represented by this logo.",
     "correctLogoId": "L030",
     "correctTileNumber": 30,
     "correctBrandName": "Twitch",
@@ -1622,7 +1622,7 @@
   {
     "questionId": "R2Q031",
     "questionNumber": 31,
-    "questionText": "Which logo represents the online marketplace eBay?",
+    "questionText": "Identify the brand or platform represented by this logo.",
     "correctLogoId": "L031",
     "correctTileNumber": 31,
     "correctBrandName": "eBay",
@@ -1676,7 +1676,7 @@
   {
     "questionId": "R2Q032",
     "questionNumber": 32,
-    "questionText": "Which logo represents the handmade and creative marketplace Etsy?",
+    "questionText": "Identify the brand or platform represented by this logo.",
     "correctLogoId": "L032",
     "correctTileNumber": 32,
     "correctBrandName": "Etsy",
@@ -1730,7 +1730,7 @@
   {
     "questionId": "R2Q033",
     "questionNumber": 33,
-    "questionText": "Which logo represents the e-commerce platform Shopify?",
+    "questionText": "Identify the brand or platform represented by this logo.",
     "correctLogoId": "L033",
     "correctTileNumber": 33,
     "correctBrandName": "Shopify",
@@ -1784,7 +1784,7 @@
   {
     "questionId": "R2Q034",
     "questionNumber": 34,
-    "questionText": "Which logo represents the cloud storage service Dropbox?",
+    "questionText": "Identify the brand or platform represented by this logo.",
     "correctLogoId": "L034",
     "correctTileNumber": 34,
     "correctBrandName": "Dropbox",
@@ -1838,7 +1838,7 @@
   {
     "questionId": "R2Q035",
     "questionNumber": 35,
-    "questionText": "Which logo represents the team communication platform Slack?",
+    "questionText": "Identify the brand or platform represented by this logo.",
     "correctLogoId": "L035",
     "correctTileNumber": 35,
     "correctBrandName": "Slack",
@@ -1892,7 +1892,7 @@
   {
     "questionId": "R2Q036",
     "questionNumber": 36,
-    "questionText": "Which logo represents the visual discovery and pinboard platform Pinterest?",
+    "questionText": "Identify the brand or platform represented by this logo.",
     "correctLogoId": "L036",
     "correctTileNumber": 36,
     "correctBrandName": "Pinterest",
@@ -1946,7 +1946,7 @@
   {
     "questionId": "R2Q037",
     "questionNumber": 37,
-    "questionText": "Which logo represents the online encyclopedia Wikipedia?",
+    "questionText": "Identify the brand or platform represented by this logo.",
     "correctLogoId": "L037",
     "correctTileNumber": 37,
     "correctBrandName": "Wikipedia",
@@ -2000,7 +2000,7 @@
   {
     "questionId": "R2Q038",
     "questionNumber": 38,
-    "questionText": "Which logo represents the movie and TV information website IMDb?",
+    "questionText": "Identify the brand or platform represented by this logo.",
     "correctLogoId": "L038",
     "correctTileNumber": 38,
     "correctBrandName": "IMDb",
@@ -2054,7 +2054,7 @@
   {
     "questionId": "R2Q039",
     "questionNumber": 39,
-    "questionText": "Which logo represents the music and audio platform SoundCloud?",
+    "questionText": "Identify the brand or platform represented by this logo.",
     "correctLogoId": "L039",
     "correctTileNumber": 39,
     "correctBrandName": "SoundCloud",
@@ -2108,7 +2108,7 @@
   {
     "questionId": "R2Q040",
     "questionNumber": 40,
-    "questionText": "Which logo represents the website publishing platform WordPress?",
+    "questionText": "Identify the brand or platform represented by this logo.",
     "correctLogoId": "L040",
     "correctTileNumber": 40,
     "correctBrandName": "WordPress",
@@ -2270,7 +2270,7 @@
   {
     "questionId": "R2Q043",
     "questionNumber": 43,
-    "questionText": "Which logo represents Apple's web browser Safari?",
+    "questionText": "Identify the brand or platform represented by this logo.",
     "correctLogoId": "L043",
     "correctTileNumber": 43,
     "correctBrandName": "Safari",
@@ -2324,7 +2324,7 @@
   {
     "questionId": "R2Q044",
     "questionNumber": 44,
-    "questionText": "Which logo represents the Linux operating system?",
+    "questionText": "Identify the brand or platform represented by this logo.",
     "correctLogoId": "L044",
     "correctTileNumber": 44,
     "correctBrandName": "Linux",
@@ -2378,7 +2378,7 @@
   {
     "questionId": "R2Q045",
     "questionNumber": 45,
-    "questionText": "Which logo represents the Ubuntu Linux distribution?",
+    "questionText": "Identify the brand or platform represented by this logo.",
     "correctLogoId": "L045",
     "correctTileNumber": 45,
     "correctBrandName": "Ubuntu",
@@ -2432,7 +2432,7 @@
   {
     "questionId": "R2Q046",
     "questionNumber": 46,
-    "questionText": "Which logo represents the Fedora Linux distribution?",
+    "questionText": "Identify the brand or platform represented by this logo.",
     "correctLogoId": "L046",
     "correctTileNumber": 46,
     "correctBrandName": "Fedora",
@@ -2486,7 +2486,7 @@
   {
     "questionId": "R2Q047",
     "questionNumber": 47,
-    "questionText": "Which logo represents the GitLab developer platform?",
+    "questionText": "Identify the brand or platform represented by this logo.",
     "correctLogoId": "L047",
     "correctTileNumber": 47,
     "correctBrandName": "GitLab",
@@ -2540,7 +2540,7 @@
   {
     "questionId": "R2Q048",
     "questionNumber": 48,
-    "questionText": "Which logo represents the Stack Overflow developer Q&A platform?",
+    "questionText": "Identify the brand or platform represented by this logo.",
     "correctLogoId": "L048",
     "correctTileNumber": 48,
     "correctBrandName": "Stack Overflow",
@@ -2594,7 +2594,7 @@
   {
     "questionId": "R2Q049",
     "questionNumber": 49,
-    "questionText": "Which logo represents Docker, widely used for containers?",
+    "questionText": "Identify the brand or platform represented by this logo.",
     "correctLogoId": "L049",
     "correctTileNumber": 49,
     "correctBrandName": "Docker",
@@ -2648,7 +2648,7 @@
   {
     "questionId": "R2Q050",
     "questionNumber": 50,
-    "questionText": "Which logo represents Amazon Web Services, a cloud platform?",
+    "questionText": "Identify the brand or platform represented by this logo.",
     "correctLogoId": "L050",
     "correctTileNumber": 50,
     "correctBrandName": "Amazon Web Services",

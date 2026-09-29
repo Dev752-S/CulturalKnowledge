@@ -23,7 +23,6 @@ interface NotificationData {
 
 export default function CulturalHeader({ user, onLogout }: CulturalHeaderProps) {
   const teamName = user?.teamName?.trim() || 'Team Vibes';
-  const participantName = user?.fullName?.trim() || 'Participant';
   const photoUrl = user?.photoUrl;
 
   const [showNotifications, setShowNotifications] = useState(false);
@@ -50,12 +49,9 @@ export default function CulturalHeader({ user, onLogout }: CulturalHeaderProps) 
   return (
     <header className="w-full h-16 sm:h-[68px] bg-[#FFFDF9]/95 backdrop-blur-md border-b border-[#643C28]/10 px-4 sm:px-6 md:px-10 flex items-center justify-between sticky top-0 z-40 transition-all select-none">
       {/* Top-Left Brand */}
-      <Link to="/" className="flex flex-col text-left group">
+      <Link to="/" className="flex items-center text-left group">
         <span className="font-cormorant text-2xl sm:text-[27px] font-semibold tracking-wide text-[#54133F] leading-none group-hover:text-[#7A1C5B] transition-colors">
           Cultural Knowledge
-        </span>
-        <span className="font-cormorant text-xs sm:text-[13px] text-[#7A4232] font-medium tracking-wider leading-tight mt-0.5">
-          college cultural event
         </span>
       </Link>
 
@@ -85,27 +81,24 @@ export default function CulturalHeader({ user, onLogout }: CulturalHeaderProps) 
             {photoUrl ? (
               <img
                 src={photoUrl}
-                alt={participantName}
+                alt={teamName}
                 className="w-8 h-8 sm:w-9 sm:h-9 rounded-full object-cover border border-[#C58A3A]/40 shadow-sm"
               />
             ) : (
               <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gradient-to-tr from-[#54133F] via-[#6D1B50] to-[#C58A3A] text-[#FFF8EA] flex items-center justify-center text-xs sm:text-sm font-semibold shadow-sm">
-                {participantName.charAt(0).toUpperCase()}
+                {teamName.charAt(0).toUpperCase()}
               </div>
             )}
           </div>
 
-          {/* Team and Participant Text */}
-          <div className="flex flex-col text-left max-w-[130px] sm:max-w-[170px] overflow-hidden leading-tight">
+          {/* Team Text Only */}
+          <div className="flex items-center text-left max-w-[130px] sm:max-w-[180px] overflow-hidden">
             <div className="flex items-center space-x-1 text-[#54133F]">
               <Users className="w-3.5 h-3.5 text-[#54133F]/75 flex-shrink-0" />
               <span className="text-xs sm:text-[13px] font-semibold truncate tracking-tight text-[#54133F]">
                 {teamName}
               </span>
             </div>
-            <span className="text-[11px] sm:text-xs text-[#7A4232] truncate font-medium">
-              {participantName}
-            </span>
           </div>
         </div>
 
