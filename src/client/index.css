@@ -73,3 +73,220 @@
   background: rgba(255, 255, 255, 0.88);
   box-shadow: 0 8px 25px rgba(80, 50, 30, 0.14), inset 0 1px 1px rgba(255, 255, 255, 1);
 }
+
+/* 3D Flip Card Utilities for Round 2 */
+.perspective-1000 {
+  perspective: 1000px;
+}
+.perspective-2000 {
+  perspective: 2000px;
+}
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+/* ==========================================================================
+   Admin Page - Clean White / Light Theme
+   ========================================================================== */
+.admin-white-theme {
+  background-color: #f8fafc !important;
+  color: #1e293b !important;
+  color-scheme: light;
+}
+
+/* Base Surfaces, Panels & Cards */
+.admin-white-theme .bg-slate-950,
+.admin-white-theme .bg-slate-950\/70,
+.admin-white-theme .bg-slate-950\/80 {
+  background-color: #f8fafc !important;
+}
+
+.admin-white-theme .bg-slate-900,
+.admin-white-theme .bg-slate-900\/60,
+.admin-white-theme .bg-slate-900\/70,
+.admin-white-theme .bg-slate-900\/80,
+.admin-white-theme .bg-slate-900\/85,
+.admin-white-theme .bg-slate-900\/90 {
+  background-color: #ffffff !important;
+}
+
+.admin-white-theme .bg-slate-800,
+.admin-white-theme .bg-slate-800\/80,
+.admin-white-theme .bg-slate-800\/90 {
+  background-color: #f1f5f9 !important;
+}
+
+.admin-white-theme .bg-slate-800\/50,
+.admin-white-theme .bg-slate-800\/30 {
+  background-color: #f8fafc !important;
+}
+
+/* Borders */
+.admin-white-theme .border-slate-950,
+.admin-white-theme .border-slate-900,
+.admin-white-theme .border-slate-800,
+.admin-white-theme .border-slate-800\/80,
+.admin-white-theme .border-slate-800\/90,
+.admin-white-theme .border-slate-700,
+.admin-white-theme .border-slate-700\/80 {
+  border-color: #e2e8f0 !important;
+}
+
+/* Typography & Contrast */
+.admin-white-theme .text-slate-100,
+.admin-white-theme .text-slate-200 {
+  color: #0f172a !important;
+}
+
+.admin-white-theme .text-slate-300 {
+  color: #334155 !important;
+}
+
+.admin-white-theme .text-slate-400 {
+  color: #64748b !important;
+}
+
+.admin-white-theme .text-slate-500 {
+  color: #64748b !important;
+}
+
+.admin-white-theme .text-slate-600 {
+  color: #94a3b8 !important;
+}
+
+/* Titles and headings */
+.admin-white-theme h1,
+.admin-white-theme h2,
+.admin-white-theme h3,
+.admin-white-theme h4 {
+  color: #0f172a !important;
+}
+
+/* Text white override: only for text that isn't on a colored badge/button */
+.admin-white-theme .text-white:not(
+  button.bg-gradient-to-r *,
+  button.bg-amber-500 *,
+  button.bg-emerald-500 *,
+  button.bg-rose-500 *,
+  button.bg-blue-500 *,
+  .bg-gradient-to-tr *,
+  .bg-emerald-500 *,
+  .bg-rose-500 *,
+  .bg-amber-500 *,
+  .bg-blue-500 *,
+  .bg-purple-500 *
+) {
+  color: #0f172a !important;
+}
+
+/* Form Inputs, Selects & Textareas */
+.admin-white-theme input:not([type="checkbox"]):not([type="radio"]),
+.admin-white-theme select,
+.admin-white-theme textarea {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+.admin-white-theme input::placeholder,
+.admin-white-theme textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+.admin-white-theme input:focus,
+.admin-white-theme select:focus,
+.admin-white-theme textarea:focus {
+  border-color: #d97706 !important;
+  background-color: #ffffff !important;
+}
+
+/* Checkboxes */
+.admin-white-theme input[type="checkbox"] {
+  background-color: #ffffff !important;
+  border-color: #cbd5e1 !important;
+}
+
+/* Tables */
+.admin-white-theme thead,
+.admin-white-theme thead tr {
+  background-color: #f8fafc !important;
+  color: #475569 !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+}
+
+.admin-white-theme thead th {
+  color: #475569 !important;
+  font-weight: 600 !important;
+}
+
+.admin-white-theme tbody tr {
+  border-bottom: 1px solid #f1f5f9 !important;
+}
+
+.admin-white-theme tbody tr:hover {
+  background-color: #f8fafc !important;
+}
+
+/* Shadows */
+.admin-white-theme .shadow-md,
+.admin-white-theme .shadow-lg,
+.admin-white-theme .shadow-2xl {
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.04) !important;
+}
+
+.admin-white-theme .shadow-\[0_20px_60px_rgba\(0\,0\,0\,0\.6\)\] {
+  box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.08) !important;
+  background-color: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+/* Navigation Header */
+.admin-white-theme header {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04) !important;
+}
+
+/* Footer */
+.admin-white-theme footer {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  border-top: 1px solid #e2e8f0 !important;
+  color: #64748b !important;
+}
+
+/* Interactive States */
+.admin-white-theme .hover\:bg-slate-800:hover,
+.admin-white-theme .hover\:bg-slate-700:hover {
+  background-color: #e2e8f0 !important;
+  color: #0f172a !important;
+}
+
+.admin-white-theme .hover\:text-white:hover {
+  color: #0f172a !important;
+}
+
+/* Inactive Tab Pill Button */
+.admin-white-theme .text-slate-400.bg-slate-900\/60 {
+  background-color: #ffffff !important;
+  color: #475569 !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+.admin-white-theme .text-slate-400.bg-slate-900\/60:hover {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+}
+
+/* Modal Backdrop */
+.admin-white-theme .bg-slate-950\/80 {
+  background-color: rgba(15, 23, 42, 0.4) !important;
+}
+
+

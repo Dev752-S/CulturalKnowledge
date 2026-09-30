@@ -8,6 +8,7 @@ import { requireAuth, type SessionUser } from '../middleware/auth';
 import { AppError } from '../middleware/errorHandler';
 import { logger } from '../../utils/logger';
 import rawQuestions from '../data/quiz_questions_100.json';
+import { isRoundActive, getRoundsStatus } from '../data/adminStore';
 import round2Router from './round2';
 
 type AuthEnv = {
@@ -42,6 +43,8 @@ export interface MemAttempt {
   unansweredCount: number;
   accuracyPercentage: string;
   answers: Map<string, MemAnswer>;
+  isDisqualified?: boolean;
+  disqualificationReason?: string;
 }
 
 export interface NotificationItem {
@@ -82,12 +85,30 @@ function getSanitizedQuestions() {
   }));
 }
 
+// GET /api/v1/quiz/rounds-status
+// Public real-time round activation status for competitor clients
+quizRouter.get('/rounds-status', async (c) => {
+  const status = await getRoundsStatus();
+  return c.json({ success: true, ...status });
+});
+
 // 1. POST /api/v1/quiz/round-1/start
 // Initiates or resumes the 60-minute server-authoritative quiz attempt
 quizRouter.post('/round-1/start', requireAuth, async (c) => {
   const user = c.get('user');
+
+  // Verify Round 1 is in ENABLED state (Section: Admin Round Activation)
+  const active = await isRoundActive('round1');
+  if (!active && user.role !== 'admin' && user.role !== 'super_admin') {
+    throw new AppError(
+      'ROUND_INACTIVE',
+      'Round 1 Cultural Quiz is currently disabled by the competition administrator. Only rounds in ENABLED state can be attended by competitors.',
+      403
+    );
+  }
+
   const now = new Date();
-  const durationMs = 60 * 60 * 1000; // 60 minutes (3600 seconds)
+  const durationMs = 10 * 60 * 1000; // 10 minutes (600 seconds)
   const activeDb = getDatabase();
 
   let attempt: {
@@ -122,8 +143,8 @@ quizRouter.post('/round-1/start', requireAuth, async (c) => {
           participantId: user.id,
           startedAt: now,
           endsAt,
-          totalQuestions: 100,
-          unansweredCount: 100,
+          totalQuestions: rawQuestions.length,
+          unansweredCount: rawQuestions.length,
         })
         .returning();
 
@@ -154,7 +175,7 @@ quizRouter.post('/round-1/start', requireAuth, async (c) => {
         answeredCount: 0,
         correctCount: 0,
         wrongCount: 0,
-        unansweredCount: 100,
+        unansweredCount: rawQuestions.length,
         accuracyPercentage: '0.00',
         answers: new Map(),
       };
@@ -183,11 +204,11 @@ quizRouter.post('/round-1/start', requireAuth, async (c) => {
       id: attempt.id,
       startedAt: attempt.startedAt.toISOString(),
       endsAt: attempt.endsAt.toISOString(),
-      durationMinutes: 60,
+      durationMinutes: 10,
       remainingSeconds,
       isSubmitted: attempt.isSubmitted,
       isAutoSubmitted: attempt.isAutoSubmitted,
-      totalQuestions: 100,
+      totalQuestions: rawQuestions.length,
     },
     questions: getSanitizedQuestions(),
   });
@@ -239,7 +260,7 @@ quizRouter.get('/round-1/attempt', requireAuth, async (c) => {
         remainingSeconds,
         isSubmitted: currentAttempt.isSubmitted,
         isAutoSubmitted: currentAttempt.isAutoSubmitted,
-        totalQuestions: 100,
+        totalQuestions: rawQuestions.length,
         answeredCount: currentAttempt.answeredCount,
         score: currentAttempt.isSubmitted ? currentAttempt.score : null,
         answers: answersMap,
@@ -278,7 +299,7 @@ quizRouter.get('/round-1/attempt', requireAuth, async (c) => {
         remainingSeconds,
         isSubmitted: mem.isSubmitted,
         isAutoSubmitted: mem.isAutoSubmitted,
-        totalQuestions: 100,
+        totalQuestions: rawQuestions.length,
         answeredCount: mem.answers.size,
         score: mem.isSubmitted ? mem.score : null,
         answers: answersObj,
@@ -292,7 +313,7 @@ quizRouter.get('/round-1/attempt', requireAuth, async (c) => {
 quizRouter.get('/round-1/questions', requireAuth, (c) => {
   return c.json({
     success: true,
-    total: 100,
+    total: rawQuestions.length,
     questions: getSanitizedQuestions(),
   });
 });
@@ -321,6 +342,9 @@ quizRouter.put(
 
     const mem = memoryAttempts.get(user.id);
     if (mem) {
+      if (mem.isDisqualified) {
+        throw new AppError('FORBIDDEN', 'Participant has been eliminated due to security anomaly. No second chance.', 403);
+      }
       if (mem.isSubmitted) {
         throw new AppError('FORBIDDEN', 'Quiz attempt has already been submitted', 403);
       }
@@ -409,10 +433,20 @@ quizRouter.post(
     const { eventType, metadata } = c.req.valid('json');
     const now = new Date();
 
+    const mem = memoryAttempts.get(user.id);
+    const isAnomaly = ['TAB_SWITCH', 'WINDOW_BLUR', 'FULLSCREEN_EXIT'].includes(eventType);
+    if (isAnomaly && mem) {
+      mem.isDisqualified = true;
+      mem.disqualificationReason = eventType;
+      mem.isSubmitted = true;
+      mem.submittedAt = now;
+      logger.warn(`Participant ${user.email} ELIMINATED due to zero-tolerance anomaly: ${eventType}`);
+    }
+
     memorySecurityEvents.push({
       id: `sec-${Date.now()}-${Math.random().toString(36).substring(7)}`,
       participantId: user.id,
-      attemptId: memoryAttempts.get(user.id)?.id || null,
+      attemptId: mem?.id || null,
       eventType,
       metadata: JSON.stringify(metadata),
       createdAt: now,
@@ -423,6 +457,7 @@ quizRouter.post(
     return c.json({
       success: true,
       eventRecorded: true,
+      eliminated: isAnomaly,
     });
   }
 );
@@ -445,7 +480,7 @@ quizRouter.post('/round-1/submit', requireAuth, async (c) => {
       alreadySubmitted: true,
       result: {
         attemptId: mem.id,
-        totalQuestions: 100,
+        totalQuestions: rawQuestions.length,
         answeredCount: mem.answeredCount,
         unansweredCount: mem.unansweredCount,
         score: mem.score,
@@ -473,7 +508,7 @@ quizRouter.post('/round-1/submit', requireAuth, async (c) => {
     }
   }
 
-  const unansweredCount = 100 - answeredCount;
+  const unansweredCount = rawQuestions.length - answeredCount;
   const score = correctCount; // 1 mark per correct answer, 0 for wrong
   const accuracy = answeredCount > 0 ? ((correctCount / answeredCount) * 100).toFixed(2) : '0.00';
 
@@ -552,14 +587,14 @@ quizRouter.post('/round-1/submit', requireAuth, async (c) => {
   }
 
   logger.info(
-    `Participant ${user.email} submitted Quiz Round 1: Score ${score}/100 (Answered: ${answeredCount}, Correct: ${correctCount})`
+    `Participant ${user.email} submitted Quiz Round 1: Score ${score}/${rawQuestions.length} (Answered: ${answeredCount}, Correct: ${correctCount})`
   );
 
   return c.json({
     success: true,
     result: {
       attemptId: mem.id,
-      totalQuestions: 100,
+      totalQuestions: rawQuestions.length,
       answeredCount,
       unansweredCount,
       score,
@@ -583,7 +618,7 @@ quizRouter.get('/round-1/result', requireAuth, (c) => {
     success: true,
     result: {
       attemptId: mem.id,
-      totalQuestions: 100,
+      totalQuestions: rawQuestions.length,
       answeredCount: mem.answeredCount,
       unansweredCount: mem.unansweredCount,
       score: mem.score,

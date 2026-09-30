@@ -1,4 +1,4 @@
-[
+const data = [
   {
     "questionId": "R2Q001",
     "questionNumber": 1,
@@ -2699,4 +2699,5 @@
       }
     ]
   }
-]
+];
+export default data;

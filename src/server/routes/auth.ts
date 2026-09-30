@@ -24,7 +24,6 @@ authRouter.post('/google', async (c) => {
 
     const activeDb = getDatabase();
     let teamName: string | null = null;
-    let participantId = 'dev-participant-id';
 
     if (activeDb) {
       // Find or create user
@@ -41,7 +40,7 @@ authRouter.post('/google', async (c) => {
         existingUser = newUser;
 
         // Provision participant profile
-        const [newParticipant] = await activeDb.insert(participants).values({
+        await activeDb.insert(participants).values({
           userId: existingUser.id,
           registrationNumber: 'SKP-' + Math.floor(100000 + Math.random() * 900000),
           collegeName: 'SKP Engineering College',
@@ -50,11 +49,9 @@ authRouter.post('/google', async (c) => {
           phone: '+91 98765 43210',
           teamName: null,
         }).returning();
-        participantId = newParticipant.id;
       } else {
         const pList = await activeDb.select().from(participants).where(eq(participants.userId, existingUser.id)).limit(1);
         if (pList[0]) {
-          participantId = pList[0].id;
           teamName = pList[0].teamName;
         }
       }
@@ -85,12 +82,15 @@ authRouter.post('/google', async (c) => {
         }
       }
 
+      const devUserId = 'dev-user-' + email.replace(/[^a-zA-Z0-9]/g, '_');
+      const devParticipantId = 'dev-p-' + email.replace(/[^a-zA-Z0-9]/g, '_');
+
       memorySessions.set(sessionId, {
-        userId: 'dev-participant-id',
+        userId: devUserId,
         role: 'participant',
         fullName,
         email,
-        participantId,
+        participantId: devParticipantId,
         teamName,
         expiresAt,
       });
@@ -127,6 +127,113 @@ authRouter.post('/google', async (c) => {
         message: 'Authentication failed. Please try again.',
       },
     }, 400);
+  }
+});
+
+/**
+ * POST /api/v1/auth/admin-login
+ * Dedicated administrative authentication using root credentials
+ */
+export const ADMIN_CREDENTIALS = {
+  email: 'darkdev257@gmail.com',
+  passkey: 'dev7.$25#@%9',
+  fullName: 'Super Administrator',
+  role: 'admin' as const,
+};
+
+authRouter.post('/admin-login', async (c) => {
+  try {
+    const body = await c.req.json().catch(() => ({}));
+    const { email, passkey } = body;
+
+    if (!email || !passkey) {
+      return c.json({
+        success: false,
+        error: { code: 'MISSING_CREDENTIALS', message: 'Email ID and passkey are required.' },
+      }, 400);
+    }
+
+    if (email.trim().toLowerCase() !== ADMIN_CREDENTIALS.email.toLowerCase() || passkey !== ADMIN_CREDENTIALS.passkey) {
+      logger.warn(`Failed admin login attempt with ID: ${email}`);
+      return c.json({
+        success: false,
+        error: { code: 'INVALID_CREDENTIALS', message: 'Invalid admin credentials or passkey.' },
+      }, 401);
+    }
+
+    const sessionId = crypto.randomUUID();
+    const expiresAt = new Date(Date.now() + SESSION_MAX_AGE * 1000);
+    const activeDb = getDatabase();
+    let adminUserId = 'usr-admin-darkdev';
+
+    if (activeDb) {
+      let existingUser = (await activeDb.select().from(users).where(eq(users.email, ADMIN_CREDENTIALS.email)).limit(1))[0];
+      if (!existingUser) {
+        const [newUser] = await activeDb.insert(users).values({
+          email: ADMIN_CREDENTIALS.email,
+          username: 'darkdev257',
+          fullName: ADMIN_CREDENTIALS.fullName,
+          passwordHash: 'admin_passkey_verified',
+          role: 'admin',
+        }).returning();
+        existingUser = newUser;
+      } else if (existingUser.role !== 'admin' && existingUser.role !== 'super_admin') {
+        await activeDb.update(users).set({ role: 'admin' }).where(eq(users.id, existingUser.id));
+      }
+      adminUserId = existingUser.id;
+
+      // Deactivate prior sessions
+      await activeDb.update(sessions)
+        .set({ isActive: false })
+        .where(and(eq(sessions.userId, existingUser.id), eq(sessions.isActive, true)));
+
+      // Insert new admin session
+      await activeDb.insert(sessions).values({
+        id: sessionId,
+        userId: existingUser.id,
+        role: 'admin',
+        deviceFingerprint: c.req.header('user-agent') || 'admin-console',
+        ipAddress: c.req.header('x-forwarded-for') || '127.0.0.1',
+        userAgent: c.req.header('user-agent'),
+        expiresAt,
+        isActive: true,
+      });
+    } else {
+      memorySessions.set(sessionId, {
+        userId: adminUserId,
+        role: 'admin',
+        fullName: ADMIN_CREDENTIALS.fullName,
+        email: ADMIN_CREDENTIALS.email,
+        expiresAt,
+      });
+    }
+
+    setCookie(c, SESSION_COOKIE_NAME, sessionId, {
+      path: '/',
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'Lax',
+      maxAge: SESSION_MAX_AGE,
+    });
+
+    logger.info(`Admin successfully authenticated: ${ADMIN_CREDENTIALS.email}`);
+
+    return c.json({
+      success: true,
+      user: {
+        id: adminUserId,
+        email: ADMIN_CREDENTIALS.email,
+        fullName: ADMIN_CREDENTIALS.fullName,
+        role: 'admin',
+      },
+      message: 'Admin authorization granted',
+    });
+  } catch (err: any) {
+    logger.error('Admin login error:', { error: err.message });
+    return c.json({
+      success: false,
+      error: { code: 'SERVER_ERROR', message: 'Failed to process admin authentication.' },
+    }, 500);
   }
 });
 

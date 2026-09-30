@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from '../context/AuthContext';
 import QuizRound1Page from './QuizRound1Page';
 
-const mockQuestions = Array.from({ length: 100 }, (_, i) => ({
+const mockQuestions = Array.from({ length: 20 }, (_, i) => ({
   id: `Q${String(i + 1).padStart(3, '0')}`,
   number: i + 1,
   category: i < 15 ? 'INDIAN TRADITIONAL CULTURE' : 'GENERAL KNOWLEDGE',
@@ -57,8 +57,8 @@ describe('QuizRound1Page Reference UI & Interaction Tests', () => {
             success: true,
             attempt: {
               id: 'att-123',
-              totalQuestions: 100,
-              remainingSeconds: 3590,
+              totalQuestions: 20,
+              remainingSeconds: 590,
               isSubmitted: false,
               answers: answersMap,
             },
@@ -74,8 +74,8 @@ describe('QuizRound1Page Reference UI & Interaction Tests', () => {
             success: true,
             attempt: {
               id: 'att-123',
-              totalQuestions: 100,
-              remainingSeconds: 3600,
+              totalQuestions: 20,
+              remainingSeconds: 600,
               isSubmitted: false,
             },
             questions: mockQuestions,
@@ -118,9 +118,9 @@ describe('QuizRound1Page Reference UI & Interaction Tests', () => {
     await waitFor(() => {
       expect(screen.getByRole('button', { name: /start quiz/i })).toBeInTheDocument();
     });
-    expect(screen.getByText(/Round 1 — Cultural Quiz/i)).toBeInTheDocument();
-    expect(screen.getByText(/100 Questions/i)).toBeInTheDocument();
-    expect(screen.getByText(/60 Minutes/i)).toBeInTheDocument();
+    expect(screen.getByText(/Round 1 — TIKA Challenge/i)).toBeInTheDocument();
+    expect(screen.getByText(/20 Questions/i)).toBeInTheDocument();
+    expect(screen.getByText(/10 Minutes/i)).toBeInTheDocument();
 
     // 2. Click Start Quiz
     const startBtn = screen.getByRole('button', { name: /start quiz/i });
@@ -143,7 +143,7 @@ describe('QuizRound1Page Reference UI & Interaction Tests', () => {
     expect(screen.getByRole('button', { name: /help/i })).toBeInTheDocument();
 
     // Center Question Card (Section 34–36, 41)
-    expect(screen.getByText('Question 1 of 100')).toBeInTheDocument();
+    expect(screen.getByText('Question 1 of 20')).toBeInTheDocument();
     expect(screen.getByText('Which dance is called the mother of all classical dances?')).toBeInTheDocument();
     expect(screen.getByText('Bharatanatyam')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /mark for review/i })).toBeInTheDocument();
@@ -152,7 +152,7 @@ describe('QuizRound1Page Reference UI & Interaction Tests', () => {
     expect(screen.getByText('Time Remaining')).toBeInTheDocument();
     expect(screen.getByText('Question Navigator')).toBeInTheDocument();
     expect(screen.getByTitle('Question 1')).toBeInTheDocument();
-    expect(screen.getByTitle('Question 100')).toBeInTheDocument();
+    expect(screen.getByTitle('Question 20')).toBeInTheDocument();
 
     // 4. Test selecting an option (Section 41 & 42)
     const optionB = screen.getByText('Bharatanatyam');
@@ -181,7 +181,7 @@ describe('QuizRound1Page Reference UI & Interaction Tests', () => {
     fireEvent.click(nextBtn);
 
     await waitFor(() => {
-      expect(screen.getByText('Question 2 of 100')).toBeInTheDocument();
+      expect(screen.getByText('Question 2 of 20')).toBeInTheDocument();
     });
 
     // 7. Test Question Navigator Jump to Question 10 (Section 48)
@@ -189,7 +189,7 @@ describe('QuizRound1Page Reference UI & Interaction Tests', () => {
     fireEvent.click(q10Btn);
 
     await waitFor(() => {
-      expect(screen.getByText('Question 10 of 100')).toBeInTheDocument();
+      expect(screen.getByText('Question 10 of 20')).toBeInTheDocument();
     });
 
     // 8. Test End Quiz button triggers confirmation dialog (Section 27 & 114)

@@ -1,21 +1,19 @@
-import { useState, useRef, useEffect } from 'react';
-import { Award, FileText, BookOpen, ShieldAlert, HelpCircle, X, CheckCircle } from 'lucide-react';
+import { useState } from 'react';
+import { Layers, BookOpen, HelpCircle, X, ShieldCheck } from 'lucide-react';
 
 interface QuizRound2LeftSidebarProps {
-  cameraStream: MediaStream | null;
+  cameraStream?: MediaStream | null;
+  cardFlipDurationSeconds?: number;
+  overallDurationMinutes?: number;
 }
 
 type ActiveNavModal = 'instructions' | 'rules' | 'help' | null;
 
-export default function QuizRound2LeftSidebar({ cameraStream }: QuizRound2LeftSidebarProps) {
+export default function QuizRound2LeftSidebar({
+  cardFlipDurationSeconds = 5,
+  overallDurationMinutes = 30,
+}: QuizRound2LeftSidebarProps) {
   const [activeModal, setActiveModal] = useState<ActiveNavModal>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    if (videoRef.current && cameraStream) {
-      videoRef.current.srcObject = cameraStream;
-    }
-  }, [cameraStream]);
 
   return (
     <>
@@ -25,7 +23,7 @@ export default function QuizRound2LeftSidebar({ cameraStream }: QuizRound2LeftSi
           {/* Header */}
           <div className="flex items-center space-x-3 px-3 py-2">
             <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-[#54133F] via-[#7B1D5C] to-[#E56A21] text-white flex items-center justify-center shadow-xs flex-shrink-0">
-              <Award className="w-5 h-5 text-[#FFF8EA]" />
+              <Layers className="w-5 h-5 text-[#FFF8EA]" />
             </div>
             <div>
               <span className="block text-xs font-bold text-[#E56A21] uppercase tracking-wider">
@@ -39,70 +37,47 @@ export default function QuizRound2LeftSidebar({ cameraStream }: QuizRound2LeftSi
 
           {/* Navigation Items */}
           <nav className="space-y-1.5 px-1">
-            {/* Question Paper (Active) */}
-            <div
-              className="w-full flex items-center space-x-3 px-4 py-2.5 rounded-2xl bg-[#FCE6D0] text-[#54133F] font-semibold text-sm shadow-xs border border-[#E56A21]/20 cursor-default"
-            >
-              <FileText className="w-4 h-4 text-[#E56A21]" />
-              <span>Question Paper</span>
-            </div>
-
-            {/* Instructions */}
             <button
-              type="button"
               onClick={() => setActiveModal('instructions')}
-              className="w-full flex items-center space-x-3 px-4 py-2.5 rounded-2xl text-[#633027] hover:bg-white/60 hover:text-[#54133F] font-medium text-sm transition-colors text-left cursor-pointer"
+              type="button"
+              className="w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm font-medium text-[#4A211C] hover:bg-white/80 hover:text-[#54133F] transition-colors cursor-pointer border border-transparent hover:border-[#E8DFD8]"
             >
-              <BookOpen className="w-4 h-4 text-[#7A4232]" />
-              <span>Instructions</span>
+              <Layers className="w-4 h-4 text-[#E56A21]" />
+              <span>Flip-Card Guide</span>
             </button>
 
-            {/* Rules */}
             <button
-              type="button"
               onClick={() => setActiveModal('rules')}
-              className="w-full flex items-center space-x-3 px-4 py-2.5 rounded-2xl text-[#633027] hover:bg-white/60 hover:text-[#54133F] font-medium text-sm transition-colors text-left cursor-pointer"
+              type="button"
+              className="w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm font-medium text-[#4A211C] hover:bg-white/80 hover:text-[#54133F] transition-colors cursor-pointer border border-transparent hover:border-[#E8DFD8]"
             >
-              <ShieldAlert className="w-4 h-4 text-[#7A4232]" />
-              <span>Rules</span>
+              <BookOpen className="w-4 h-4 text-[#E56A21]" />
+              <span>Round 2 Rules</span>
             </button>
 
-            {/* Help */}
             <button
-              type="button"
               onClick={() => setActiveModal('help')}
-              className="w-full flex items-center space-x-3 px-4 py-2.5 rounded-2xl text-[#633027] hover:bg-white/60 hover:text-[#54133F] font-medium text-sm transition-colors text-left cursor-pointer"
+              type="button"
+              className="w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm font-medium text-[#4A211C] hover:bg-white/80 hover:text-[#54133F] transition-colors cursor-pointer border border-transparent hover:border-[#E8DFD8]"
             >
-              <HelpCircle className="w-4 h-4 text-[#7A4232]" />
-              <span>Help</span>
+              <HelpCircle className="w-4 h-4 text-[#E56A21]" />
+              <span>Help &amp; Support</span>
             </button>
           </nav>
         </div>
 
-        {/* Live Proctoring Webcam Stream Display */}
-        {cameraStream && (
-          <div className="mt-6 px-2">
-            <div className="rounded-2xl overflow-hidden border border-[#E56A21]/30 bg-black/5 p-2 backdrop-blur-xs shadow-xs">
-              <div className="relative aspect-video rounded-xl overflow-hidden bg-black">
-                <video
-                  ref={videoRef}
-                  autoPlay
-                  playsInline
-                  muted
-                  className="w-full h-full object-cover mirror"
-                  style={{ transform: 'scaleX(-1)' }}
-                />
-                <div className="absolute top-1.5 left-1.5 flex items-center space-x-1 px-2 py-0.5 rounded-full bg-black/60 text-white text-[10px] font-medium backdrop-blur-xs">
-                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                  <span>Proctor Cam</span>
-                </div>
-              </div>
-              <p className="text-[10px] text-center text-[#7A4232] mt-1.5 font-medium">
-                Live Proctoring Active
-              </p>
+        {/* Proctor Integrity Badge */}
+        <div className="mt-6 px-2">
+          <div className="rounded-2xl border border-emerald-500/30 bg-emerald-50/70 p-3 backdrop-blur-xs shadow-xs text-center">
+            <div className="flex items-center justify-center space-x-1.5 text-emerald-800 text-xs font-bold mb-1">
+              <ShieldCheck className="w-4 h-4 text-emerald-600" />
+              <span>Security Monitoring Active</span>
             </div>
+            <p className="text-[11px] text-emerald-900/80 leading-snug">
+              Zero tolerance active: Tab switch, window blur, or exiting fullscreen triggers instant elimination.
+            </p>
           </div>
-        )}
+        </div>
       </aside>
 
       {/* Slide-over / Modal for Instructions, Rules, Help */}
@@ -121,37 +96,13 @@ export default function QuizRound2LeftSidebar({ cameraStream }: QuizRound2LeftSi
             {activeModal === 'instructions' && (
               <div>
                 <h3 className="font-cormorant text-2xl font-bold text-[#54133F] mb-4">
-                  Round 2 — Logo Quiz Instructions
+                  Flip-Card Logo Identification Game
                 </h3>
                 <div className="space-y-3 text-xs sm:text-sm text-[#4A211C] leading-relaxed">
-                  <div className="flex items-start space-x-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0" />
-                    <span>This round contains <strong>50 visual logo identification questions</strong>.</span>
-                  </div>
-                  <div className="flex items-start space-x-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0" />
-                    <span>Each question presents <strong>four visual logo options (A, B, C, D)</strong>. Select one answer.</span>
-                  </div>
-                  <div className="flex items-start space-x-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0" />
-                    <span>This round is <strong>untimed</strong>. Take your time to carefully identify each emblem.</span>
-                  </div>
-                  <div className="flex items-start space-x-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0" />
-                    <span>Your selections are <strong>saved automatically</strong> to the server as you click.</span>
-                  </div>
-                  <div className="flex items-start space-x-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0" />
-                    <span>Navigate freely between questions using the <strong>Question Navigator</strong> on the right.</span>
-                  </div>
-                  <div className="flex items-start space-x-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0" />
-                    <span>Use <strong>Mark for Review</strong> to flag questions to revisit before final submission.</span>
-                  </div>
-                  <div className="flex items-start space-x-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0" />
-                    <span>Submit your examination when you have completed all questions.</span>
-                  </div>
+                  <p>• <strong>Hidden Mystery Card:</strong> Click &quot;Reveal Logo&quot; to flip the card and view the logo.</p>
+                  <p>• <strong>Strict {cardFlipDurationSeconds}-Second Reveal:</strong> The card remains visible for exactly {cardFlipDurationSeconds} seconds, then permanently locks face-down.</p>
+                  <p>• <strong>Identify from Memory:</strong> Select the correct brand name from the four text choices after the card locks.</p>
+                  <p>• <strong>Review &amp; Submit:</strong> Complete all 50 questions within {overallDurationMinutes} minutes, review your answers, and explicitly submit Round 2.</p>
                 </div>
               </div>
             )}
@@ -159,14 +110,13 @@ export default function QuizRound2LeftSidebar({ cameraStream }: QuizRound2LeftSi
             {activeModal === 'rules' && (
               <div>
                 <h3 className="font-cormorant text-2xl font-bold text-[#54133F] mb-4">
-                  Competition Integrity &amp; Security Rules
+                  Round 2 Rules &amp; Guidelines
                 </h3>
                 <div className="space-y-3 text-xs sm:text-sm text-[#4A211C] leading-relaxed">
-                  <p>• <strong>No External AI Assistance:</strong> The use of external AI or automated tools is strictly prohibited.</p>
-                  <p>• <strong>Single Window Policy:</strong> Do not switch browser tabs or leave the examination window.</p>
-                  <p>• <strong>Unauthorized Devices:</strong> Using secondary monitors or unauthorized handheld devices during the quiz is prohibited.</p>
-                  <p>• <strong>Security Signal Logging:</strong> Fullscreen exits and window focus changes are recorded automatically for review.</p>
-                  <p>• <strong>Proctoring Stream:</strong> If webcam monitoring was selected at preflight, maintain your position in the camera view.</p>
+                  <p>• <strong>50 Logo Questions:</strong> Attend every question. Each question offers 4 text options.</p>
+                  <p>• <strong>Single Reveal:</strong> The logo cannot be re-revealed once the {cardFlipDurationSeconds}-second window closes.</p>
+                  <p className="text-rose-700 font-semibold">• <strong>Zero-Tolerance Elimination:</strong> Tab switch, window blur, or exiting fullscreen causes instant elimination with no second chance.</p>
+                  <p>• <strong>Timer:</strong> Overall duration is {overallDurationMinutes} minutes. The quiz auto-submits when the timer ends.</p>
                 </div>
               </div>
             )}
@@ -174,26 +124,14 @@ export default function QuizRound2LeftSidebar({ cameraStream }: QuizRound2LeftSi
             {activeModal === 'help' && (
               <div>
                 <h3 className="font-cormorant text-2xl font-bold text-[#54133F] mb-4">
-                  Need Help during the Quiz?
+                  Help &amp; Support
                 </h3>
                 <div className="space-y-3 text-xs sm:text-sm text-[#4A211C] leading-relaxed">
-                  <p>• <strong>Connection Lost?</strong> If your internet drops temporarily, the arena will reconnect automatically and restore your answers from the server.</p>
-                  <p>• <strong>Logo image not loading?</strong> The platform will automatically load a crisp PNG fallback for any SVG asset.</p>
-                  <p>• <strong>Accidental Exit?</strong> You can re-open the examination link and resume from where you left off until you submit.</p>
-                  <p>• <strong>Proctor Assistance:</strong> If you face hardware issues, raise your hand to alert the hall supervisor immediately.</p>
+                  <p>If you encounter technical issues with card flip rendering, contact the proctor desk immediately.</p>
+                  <p>Do NOT switch tabs or minimize the window.</p>
                 </div>
               </div>
             )}
-
-            <div className="mt-6 pt-4 border-t border-[#E8DFD8] text-right">
-              <button
-                type="button"
-                onClick={() => setActiveModal(null)}
-                className="px-5 py-2 rounded-xl bg-[#54133F] text-white text-xs sm:text-sm font-semibold hover:bg-[#6E1A52] transition-colors cursor-pointer"
-              >
-                Close
-              </button>
-            </div>
           </div>
         </div>
       )}

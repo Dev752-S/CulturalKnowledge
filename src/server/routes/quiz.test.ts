@@ -29,7 +29,7 @@ describe('Round 1 Cultural Quiz Backend APIs', () => {
     });
   });
 
-  it('POST /api/v1/quiz/round-1/start initiates 60-min attempt and returns 100 sanitized questions (ZERO answer keys)', async () => {
+  it('POST /api/v1/quiz/round-1/start initiates 10-min attempt and returns 20 sanitized questions (ZERO answer keys)', async () => {
     const res = await app.request('/api/v1/quiz/round-1/start', {
       method: 'POST',
       headers: {
@@ -43,17 +43,17 @@ describe('Round 1 Cultural Quiz Backend APIs', () => {
 
     // Attempt verification (Section 53 & 54)
     expect(data.attempt).toBeDefined();
-    expect(data.attempt.totalQuestions).toBe(100);
-    expect(data.attempt.durationMinutes).toBe(60);
-    expect(data.attempt.remainingSeconds).toBeGreaterThan(3500); // ~3600 seconds (60 mins)
+    expect(data.attempt.totalQuestions).toBe(20);
+    expect(data.attempt.durationMinutes).toBe(10);
+    expect(data.attempt.remainingSeconds).toBeGreaterThan(500);
     expect(data.attempt.isSubmitted).toBe(false);
 
     // Sanitized Questions (Section 44 & 105)
-    expect(data.questions.length).toBe(100);
+    expect(data.questions.length).toBe(20);
     const firstQ = data.questions[0];
     expect(firstQ.id).toBe('Q001');
     expect(firstQ.number).toBe(1);
-    expect(firstQ.text).toBe('Which dance is called the mother of all classical dances?');
+    expect(firstQ.text).toContain('Nataraja');
     expect(firstQ.options.length).toBe(4);
 
     // CRITICAL: Ensure NO answer key or correct_option is returned in API response
@@ -80,7 +80,7 @@ describe('Round 1 Cultural Quiz Backend APIs', () => {
     expect(res.status).toBe(200);
     const data = (await res.json()) as any;
     expect(data.success).toBe(true);
-    expect(data.attempt.totalQuestions).toBe(100);
+    expect(data.attempt.totalQuestions).toBe(20);
     expect(data.attempt.remainingSeconds).toBeGreaterThan(0);
   });
 
@@ -130,24 +130,6 @@ describe('Round 1 Cultural Quiz Backend APIs', () => {
     expect(attData.attempt.answers['Q001'].isMarkedForReview).toBe(true);
   });
 
-  it('POST /api/v1/quiz/round-1/security-events logs proctor signals (TAB_SWITCH, FULLSCREEN_EXIT)', async () => {
-    const secRes = await app.request('/api/v1/quiz/round-1/security-events', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Cookie: sessionCookie,
-      },
-      body: JSON.stringify({
-        eventType: 'TAB_SWITCH',
-        metadata: { durationMs: 2500 },
-      }),
-    });
-
-    expect(secRes.status).toBe(200);
-    const secData = (await secRes.json()) as any;
-    expect(secData.success).toBe(true);
-    expect(secData.eventRecorded).toBe(true);
-  });
 
   it('POST /api/v1/quiz/round-1/submit evaluates server-authoritative score and prevents duplicate submissions', async () => {
     await app.request('/api/v1/quiz/round-1/start', {
@@ -177,7 +159,7 @@ describe('Round 1 Cultural Quiz Backend APIs', () => {
     expect(subRes.status).toBe(200);
     const subData = (await subRes.json()) as any;
     expect(subData.success).toBe(true);
-    expect(subData.result.totalQuestions).toBe(100);
+    expect(subData.result.totalQuestions).toBe(20);
     expect(subData.result.answeredCount).toBe(2);
     expect(subData.result.score).toBe(2); // Q1 and Q2 both correct!
 
@@ -225,5 +207,25 @@ describe('Round 1 Cultural Quiz Backend APIs', () => {
     );
     expect(round1Notifs.length).toBe(1);
     expect(round1Notifs[0].message).toContain('marks are now available on the leaderboard');
+  });
+
+  it('POST /api/v1/quiz/round-1/security-events logs proctor signals and eliminates participant on anomaly', async () => {
+    const secRes = await app.request('/api/v1/quiz/round-1/security-events', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Cookie: sessionCookie,
+      },
+      body: JSON.stringify({
+        eventType: 'TAB_SWITCH',
+        metadata: { durationMs: 2500 },
+      }),
+    });
+
+    expect(secRes.status).toBe(200);
+    const secData = (await secRes.json()) as any;
+    expect(secData.success).toBe(true);
+    expect(secData.eventRecorded).toBe(true);
+    expect(secData.eliminated).toBe(true);
   });
 });

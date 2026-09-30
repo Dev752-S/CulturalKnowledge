@@ -1,12 +1,13 @@
 import type { ErrorHandler } from 'hono';
+import type { ContentfulStatusCode } from 'hono/utils/http-status';
 import { logger } from '../../utils/logger';
 
 export class AppError extends Error {
   public readonly code: string;
-  public readonly statusCode: number;
+  public readonly statusCode: ContentfulStatusCode;
   public readonly details?: unknown;
 
-  constructor(code: string, message: string, statusCode: number = 400, details?: unknown) {
+  constructor(code: string, message: string, statusCode: ContentfulStatusCode = 400, details?: unknown) {
     super(message);
     this.name = 'AppError';
     this.code = code;
@@ -30,7 +31,7 @@ export const errorHandler: ErrorHandler = (err, c) => {
           ...(err.details ? { details: err.details } : {}),
         },
       },
-      err.statusCode as any
+      err.statusCode
     );
   }
 

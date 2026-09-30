@@ -1,35 +1,28 @@
-import { useState, useRef, useEffect } from 'react';
-import { FileText, BookOpen, ShieldAlert, HelpCircle, X } from 'lucide-react';
+import { useState } from 'react';
+import { FileText, BookOpen, HelpCircle, X, ShieldCheck } from 'lucide-react';
 
 interface QuizLeftSidebarProps {
-  cameraStream: MediaStream | null;
+  cameraStream?: MediaStream | null;
 }
 
 type ActiveNavModal = 'instructions' | 'rules' | 'help' | null;
 
-export default function QuizLeftSidebar({ cameraStream }: QuizLeftSidebarProps) {
+export default function QuizLeftSidebar({}: QuizLeftSidebarProps) {
   const [activeModal, setActiveModal] = useState<ActiveNavModal>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    if (videoRef.current && cameraStream) {
-      videoRef.current.srcObject = cameraStream;
-    }
-  }, [cameraStream]);
 
   return (
     <>
       <aside className="w-full md:w-56 lg:w-64 flex flex-col justify-between py-2 sm:py-4 select-none">
         {/* Top Header & Navigation Items */}
         <div className="space-y-6">
-          {/* Header (Section 28) */}
+          {/* Header */}
           <div className="flex items-center space-x-3 px-3 py-2">
             <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-[#54133F] via-[#7B1D5C] to-[#E56A21] text-white flex items-center justify-center shadow-xs flex-shrink-0">
               <FileText className="w-5 h-5 text-[#FFF8EA]" />
             </div>
             <div>
               <span className="block text-xs font-bold text-[#E56A21] uppercase tracking-wider">
-                Round 1
+                Question Paper
               </span>
               <h2 className="font-cormorant text-xl sm:text-2xl font-bold text-[#54133F] leading-tight">
                 Cultural Quiz
@@ -37,72 +30,49 @@ export default function QuizLeftSidebar({ cameraStream }: QuizLeftSidebarProps) 
             </div>
           </div>
 
-          {/* Navigation Items (Section 29 & 30) */}
+          {/* Navigation Items */}
           <nav className="space-y-1.5 px-1">
-            {/* Question Paper (Active) */}
-            <div
-              className="w-full flex items-center space-x-3 px-4 py-2.5 rounded-2xl bg-[#FCE6D0] text-[#54133F] font-semibold text-sm shadow-xs border border-[#E56A21]/20 cursor-default"
+            <button
+              onClick={() => setActiveModal('instructions')}
+              type="button"
+              className="w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm font-medium text-[#4A211C] hover:bg-white/80 hover:text-[#54133F] transition-colors cursor-pointer border border-transparent hover:border-[#E8DFD8]"
             >
               <FileText className="w-4 h-4 text-[#E56A21]" />
-              <span>Question Paper</span>
-            </div>
-
-            {/* Instructions */}
-            <button
-              type="button"
-              onClick={() => setActiveModal('instructions')}
-              className="w-full flex items-center space-x-3 px-4 py-2.5 rounded-2xl text-[#633027] hover:bg-white/60 hover:text-[#54133F] font-medium text-sm transition-colors text-left cursor-pointer"
-            >
-              <BookOpen className="w-4 h-4 text-[#7A4232]" />
               <span>Instructions</span>
             </button>
 
-            {/* Rules */}
             <button
-              type="button"
               onClick={() => setActiveModal('rules')}
-              className="w-full flex items-center space-x-3 px-4 py-2.5 rounded-2xl text-[#633027] hover:bg-white/60 hover:text-[#54133F] font-medium text-sm transition-colors text-left cursor-pointer"
+              type="button"
+              className="w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm font-medium text-[#4A211C] hover:bg-white/80 hover:text-[#54133F] transition-colors cursor-pointer border border-transparent hover:border-[#E8DFD8]"
             >
-              <ShieldAlert className="w-4 h-4 text-[#7A4232]" />
-              <span>Rules</span>
+              <BookOpen className="w-4 h-4 text-[#E56A21]" />
+              <span>Rules &amp; Scoring</span>
             </button>
 
-            {/* Help */}
             <button
-              type="button"
               onClick={() => setActiveModal('help')}
-              className="w-full flex items-center space-x-3 px-4 py-2.5 rounded-2xl text-[#633027] hover:bg-white/60 hover:text-[#54133F] font-medium text-sm transition-colors text-left cursor-pointer"
+              type="button"
+              className="w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm font-medium text-[#4A211C] hover:bg-white/80 hover:text-[#54133F] transition-colors cursor-pointer border border-transparent hover:border-[#E8DFD8]"
             >
-              <HelpCircle className="w-4 h-4 text-[#7A4232]" />
-              <span>Help</span>
+              <HelpCircle className="w-4 h-4 text-[#E56A21]" />
+              <span>Help &amp; Support</span>
             </button>
           </nav>
         </div>
 
-        {/* Live Proctoring Webcam Stream Display (Section 16) */}
-        {cameraStream && (
-          <div className="mt-6 px-2">
-            <div className="rounded-2xl overflow-hidden border border-[#E56A21]/30 bg-black/5 p-2 backdrop-blur-xs shadow-xs">
-              <div className="relative aspect-video rounded-xl overflow-hidden bg-black">
-                <video
-                  ref={videoRef}
-                  autoPlay
-                  playsInline
-                  muted
-                  className="w-full h-full object-cover mirror"
-                  style={{ transform: 'scaleX(-1)' }}
-                />
-                <div className="absolute top-1.5 left-1.5 flex items-center space-x-1 px-2 py-0.5 rounded-full bg-black/60 text-white text-[10px] font-medium backdrop-blur-xs">
-                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                  <span>Proctor Cam</span>
-                </div>
-              </div>
-              <p className="text-[10px] text-center text-[#7A4232] mt-1.5 font-medium">
-                Live Proctoring Active
-              </p>
+        {/* Proctor Integrity Badge */}
+        <div className="mt-6 px-2">
+          <div className="rounded-2xl border border-emerald-500/30 bg-emerald-50/70 p-3 backdrop-blur-xs shadow-xs text-center">
+            <div className="flex items-center justify-center space-x-1.5 text-emerald-800 text-xs font-bold mb-1">
+              <ShieldCheck className="w-4 h-4 text-emerald-600" />
+              <span>Security Monitoring Active</span>
             </div>
+            <p className="text-[11px] text-emerald-900/80 leading-snug">
+              Zero tolerance active: Tab switch, window blur, or exiting fullscreen triggers instant elimination.
+            </p>
           </div>
-        )}
+        </div>
       </aside>
 
       {/* Slide-over / Modal for Instructions, Rules, Help */}
@@ -121,16 +91,13 @@ export default function QuizLeftSidebar({ cameraStream }: QuizLeftSidebarProps) 
             {activeModal === 'instructions' && (
               <div>
                 <h3 className="font-cormorant text-2xl font-bold text-[#54133F] mb-4">
-                  Examination Instructions
+                  Instructions
                 </h3>
                 <div className="space-y-3 text-xs sm:text-sm text-[#4A211C] leading-relaxed">
-                  <p>• The quiz comprises <strong>100 Multiple Choice Questions</strong>.</p>
-                  <p>• Total examination duration is <strong>60 minutes</strong>.</p>
-                  <p>• Each question carries <strong>1 positive mark</strong>. There is no negative marking.</p>
-                  <p>• You may jump between questions at any time using the <strong>Question Navigator</strong>.</p>
-                  <p>• Use <strong>Mark for Review</strong> to flag questions you wish to revisit before final submission.</p>
-                  <p>• Answers are <strong>autosaved immediately</strong> upon selection.</p>
-                  <p>• When the timer expires, your examination will automatically submit.</p>
+                  <p>• <strong>100 MCQ Questions:</strong> Single correct answer per question.</p>
+                  <p>• <strong>Navigation:</strong> Use &quot;Next&quot; / &quot;Previous&quot; or click question numbers directly from the navigator grid.</p>
+                  <p>• <strong>Autosave:</strong> Every option selected is instantly autosaved to the server.</p>
+                  <p>• <strong>Review Later:</strong> Bookmark questions to revisit before final submission.</p>
                 </div>
               </div>
             )}
@@ -138,14 +105,12 @@ export default function QuizLeftSidebar({ cameraStream }: QuizLeftSidebarProps) 
             {activeModal === 'rules' && (
               <div>
                 <h3 className="font-cormorant text-2xl font-bold text-[#54133F] mb-4">
-                  Official Competition Rules
+                  Rules &amp; Anti-Cheat
                 </h3>
                 <div className="space-y-3 text-xs sm:text-sm text-[#4A211C] leading-relaxed">
-                  <p>• <strong>Single Device Lock:</strong> Only one active session is authorized per team attempt.</p>
-                  <p>• <strong>No External AI:</strong> External AI tools, search assistants, and chatbots are strictly prohibited.</p>
-                  <p>• <strong>Stay in Fullscreen:</strong> Exiting fullscreen or switching browser tabs will record security signals.</p>
-                  <p>• <strong>Proctor Verification:</strong> Live proctoring logs and camera availability are monitored.</p>
-                  <p>• <strong>Server Authority:</strong> Timer, question mapping, and scoring are evaluated server-side.</p>
+                  <p>• <strong>Duration:</strong> 60 minutes server-authoritative countdown.</p>
+                  <p className="text-rose-700 font-semibold">• <strong>Zero-Tolerance Elimination:</strong> Any window blur, tab switch, or fullscreen exit triggers instant disqualification.</p>
+                  <p>• <strong>Final Submission:</strong> Quiz submits automatically when time expires, or upon explicit submit confirmation.</p>
                 </div>
               </div>
             )}
@@ -153,25 +118,14 @@ export default function QuizLeftSidebar({ cameraStream }: QuizLeftSidebarProps) 
             {activeModal === 'help' && (
               <div>
                 <h3 className="font-cormorant text-2xl font-bold text-[#54133F] mb-4">
-                  Technical Support &amp; Help
+                  Help &amp; Support
                 </h3>
                 <div className="space-y-3 text-xs sm:text-sm text-[#4A211C] leading-relaxed">
-                  <p>• If your network disconnects, keep the tab open. The quiz will auto-reconnect and sync with the server.</p>
-                  <p>• To report a technical anomaly or question issue, notify your assigned room proctor.</p>
-                  <p>• Do not close your browser window during an active attempt.</p>
+                  <p>If you encounter technical issues, contact the proctor desk or test coordinator immediately.</p>
+                  <p>Do NOT refresh or switch tabs unless instructed by an official coordinator.</p>
                 </div>
               </div>
             )}
-
-            <div className="mt-6 pt-4 border-t border-[#E8DFD8] flex justify-end">
-              <button
-                type="button"
-                onClick={() => setActiveModal(null)}
-                className="py-2 px-5 rounded-xl bg-[#54133F] text-white text-xs font-semibold uppercase tracking-wider hover:bg-[#6E1A52] transition-colors cursor-pointer"
-              >
-                Close
-              </button>
-            </div>
           </div>
         </div>
       )}

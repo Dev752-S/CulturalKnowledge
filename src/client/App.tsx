@@ -9,6 +9,7 @@ import QuizResultPage from './pages/QuizResultPage';
 import QuizRound2Page from './pages/QuizRound2Page';
 import QuizRound2ResultPage from './pages/QuizRound2ResultPage';
 import LeaderboardPage from './pages/LeaderboardPage';
+import AdminPage from './pages/AdminPage';
 
 function PageLoading() {
   return (
@@ -119,7 +120,7 @@ function RulesPage() {
         <div>
           <h2 className="text-lg font-bold text-white mb-2">Round 2: Top 15 Finalist Logo Arena</h2>
           <p className="text-sm text-slate-400">
-            50 questions logo quiz. Visual logo options with untimed, focused participation.
+            50 questions logo quiz. Visual logo options with 30-minute focused participation.
           </p>
         </div>
       </div>
@@ -173,6 +174,8 @@ export default function App() {
           <Route path="/quiz/round-2" element={<QuizRound2Page />} />
           <Route path="/quiz/round-2/result" element={<QuizRound2ResultPage />} />
           <Route path="/leaderboard" element={<LeaderboardPage />} />
+          <Route path="/dev" element={<AdminPage />} />
+          <Route path="/admin" element={<Navigate to="/dev" replace />} />
           <Route path="/rules" element={<RulesPage />} />
           <Route path="/schedule" element={<SchedulePage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
